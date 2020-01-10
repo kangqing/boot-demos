@@ -1,7 +1,5 @@
 package com.yunqing.demomybatisplus.config;
 
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
-import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +25,4 @@ public class MybatisPlusConfig {
         // paginationInterceptor.setLimit(500);
         return new PaginationInterceptor();
     }
-
-
 }

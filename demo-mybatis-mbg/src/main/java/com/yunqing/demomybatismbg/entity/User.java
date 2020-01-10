@@ -1,5 +1,8 @@
 package com.yunqing.demomybatismbg.entity;
 
+import lombok.Data;
+
+@Data
 public class User {
     /**
      * 	主键ID
