@@ -101,6 +101,8 @@
 
     <modules>
         <module>demo-mybatis-plus</module>
+        <module>demo-mybatis-mbg</module>
     </modules>
+
 
 </project>
