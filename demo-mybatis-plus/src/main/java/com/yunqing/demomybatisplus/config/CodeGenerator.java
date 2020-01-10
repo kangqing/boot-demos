@@ -1,4 +1,4 @@
-package com.yunqing.demomybatisplus;
+package com.yunqing.demomybatisplus.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
