@@ -1,9 +1,8 @@
 package com.yunqing.demomybatisplus.pojo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -42,10 +41,20 @@ public class Role extends Model<Role> {
     @ApiModelProperty(value = "描述")
     private String description;
 
+    /**
+     * 注意：设置此字段为自动填充字段，即添加记录的时候自动添加创建时间
+     * 需要配置实现接口 MetaObjectHandler
+     */
     @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+    /**
+     * 注意：设置此字段为自动填充字段，添加或更新记录时候，此字段自动填充
+     * 需要配置实现接口 MetaObjectHandler
+     */
     @ApiModelProperty(value = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
 

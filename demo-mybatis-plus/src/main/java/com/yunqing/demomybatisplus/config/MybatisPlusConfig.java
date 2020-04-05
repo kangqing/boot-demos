@@ -25,4 +25,6 @@ public class MybatisPlusConfig {
         // paginationInterceptor.setLimit(500);
         return new PaginationInterceptor();
     }
+
+
 }

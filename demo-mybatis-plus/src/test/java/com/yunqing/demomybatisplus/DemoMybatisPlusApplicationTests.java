@@ -49,7 +49,7 @@ class DemoMybatisPlusApplicationTests {
      */
     @Test
     void update() {
-        Assertions.assertTrue(new Role().setId(1L).setRoleName("管理员").updateById());
+        Assertions.assertTrue(new Role().setId(2L).setRoleName("管理员").updateById());
 
         Assertions.assertTrue(new Role().update(new UpdateWrapper<Role>().lambda()
                 .set(Role::getCreateTime, LocalDateTime.now()).eq(Role::getId, 1)));
