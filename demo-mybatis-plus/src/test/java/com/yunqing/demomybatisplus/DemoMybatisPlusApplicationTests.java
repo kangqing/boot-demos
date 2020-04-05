@@ -31,7 +31,8 @@ class DemoMybatisPlusApplicationTests {
     @Test
     void insert() {
         Role role = new Role();
-        role.setRoleCode("ROLE_ADMIN");
+        role.setRoleCode("ROLE_user");
+        role.setRoleName("用户");
         /**
          * 自3.3.0开始默认雪花生成器 type = IdType.ASSIGN_ID
          */
@@ -48,10 +49,10 @@ class DemoMybatisPlusApplicationTests {
      */
     @Test
     void update() {
-        Assertions.assertTrue(new Role().setId(3L).setRoleName("管理员").updateById());
+        Assertions.assertTrue(new Role().setId(1L).setRoleName("管理员").updateById());
 
         Assertions.assertTrue(new Role().update(new UpdateWrapper<Role>().lambda()
-                .set(Role::getCreateTime, LocalDateTime.now()).eq(Role::getId, 3)));
+                .set(Role::getCreateTime, LocalDateTime.now()).eq(Role::getId, 1)));
     }
 
     /**
@@ -64,12 +65,27 @@ class DemoMybatisPlusApplicationTests {
     void select() {
         List<User> list = new User().selectList(new QueryWrapper<User>().lambda().eq(User::getUserStatus, "1"));
         List<String> emails = list.stream().map(User::getEmail).collect(Collectors.toList());
-        Assertions.assertTrue(emails.contains("yunqing_71@163.com"));
+        Assertions.assertTrue(emails.contains("yunqing@qq.com"));
 
         list = new User().selectAll();
         Assertions.assertTrue(list.size() > 0);
 
         log.info(list.toString());
+    }
+
+    /**
+     * ActiveRecord添加， 有选择性的添加
+     * INSERT INTO t_user ( id, email, user_status, create_time ) VALUES ( ?, ?, ?, ? )
+     */
+    @Test
+    void insertUser() {
+        User user = new User();
+        user.setEmail("new_user@qq.com");
+        user.setUserStatus("1");
+        user.setCreateTime(LocalDateTime.now());
+        Assertions.assertTrue(user.insert());
+
+        log.info(user.getId());
     }
 
     /**
@@ -80,10 +96,10 @@ class DemoMybatisPlusApplicationTests {
      */
     @Test
     void delete() {
-        Assertions.assertTrue(new Role().setId(1215548293561008129L).deleteById());
+        Assertions.assertTrue(new Role().setId(2L).deleteById());
 
         Assertions.assertTrue(new User().delete(new QueryWrapper<User>().lambda().eq(User::getUserStatus, "1")
-        .lt(User::getCreateTime, LocalDateTime.now()).eq(User::getEmail, "yunqing_71@163.com")));
+        .lt(User::getCreateTime, LocalDateTime.now()).eq(User::getEmail, "new_user@qq.com")));
     }
 
     /**

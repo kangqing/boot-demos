@@ -43,15 +43,15 @@ class DemoMybatisMbgApplicationTests {
      */
     @Test
     void selectPage() {
-        //查询第2页数据，每页3条数据
-        PageHelper.startPage(2, 3);
+        //查询第1页数据，每页3条数据
+        PageHelper.startPage(1, 3);
         //不写条件 = 查所有
         List<User> list = userMapper.selectByExample(new UserExample());
         //用这个取到查询到的数据不分页的总数
         PageInfo<User> pageInfo = new PageInfo<>(list);
         if (list.size() > 0) {
             list.forEach(e -> log.info("用户{}", e.toString()));
-            Assertions.assertTrue(pageInfo.getTotal() > 3);
+            Assertions.assertTrue(pageInfo.getTotal() != 0);
             log.info("total = {}", pageInfo.getTotal());
         }
     }
@@ -63,8 +63,10 @@ class DemoMybatisMbgApplicationTests {
     @Test
     void insert() {
         User user = new User();
-        user.setAge(11);
+        user.setAge(26);
         user.setName("yunqing");
+        user.setEmail("yunqing@qq.com");
+        user.setStatus("1");
         Assertions.assertTrue(userMapper.insert(user) > 0);
         log.info("----- {}", user.toString());
     }
@@ -113,8 +115,10 @@ class DemoMybatisMbgApplicationTests {
     @Test
     void update() {
         User user = new User();
-        user.setId(9L);
+        user.setId(3L);
         user.setName("xiaoming");
+        user.setAge(20);
+        user.setEmail("xiaom@qq.com");
         UserExample example = new UserExample();
         example.or().andNameEqualTo("xiaoming");
         Assertions.assertTrue(userMapper.updateByExample(user, example) > 0);
