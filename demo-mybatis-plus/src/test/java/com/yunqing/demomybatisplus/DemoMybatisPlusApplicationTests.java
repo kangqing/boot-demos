@@ -43,14 +43,24 @@ class DemoMybatisPlusApplicationTests {
 
     /**
      * ActiveRecord修改
-     * UPDATE t_role SET role_name=? WHERE id=?
+     * UPDATE t_role SET role_code=?, role_name=?, update_time=?, version=? WHERE id=? AND version=?
      *
      * UPDATE t_role SET create_time=? WHERE (id = ?)
      */
     @Test
     void update() {
-        Assertions.assertTrue(new Role().setId(2L).setRoleName("管理员").updateById());
-
+        /**
+         * 测试乐观锁更新Role,先查询获取版本号，在更新，之后再获取版本号
+         */
+        Role role = new Role().selectById(2L);
+        log.info("更新之前获取版本号 = {}", role.getVersion());
+        role.setRoleName("管理员1234");
+        Assertions.assertTrue(role.updateById());
+        Role role2 = new Role().selectById(2L);
+        log.info("更新之后获取版本号 = {}", role2.getVersion());
+        /**
+         * 非乐观锁更新，直接更新
+         */
         Assertions.assertTrue(new Role().update(new UpdateWrapper<Role>().lambda()
                 .set(Role::getCreateTime, LocalDateTime.now()).eq(Role::getId, 1)));
     }

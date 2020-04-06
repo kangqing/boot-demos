@@ -1,5 +1,6 @@
 package com.yunqing.demomybatisplus.config;
 
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackages = {"com.yunqing.demomybatisplus.mapper"})
 public class MybatisPlusConfig {
+
+
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
+    }
 
     /**
      * 配置分页插件

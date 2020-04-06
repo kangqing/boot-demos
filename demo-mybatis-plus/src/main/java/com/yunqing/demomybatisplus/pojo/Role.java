@@ -57,6 +57,15 @@ public class Role extends Model<Role> {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
+    /**
+     * 版本号属性
+     * 设置此字段在添加的时候自动设置version值为 1
+     * 需要配置实现接口 MetaObjectHandler
+     */
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
+
 
     @Override
     protected Serializable pkVal() {

@@ -18,6 +18,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
         this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        //配置添加role记录的时候自动填充版本号为1
+        this.setFieldValByName("version", "1", metaObject);
     }
 
     /**
