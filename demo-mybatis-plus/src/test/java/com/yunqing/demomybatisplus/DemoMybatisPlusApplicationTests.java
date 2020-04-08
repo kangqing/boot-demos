@@ -131,5 +131,25 @@ class DemoMybatisPlusApplicationTests {
         list.forEach(System.out::println);
     }
 
+    /**
+     * 测试逻辑删除
+     * UPDATE t_role SET deleted=1 WHERE id=? AND deleted=0
+     */
+    @Test
+    void ljDeleted() {
+        Assertions.assertTrue(new Role().setId(2L).deleteById());
+    }
+
+    /**
+     * 测试查询，看看逻辑删除的数据是否还在
+     */
+    @Test
+    void query() {
+        List<Role> roles = new Role().selectAll();
+        roles.forEach(System.out::println);
+    }
+
+
+
 
 }

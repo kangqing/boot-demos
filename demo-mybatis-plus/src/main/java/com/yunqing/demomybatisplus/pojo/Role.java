@@ -66,6 +66,12 @@ public class Role extends Model<Role> {
     @TableField(fill = FieldFill.INSERT)
     private Integer version;
 
+    /**
+     * 逻辑删除标志位
+     */
+    @TableLogic
+    private Integer deleted;
+
 
     @Override
     protected Serializable pkVal() {
