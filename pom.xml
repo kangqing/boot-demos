@@ -103,6 +103,7 @@
         <module>demo-mybatis-plus</module>
         <module>demo-mybatis-mbg</module>
         <module>demo-redis</module>
+        <module>demo-configuration-properties</module>
     </modules>
 
 
