@@ -16,3 +16,20 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///demo-redis?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    username: root
+    password: 5678
+  cache:
+    redis:
+      use-key-prefix: true #是否开启前缀
+      key-prefix: dev #前缀
+      cache-null-values: true #是否缓存空值
+      time-to-live: 3600s #默认过期时间
+
+# 配置slq打印日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

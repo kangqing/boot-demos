@@ -7,8 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -20,6 +23,21 @@ public class RedisCacheTemplate implements CacheTemplate {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+
+    /**
+     * 防止出现 key 乱码的现象， redisTemplate默认使用的是JdkSerializationRedisSerializer
+     * 把传入的值当Object对象进行序列化，所以可以猜测这里key出现的\xac\xed\x00\x05t\x00\tb其实可能是对象头信息。
+     * @param redisTemplate
+     */
+    @Autowired(required = false)
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(stringSerializer);
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 写入
