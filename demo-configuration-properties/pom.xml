@@ -8,7 +8,6 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.yunqing</groupId>
     <artifactId>demo-configuration-properties</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo-configuration-properties</name>

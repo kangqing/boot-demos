@@ -9,7 +9,6 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.yunqing</groupId>
     <artifactId>demo-mybatis-plus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo-mybatis-plus</name>

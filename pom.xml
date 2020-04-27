@@ -40,6 +40,14 @@
         </repository>
     </repositories>
 
+    <modules>
+        <module>demo-mybatis-plus</module>
+        <module>demo-mybatis-mbg</module>
+        <module>demo-redis</module>
+        <module>demo-configuration-properties</module>
+        <module>demo-aaa</module>
+    </modules>
+
 
     <dependencies>
         <dependency>
@@ -78,56 +86,9 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring.boot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
-    <!--<build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            &lt;!&ndash; 资源文件拷贝插件,xml,html打包进项目 &ndash;&gt;
+            <!-- 资源文件拷贝插件,xml,html打包进项目 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -137,7 +98,7 @@
                 </configuration>
             </plugin>
 
-            &lt;!&ndash; Java 编译插件 &ndash;&gt;
+            <!-- Java 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -149,7 +110,7 @@
                 </configuration>
             </plugin>
 
-            &lt;!&ndash; 打包时跳过测试 &ndash;&gt;
+            <!-- 打包时跳过测试 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -159,14 +120,7 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
-
-    <modules>
-        <module>demo-mybatis-plus</module>
-        <module>demo-mybatis-mbg</module>
-        <module>demo-redis</module>
-        <module>demo-configuration-properties</module>
-    </modules>
+    </build>
 
 
 </project>
