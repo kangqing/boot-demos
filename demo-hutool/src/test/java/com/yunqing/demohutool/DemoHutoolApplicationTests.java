@@ -3,14 +3,19 @@ package com.yunqing.demohutool;
 import cn.hutool.core.date.ChineseDate;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
+import cn.hutool.extra.qrcode.QrConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.awt.*;
 import java.util.Date;
 
 @SpringBootTest
@@ -73,13 +78,37 @@ class DemoHutoolApplicationTests {
         String s = IdUtil.simpleUUID();
         //生成的UUID是带-的字符串
         String s1 = IdUtil.randomUUID();
+        //MongoDB数据库的一种唯一ID生成策略
         String s3 = IdUtil.objectId();
 
         //参数1为终端id,参数2为数据中心id
         Snowflake snowflake = IdUtil.createSnowflake(1, 1);
         long lon = snowflake.nextId();
-        Console.log("不带 - 的UUID:{}\n带 - 的UUID:{}\nMongoDB数据库的一种唯一ID生成策略:{}\n分布式雪花算法全局唯一id:{}",
-                s, s1, s3, lon);
+        String str = snowflake.nextIdStr();
+        Console.log("不带 - 的UUID:{}\n带 - 的UUID:{}\nMongoDB数据库的一种唯一ID生成策略:{}\n分布式雪花算法全局唯一id:{}" +
+                "\n雪花算法String类型id:{}", s, s1, s3, lon, str);
+    }
+
+    @Test
+    void validatorTest() {
+        boolean isEmail = Validator.isEmail("10001@qq.com");
+        //正则匹配正整数
+        boolean mactchRegex = Validator.isMactchRegex("^[1-9]\\d*$", "3.14");
+        boolean isUUID = Validator.isUUID(IdUtil.simpleUUID());
+        Console.log("验证邮箱：{}\n正则匹配：{}\n验证UUID：{}", isEmail, mactchRegex, isUUID);
+    }
+
+    @Test
+    void QrCodeUtilTest() {
+        QrConfig config = new QrConfig(300, 300);
+        // 设置边距，既二维码和背景之间的边距
+        config.setMargin(3);
+        // 设置前景色，既二维码颜色（蓝色）
+        config.setForeColor(Color.blue);
+        // 设置背景色（灰色）
+        config.setBackColor(Color.gray);
+        // 生成二维码到文件，也可以到流
+        QrCodeUtil.generate("http://www.baidu.com", config, FileUtil.file("e:/qrcode.jpg"));
     }
 
 }
