@@ -26,7 +26,16 @@
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     </properties>
 
-    <repositories>
+    <modules>
+        <module>demo-mybatis-plus</module>
+        <module>demo-mybatis-mbg</module>
+        <module>demo-redis</module>
+        <module>demo-configuration-properties</module>
+        <module>demo-hutool</module>
+        <module>demo-web-log</module>
+    </modules>
+
+    <!--<repositories>
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
@@ -38,7 +47,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories>-->
 
 
     <dependencies>
@@ -129,14 +138,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <modules>
-        <module>demo-mybatis-plus</module>
-        <module>demo-mybatis-mbg</module>
-        <module>demo-redis</module>
-        <module>demo-configuration-properties</module>
-        <module>demo-hutool</module>
-    </modules>
 
 
 </project>
