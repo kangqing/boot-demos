@@ -26,7 +26,16 @@
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     </properties>
 
-    <repositories>
+    <modules>
+        <module>demo-mybatis-plus</module>
+        <module>demo-mybatis-mbg</module>
+        <module>demo-redis</module>
+        <module>demo-configuration-properties</module>
+        <module>demo-hutool</module>
+        <module>demo-web-log</module>
+    </modules>
+
+    <!--<repositories>
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
@@ -38,7 +47,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <modules>
         <module>demo-mybatis-plus</module>
@@ -81,7 +90,23 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>4.6.13</version>
+            <version>5.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <!--swagger2的依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
         </dependency>
     </dependencies>
 
