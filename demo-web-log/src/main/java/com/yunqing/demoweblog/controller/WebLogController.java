@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/aoplog")
 public class WebLogController {
-
     @GetMapping("/book")
     @ApiOperation("根据id查询书名")
     public String log(@RequestParam String id) {
