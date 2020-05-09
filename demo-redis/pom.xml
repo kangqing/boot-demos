@@ -6,7 +6,7 @@
 		<groupId>com.yunqing</groupId>
 		<artifactId>boot-demos</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<!--<relativePath/>  lookup parent from repository 从此处规定的路径 -> 本地仓库-> 远程仓库 -->
 	</parent>
 	<artifactId>demo-redis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
