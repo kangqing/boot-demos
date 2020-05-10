@@ -12,7 +12,7 @@ public class ResultTool {
     }
 
     public static <T> JsonResult<T> success(T data) {
-        return new JsonResult(true, data);
+        return new JsonResult<>(true, data);
     }
 
     public static JsonResult fail() {

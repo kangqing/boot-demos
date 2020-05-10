@@ -17,6 +17,7 @@ public class TestController {
 
     @GetMapping("/result")
     public JsonResult test() {
-        return ResultTool.fail(ResultCode.PARAM_NOT_COMPLETE);
+        String aa = "Hello, JsonResult";
+        return ResultTool.success(aa);
     }
 }
