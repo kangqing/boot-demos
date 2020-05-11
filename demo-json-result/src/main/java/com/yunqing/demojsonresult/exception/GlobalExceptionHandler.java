@@ -46,6 +46,7 @@ public class GlobalExceptionHandler {
         log.info("请求参数异常",collect);
         jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
         jsonResult.setResponseMsg(ex.getMessage());
+        jsonResult.setData(null);
         return jsonResult;
     }
 
@@ -66,6 +67,7 @@ public class GlobalExceptionHandler {
         } else {
             jsonResult.setResponseMsg(exception.getMessage());
         }
+        jsonResult.setData(null);
         return jsonResult;
     }
 
@@ -105,6 +107,7 @@ public class GlobalExceptionHandler {
         //JsonResult<String> jsonResult = new JsonResult();
         jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
         jsonResult.setResponseMsg("该请求路径："+request.getRequestURI()+"下的请求参数不全："+pe.getMessage());
+        jsonResult.setData(null);
         return jsonResult;
     }
 
@@ -120,6 +123,7 @@ public class GlobalExceptionHandler {
         //JsonResult<String> jsonResult = new JsonResult();
         jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
         jsonResult.setResponseMsg("请求方式不正确");
+        jsonResult.setData(null);
         return jsonResult;
     }
 
@@ -136,6 +140,7 @@ public class GlobalExceptionHandler {
         //JsonResult<String> jsonResult = new JsonResult();
         jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
         jsonResult.setResponseMsg(pe.getMessage());
+        jsonResult.setData(null);
         return jsonResult;
     }
 
@@ -159,7 +164,6 @@ public class GlobalExceptionHandler {
      * @return
      */
     public String showParams(HttpServletRequest request) {
-        Map<String,Object> map = new HashMap<String,Object>();
         StringBuilder stringBuilder=new StringBuilder();
         Enumeration paramNames = request.getParameterNames();
         stringBuilder.append("----------------参数开始-------------------");
