@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/result")
-    public JsonResult test() {
+    public JsonResult test() throws Exception {
         String aa = "Hello, JsonResult";
+        if (!aa.contains("1")) {
+            throw new Exception("nnnnnn");
+        }
         return ResultTool.success(aa);
     }
 }

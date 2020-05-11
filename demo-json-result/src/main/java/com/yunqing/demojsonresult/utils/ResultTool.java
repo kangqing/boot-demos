@@ -5,7 +5,7 @@ package com.yunqing.demojsonresult.utils;
  * @date 2020/5/9 14:00
  * 返回体构造工具
  */
-public class ResultTool {
+public class ResultTool<T> {
 
     public static JsonResult success() {
         return new JsonResult(true);
