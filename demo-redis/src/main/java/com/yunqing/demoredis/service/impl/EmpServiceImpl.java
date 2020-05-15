@@ -20,21 +20,24 @@ public class EmpServiceImpl implements EmpService {
     private EmpMapper empMapper;
 
     @Override
-    @Cacheable(value = {"selectAll"}, unless="#result == null")
     public List<Emp> selectAll() {
         return empMapper.selectList(null);
     }
 
     @Override
-    @CachePut(value = {"selectAll"}, key = "#emp.id", unless="#result == null")
-    @Transactional(rollbackFor = Exception.class)
+    @Cacheable(value = "empCache", key = "#id", sync = true)
+    public Emp getEmpById(String id) {
+        return empMapper.selectById(id);
+    }
+
+    @Override
+    @CachePut(value = "empCache", key = "#emp.id")
     public void add(Emp emp) {
         empMapper.insert(emp);
     }
 
     @Override
-    @CacheEvict(value = {"selectAll"}, key = "#id")
-    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "empCache",key = "#id")
     public void delete(String id) {
         empMapper.deleteById(id);
     }
