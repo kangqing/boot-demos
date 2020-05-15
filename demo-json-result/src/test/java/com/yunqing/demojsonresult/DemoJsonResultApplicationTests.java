@@ -8,10 +8,25 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @Slf4j
 class DemoJsonResultApplicationTests {
+
+    @Test
+    public void helloWorld() {
+        final int[] arrs = {-229985452, -147909649};
+        for (final int arr : arrs) {
+            final Random random = new Random(arr);
+            while (true) {
+                final int n = random.nextInt(27);
+                if (n == 0) break;
+                System.out.print((char) ('`' + n));
+            }
+            System.out.print(" ");
+        }
+    }
 
     @Test
     void contextLoads() {
