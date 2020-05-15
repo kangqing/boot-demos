@@ -1,3 +1,22 @@
-http://localhost:8081/test/result
+#环境变量 http-client.private.env.json
+http://{{baseUrl}}/test/query
+
+###
+POST http://{{baseUrl}}/test/add
+Content-Type: application/x-www-form-urlencoded
+
+aa=123456
+
+### Send POST request with json body
+POST http://{{baseUrl}}/test/update
+Content-Type: application/json
+
+{
+  "username": "yunqing",
+  "password": "123456"
+}
+
+###
+GET http://{{baseUrl}}/test/delete?id=1
 
 ###
