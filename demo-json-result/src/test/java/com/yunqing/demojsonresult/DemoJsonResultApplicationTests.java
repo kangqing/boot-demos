@@ -1,5 +1,6 @@
 package com.yunqing.demojsonresult;
 
+import com.yunqing.demojsonresult.utils.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ import java.util.Random;
 class DemoJsonResultApplicationTests {
 
     @Test
-    public void helloWorld() {
+    void helloWorld() {
         final int[] arrs = {-229985452, -147909649};
         for (final int arr : arrs) {
             final Random random = new Random(arr);
@@ -46,7 +47,7 @@ class DemoJsonResultApplicationTests {
      * @param arrayList
      * @return
      */
-    public static int getArrayListCapacity(ArrayList<?> arrayList) {
+    static int getArrayListCapacity(ArrayList<?> arrayList) {
         Class<ArrayList> arrayListClass = ArrayList.class;
         try {
             Field field = arrayListClass.getDeclaredField("elementData");

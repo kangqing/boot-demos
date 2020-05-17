@@ -2,6 +2,7 @@ package com.yunqing.demojsonresult.exception;
 
 import com.yunqing.demojsonresult.utils.JsonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindException;
@@ -21,14 +22,14 @@ import java.util.stream.Collectors;
 
 /**
  * 全局异常处理
+ * 仅仅在GlobalExceptionHandler不存在的时候才启用
  * @author yx
  * @date 2020/5/11 12:14
  */
 @RestControllerAdvice
 @Slf4j
+@ConditionalOnMissingBean(GlobalExceptionHandler.class)
 public class GlobalExceptionHandler {
-
-    JsonResult<String> jsonResult = new JsonResult(false);
 
     /**
      * 方法参数校验异常 Validate
@@ -40,14 +41,10 @@ public class GlobalExceptionHandler {
     public JsonResult handleValidationException(HttpServletRequest request, ConstraintViolationException ex) {
         log.error("异常:" + request.getRequestURI(), ex);
         String collect = ex.getConstraintViolations().stream().filter(Objects::nonNull)
-                .map(cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage())
+                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
                 .collect(Collectors.joining(", "));
-        //JsonResult<String> jsonResult = new JsonResult();
         log.info("请求参数异常",collect);
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
-        jsonResult.setResponseMsg(ex.getMessage());
-        jsonResult.setData(null);
-        return jsonResult;
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage());
     }
 
     /**
@@ -56,19 +53,16 @@ public class GlobalExceptionHandler {
      * @param exception
      * @return
      */
-    @ExceptionHandler(value = MethodArgumentNotValidException.class) //400
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public JsonResult methodArgumentValidationHandler(HttpServletRequest request, MethodArgumentNotValidException exception){
         log.info("异常:" + request.getRequestURI(), exception);
         log.info("请求参数错误！{}",getExceptionDetail(exception),"参数数据："+ showParams(request));
-        //JsonResult<String> jsonResult = new JsonResult();
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
         if (exception.getBindingResult() != null && !CollectionUtils.isEmpty(exception.getBindingResult().getAllErrors())) {
-            jsonResult.setResponseMsg(exception.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+            return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()),
+                    exception.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         } else {
-            jsonResult.setResponseMsg(exception.getMessage());
+            return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), exception.getMessage());
         }
-        jsonResult.setData(null);
-        return jsonResult;
     }
 
     /**
@@ -80,18 +74,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     public JsonResult bindException(HttpServletRequest request, BindException pe) {
         log.error("异常:" + request.getRequestURI(), pe);
-        //JsonResult<String> jsonResult = new JsonResult();
         Map map=new HashMap();
         if(pe.getBindingResult()!=null){
             List<ObjectError> allErrors = pe.getBindingResult().getAllErrors();
             allErrors.stream().filter(Objects::nonNull).forEach(objectError -> {
-                map.put("请求路径："+request.getRequestURI()+"--请求参数："+(((FieldError) ((FieldError) allErrors.get(0))).getField().toString()),objectError.getDefaultMessage());
+                map.put("请求路径："+request.getRequestURI()+"--请求参数："+(((FieldError) allErrors.get(0)).getField()),
+                        objectError.getDefaultMessage());
             });
         }
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
-        jsonResult.setResponseMsg("请求参数绑定失败");
-        jsonResult.setData(map.toString());
-        return jsonResult;
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求参数绑定失败");
     }
 
 
@@ -104,11 +95,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public JsonResult missingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException pe) {
         log.error("异常:" + request.getRequestURI(), pe);
-        //JsonResult<String> jsonResult = new JsonResult();
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
-        jsonResult.setResponseMsg("该请求路径："+request.getRequestURI()+"下的请求参数不全："+pe.getMessage());
-        jsonResult.setData(null);
-        return jsonResult;
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "该请求路径：" +
+                request.getRequestURI() + "下的请求参数不全："+pe.getMessage());
     }
 
     /**
@@ -120,11 +108,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public JsonResult httpRequestMethodNotSupportedException(HttpServletRequest request, HttpRequestMethodNotSupportedException pe) {
         log.error("异常:" + request.getRequestURI(), pe);
-        //JsonResult<String> jsonResult = new JsonResult();
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
-        jsonResult.setResponseMsg("请求方式不正确");
-        jsonResult.setData(null);
-        return jsonResult;
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求方式不正确");
+    }
+
+    /**
+     * 自定义异常
+     * @param request
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(BaseException.class)
+    public JsonResult baseException(HttpServletRequest request, BaseException ex) {
+        log.error("自定义异常:" + request.getRequestURI(), ex);
+        return JsonResult.fail(ex.getErrorCode(), ex.getMessage());
     }
 
 
@@ -137,11 +133,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public JsonResult otherException(HttpServletRequest request, Exception pe) {
         log.error("异常:" + request.getRequestURI(), pe);
-        //JsonResult<String> jsonResult = new JsonResult();
-        jsonResult.setResponseCode(HttpStatus.BAD_REQUEST.value());
-        jsonResult.setResponseMsg(pe.getMessage());
-        jsonResult.setData(null);
-        return jsonResult;
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), pe.getMessage());
     }
 
     /**
