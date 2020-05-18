@@ -11,7 +11,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +24,12 @@ import java.util.stream.Collectors;
 
 /**
  * 全局异常处理
- * 仅仅在GlobalExceptionHandler不存在的时候才启用
  * @author yx
  * @date 2020/5/11 12:14
  */
-@RestControllerAdvice
+@ResponseBody
+@ControllerAdvice
 @Slf4j
-@ConditionalOnMissingBean(GlobalExceptionHandler.class)
 public class GlobalExceptionHandler {
 
     /**
@@ -127,13 +128,13 @@ public class GlobalExceptionHandler {
     /**
      * 其他异常
      * @param request
-     * @param pe
+     * @param ex
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public JsonResult otherException(HttpServletRequest request, Exception pe) {
-        log.error("异常:" + request.getRequestURI(), pe);
-        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), pe.getMessage());
+    public JsonResult otherException(HttpServletRequest request, Exception ex) {
+        log.error("异常:" + request.getRequestURI(), ex);
+        return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage());
     }
 
     /**

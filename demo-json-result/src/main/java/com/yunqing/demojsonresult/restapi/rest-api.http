@@ -12,7 +12,7 @@ POST http://{{baseUrl}}/test/update
 Content-Type: application/json
 
 {
-  "username": "yunqing",
+  "username": null,
   "password": "123456"
 }
 
