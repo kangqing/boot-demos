@@ -24,11 +24,13 @@ public class TestController {
 
     @PostMapping("/add")
     public JsonResult test1(@RequestParam String aa) {
-        return JsonResult.success(aa);
+
+        throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), aa);
+
     }
 
     @PostMapping("/update")
-    public JsonResult test2(@RequestBody User user) throws BaseException{
+    public JsonResult test2(@RequestBody User user) {
         //Assert.notNull(user.getUsername(), "用户名不能为空");
         if (user.getUsername()==null) {
             throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "用户名不能为空777");

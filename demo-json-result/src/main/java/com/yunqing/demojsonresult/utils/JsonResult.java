@@ -15,20 +15,20 @@ import java.io.Serializable;
 public class JsonResult<T> implements Serializable {
 
     private Boolean status;
-    private String responseCode;
-    private String responseMsg;
+    private String code;
+    private String msg;
     private T data;
 
     private JsonResult(boolean status) {
         this.status = status;
-        this.responseCode = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
-        this.responseMsg = status ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
+        this.code = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
+        this.msg = status ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
     }
 
     private JsonResult(boolean status, String msg) {
         this.status = status;
-        this.responseCode = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
-        this.responseMsg = msg;
+        this.code = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
+        this.msg = msg;
     }
 
     /**
@@ -38,28 +38,28 @@ public class JsonResult<T> implements Serializable {
      */
     private JsonResult(String code, String msg) {
         this.status = false;
-        this.responseCode = code;
-        this.responseMsg = msg;
+        this.code = code;
+        this.msg = msg;
     }
 
     private JsonResult(boolean status, T data) {
         this.status = status;
-        this.responseCode = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
-        this.responseMsg = status ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
+        this.code = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
+        this.msg = status ? ResultCode.SUCCESS.getMessage() : ResultCode.COMMON_FAIL.getMessage();
         this.data = data;
     }
 
     private JsonResult(boolean status, String msg, T data) {
         this.status = status;
-        this.responseCode = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
-        this.responseMsg = msg;
+        this.code = status ? ResultCode.SUCCESS.getCode() : ResultCode.COMMON_FAIL.getCode();
+        this.msg = msg;
         this.data = data;
     }
 
     private JsonResult(boolean status, String code, String msg, T data) {
         this.status = status;
-        this.responseCode = code;
-        this.responseMsg = msg;
+        this.code = code;
+        this.msg = msg;
         this.data = data;
     }
 
