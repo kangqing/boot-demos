@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface CacheTemplate
-{
+public interface CacheTemplate {
 
     boolean set(String key, String value, Long expire);
 
