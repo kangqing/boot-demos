@@ -20,6 +20,8 @@ public interface CacheTemplate {
 
     long incr(String key, long delta);
 
+    long decr(String key, long delta);
+
     long incr(String key, long delta, long time);
 
     Map<Object, Object> hGet(String key);

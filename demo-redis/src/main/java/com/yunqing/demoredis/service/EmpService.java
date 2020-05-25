@@ -13,4 +13,6 @@ public interface EmpService {
     void add(Emp emp);
 
     void delete(String id);
+
+    void testRedisRollback() throws Exception;
 }

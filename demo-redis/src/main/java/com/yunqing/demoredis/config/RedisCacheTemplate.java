@@ -36,6 +36,7 @@ public class RedisCacheTemplate implements CacheTemplate {
         redisTemplate.setValueSerializer(stringSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);
         redisTemplate.setHashValueSerializer(stringSerializer);
+        redisTemplate.setEnableTransactionSupport(true);
         this.redisTemplate = redisTemplate;
     }
 
@@ -181,6 +182,22 @@ public class RedisCacheTemplate implements CacheTemplate {
     public long incr(String key, long delta) {
         try {
             return redisTemplate.opsForValue().increment(key, delta);
+        } catch (Exception e) {
+            log.error("redis获取" + key + "失败", e);
+            return -1;
+        }
+    }
+
+    /**
+     * 获取redis自减序号
+     * @param key
+     * @param delta
+     * @return
+     */
+    @Override
+    public long decr(String key, long delta) {
+        try {
+            return redisTemplate.opsForValue().decrement(key, delta);
         } catch (Exception e) {
             log.error("redis获取" + key + "失败", e);
             return -1;

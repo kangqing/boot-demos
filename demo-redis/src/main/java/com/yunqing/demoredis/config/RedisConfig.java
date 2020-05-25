@@ -13,13 +13,19 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.*;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.time.Duration;
 
 
 @Configuration
 @EnableCaching
 @ConfigurationProperties(prefix = "spring.cache.redis")
+@EnableTransactionManagement
 public class RedisConfig {
 
     private Duration timeToLive = Duration.ZERO;
@@ -43,6 +49,11 @@ public class RedisConfig {
             }
             return sb.toString();
         };
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource); // 3
     }
 
     /**

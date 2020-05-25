@@ -30,4 +30,9 @@ public class EmpController {
         empService.delete(id);
         return true;
     }
+
+    @GetMapping("/redis")
+    public void testRedisRollback() throws Exception {
+        empService.testRedisRollback();
+    }
 }
