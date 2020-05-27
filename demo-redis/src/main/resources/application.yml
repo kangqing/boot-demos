@@ -1,7 +1,7 @@
 
 spring:
   redis:
-    host: 192.168.16.128
+    host: 127.0.0.1 #192.168.16.128
     port: 6379
     # 连接超时时间（记得添加单位，Duration）
     timeout: 10000ms

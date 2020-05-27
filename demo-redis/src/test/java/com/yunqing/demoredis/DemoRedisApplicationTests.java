@@ -27,7 +27,7 @@ class DemoRedisApplicationTests {
 	void contextLoads() {
 		String currentDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		String key = SERIAL_NUM + currentDate;
-		long incr = redisCacheTemplate.incr(key, 1, 86400);
+		long incr = redisCacheTemplate.incr(key, -1, 86400);
 		//移位运算符<<，左移几位相当于乘以2的几次方, 1 << 2 = 4
 		String code = SequenceUtil.getSequence(incr, 1 << 2);
 		log.info(currentDate + code);

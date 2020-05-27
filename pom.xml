@@ -27,6 +27,7 @@
     </properties>
 
     <modules>
+        <module>demo-a-test</module>
         <module>demo-mybatis-plus</module>
         <module>demo-mybatis-mbg</module>
         <module>demo-redis</module>
