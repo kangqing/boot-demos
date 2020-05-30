@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yunqing.demomybatisplus.pojo.Role;
 import com.yunqing.demomybatisplus.pojo.User;
+import com.yunqing.demomybatisplus.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,33 @@ class DemoMybatisPlusApplicationTests {
 
     @Autowired
     private Snowflake snowflake;
+    @Autowired
+    private UserService userService;
+
+    /**
+     * 测试有选择性的更新
+     */
+    @Test
+    void testUpdateSelect() {
+        User user = new User();
+        //user.setId("1");
+        user.setEmail("33333");
+        /**
+         * 是有选择性的更新
+         * UPDATE t_user SET email=? WHERE id=?
+         */
+        userService.updateById(user);
+        /**
+         * 也是有选择性的更新
+         * UPDATE t_user SET email=? WHERE (id = ?)
+         */
+        userService.update(user, new UpdateWrapper<User>().lambda().eq(User::getId, "1"));
+        /**
+         * 都是有选择性的更新
+         * UPDATE t_user SET email=? WHERE (id = ?)
+         */
+        userService.update(new UpdateWrapper<User>().lambda().set(User::getEmail, "5555555").eq(User::getId, "1"));
+    }
 
     /**
      * ActiveRecord添加， 有选择性的添加
