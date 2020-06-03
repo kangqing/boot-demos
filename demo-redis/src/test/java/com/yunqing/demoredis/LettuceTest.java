@@ -90,6 +90,7 @@ public class LettuceTest {
 
     /**
      * redis  set集合
+     * 测试
      */
     @Test
     void redisSet() {
