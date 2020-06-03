@@ -31,7 +31,7 @@ public class LettuceTest {
      */
     @BeforeEach
     void connRedisByLettuce() {
-        redisClient = RedisClient.create("redis://127.0.0.1:6379");
+        redisClient = RedisClient.create("redis://192.168.16.128:6379");
         redisConnection = redisClient.connect();
         sync = redisConnection.sync();
     }
@@ -51,7 +51,7 @@ public class LettuceTest {
      * ttl 返回-2不存在此key
      */
     @Test
-    void set() {
+    void string() {
         log.info(sync.set("k1", "v1"));
         sync.expire("k1", 1000); //设置1000秒超时
         try {
@@ -65,8 +65,8 @@ public class LettuceTest {
 
     /**
      * redis 列表，相当于链表
-     * lpush 左侧添加
-     * rpush 右侧添加
+     * lpush 左侧添加，是可变参数，可同时追加多个
+     * rpush 右侧添加，是可变参数，可同时追加多个
      * lrange key 0 -1 获取列表第一到最后一个
      * lpop key 删除列表左侧第一个
      * rpop key 删除列表右侧第一个
@@ -74,9 +74,9 @@ public class LettuceTest {
      */
     @Test
     void redisList() {
-        sync.lpush("friends", "Tom");
-        sync.lpush("friends", "Bob");
-        sync.rpush("friends", "peter");
+        sync.rpush("friends", "Tom", "yunqing");
+        sync.rpush("friends", "Bob", "kls");
+        sync.lpush("friends", "peter");
         log.info(sync.llen("friends").toString());
         List<String> friends = sync.lrange("friends", 0, -1);
         friends.forEach(System.out::println);
@@ -84,5 +84,21 @@ public class LettuceTest {
         sync.rpop("friends");
         List<String> friends2 = sync.lrange("friends", 0, -1);
         friends2.forEach(System.out::println);
+        log.info(sync.llen("friends").toString());
+        sync.expire("friends", 10);//设置1000秒过期
     }
+
+    /**
+     * redis  set集合
+     */
+    @Test
+    void redisSet() {
+        sync.sadd("names", "yunqing", "kls", "tom", "tom");
+        log.info("输出set集合[{}]", String.valueOf(sync.smembers("names")));
+        log.info("测试是否存在---------[{}]", sync.sismember("names", "yunqing"));
+        log.info("删除结果1成功，0失败---------[{}}]", sync.srem("names", "tom"));
+        log.info("输出集合[{}]", sync.smembers("names"));
+        sync.expire("names", 10);
+    }
+
 }
