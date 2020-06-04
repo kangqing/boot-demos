@@ -9,7 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,7 +33,7 @@ public class LettuceTest {
      */
     @BeforeEach
     void connRedisByLettuce() {
-        redisClient = RedisClient.create("redis://192.168.16.128:6379");
+        redisClient = RedisClient.create("redis://127.0.0.1:6379");
         redisConnection = redisClient.connect();
         sync = redisConnection.sync();
     }
@@ -94,12 +96,46 @@ public class LettuceTest {
      */
     @Test
     void redisSet() {
-        sync.sadd("names", "yunqing", "kls", "tom", "tom");
+        sync.sadd("names", "yunqing", "kls", "tom", "tom", "a", "c", "b");
         log.info("输出set集合[{}]", String.valueOf(sync.smembers("names")));
         log.info("测试是否存在---------[{}]", sync.sismember("names", "yunqing"));
         log.info("删除结果1成功，0失败---------[{}}]", sync.srem("names", "tom"));
         log.info("输出集合[{}]", sync.smembers("names"));
         sync.expire("names", 10);
+    }
+
+    /**
+     * 带排序的set集合
+     */
+    @Test
+    void redisZSet() {
+        sync.zadd("names", 1, "yunqing");
+        sync.zadd("names", 3, "tom");
+        sync.zadd("names", 2, "kls");
+        sync.zadd("names", 10, "tom");
+        sync.zadd("names", 5, "peter");
+        sync.zadd("names", 5, "bob");
+        log.info("查看集合所有[{}]---------", sync.zrange("names", 0, -1));
+        log.info("删除一个-----[{}]", sync.zrem("names", "peter"));
+        log.info("查看集合所有[{}]---------", sync.zrange("names", 0, -1));
+        sync.expire("names", 10);
+    }
+
+    /**
+     * hash格式存储
+     */
+    @Test
+    void hash() {
+        sync.hset("user", "name", "yunqing");
+        sync.hset("user", "age", "26");
+        log.info("获取所有-----[{}]", sync.hgetall("user"));
+        Map<String, String> map = new HashMap<>();
+        map.put("sex", "男");
+        map.put("email", "10001");
+        sync.hmset("user", map);
+        log.info("获取所有-----[{}]", sync.hgetall("user"));
+        log.info("获取一个------[{}]", sync.hget("user", "email"));
+        sync.expire("user", 10);
     }
 
 }
