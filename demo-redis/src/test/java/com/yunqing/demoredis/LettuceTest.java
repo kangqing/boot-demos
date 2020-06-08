@@ -1,6 +1,7 @@
 package com.yunqing.demoredis;
 
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class LettuceTest {
 
+
     RedisClient redisClient;
     StatefulRedisConnection<String, String> redisConnection;
     RedisCommands<String, String> sync;
@@ -30,11 +34,24 @@ public class LettuceTest {
     /**
      * @BeforeEach 注解在非静态方法上，所有测试方法之前执行
      * @BeforeAll 注解在静态方法上，所有测试方法之前执行
+     * Lettuce主要提供三种API：
+     * 同步（sync）：RedisCommands。
+     * 异步（async）：RedisAsyncCommands。
+     * 反应式（reactive）：RedisReactiveCommands。
      */
     @BeforeEach
     void connRedisByLettuce() {
-        redisClient = RedisClient.create("redis://127.0.0.1:6379");
+        //创建单机连接的连接命令
+        RedisURI redisUri = RedisURI.builder()
+                .withHost("localhost")
+                .withPort(6379)
+                .withTimeout(Duration.of(10, ChronoUnit.SECONDS))//连接超时时间
+                .build();
+        //创建客户端
+        redisClient = RedisClient.create(redisUri);
+        //创建线程安全的连接
         redisConnection = redisClient.connect();
+        //创建同步命令
         sync = redisConnection.sync();
     }
 
@@ -77,7 +94,7 @@ public class LettuceTest {
     @Test
     void redisList() {
         sync.rpush("friends", "Tom", "yunqing");
-        sync.rpush("friends", "Bob", "kls");
+        sync.rpush("friends", "Bob", "kkk");
         sync.lpush("friends", "peter");
         log.info(sync.llen("friends").toString());
         List<String> friends = sync.lrange("friends", 0, -1);
@@ -96,7 +113,7 @@ public class LettuceTest {
      */
     @Test
     void redisSet() {
-        sync.sadd("names", "yunqing", "kls", "tom", "tom", "a", "c", "b");
+        sync.sadd("names", "yunqing", "kkk", "tom", "tom", "a", "c", "b");
         log.info("输出set集合[{}]", String.valueOf(sync.smembers("names")));
         log.info("测试是否存在---------[{}]", sync.sismember("names", "yunqing"));
         log.info("删除结果1成功，0失败---------[{}}]", sync.srem("names", "tom"));
@@ -111,7 +128,7 @@ public class LettuceTest {
     void redisZSet() {
         sync.zadd("names", 1, "yunqing");
         sync.zadd("names", 3, "tom");
-        sync.zadd("names", 2, "kls");
+        sync.zadd("names", 2, "kkk");
         sync.zadd("names", 10, "tom");
         sync.zadd("names", 5, "peter");
         sync.zadd("names", 5, "bob");
@@ -136,6 +153,9 @@ public class LettuceTest {
         log.info("获取所有-----[{}]", sync.hgetall("user"));
         log.info("获取一个------[{}]", sync.hget("user", "email"));
         sync.expire("user", 10);
+    }
+
+    void guandao() {
     }
 
 }
