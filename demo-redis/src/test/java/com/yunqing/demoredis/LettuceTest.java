@@ -155,7 +155,8 @@ public class LettuceTest {
         sync.expire("user", 10);
     }
 
-    void guandao() {
-    }
+    /**
+     * Lettuce的管道不是真正的管道，效率没有 Jedis 的高 ？？？有待考证
+     */
 
 }
