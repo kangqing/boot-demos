@@ -1,0 +1,3 @@
+#优先于properties加载
+server:
+  port: 8083
