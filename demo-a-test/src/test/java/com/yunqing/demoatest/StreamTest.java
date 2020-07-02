@@ -1,6 +1,7 @@
 package com.yunqing.demoatest;
 
 import cn.hutool.core.util.ReUtil;
+import cn.hutool.json.JSONUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -180,6 +186,129 @@ public class StreamTest {
 
     }
 
+    /**
+     * reduce
+     * @DESC 合并流元素产生单个值
+     * 1.计算list中所有学生年龄的总和，存在则打印
+     * 2.计算list中所有学生年龄的总和，存在则打印
+     */
+    @Test
+    void reduceTest() {
+        list.stream().map(Student::getAge)
+                .reduce(Integer::sum)
+                .ifPresent(System.out::println);
+
+        list.stream().map(Student::getScore)
+                .reduce(Double::sum)
+                .ifPresent(System.out::println);
+    }
+
+    /**
+     * collector
+     * 收集器，主要用于toList() / toSet() / toMap() / joining()连接字符串
+     * 1.把list中的id作为key, name作为value转化成Map
+     * 2.把学生名字用逗号拼接，并且第一个逗号用星号替换
+     */
+    @Test
+    void collectorTest() {
+
+        Map<Integer, String> map = list.stream().collect(Collectors.toMap(Student::getId, Student::getName));
+        map.forEach((k, v) -> log.info("key = {} , value = {}", k, v));
+
+        String s = list.stream().map(Student::getName)
+                .collect(Collectors.joining(","))
+                .replaceFirst(",", "*");
+        log.info("输出逗号拼接的字符串-->{}", s);
+
+    }
+
+    /**
+     * summarizingDouble
+     * 1.计算集合中某个元素的 count / sum / avg / min / max
+     * 2.第二种写法
+     */
+    @Test
+    void summarizingDoubleTest() {
+        DoubleSummaryStatistics collect = list.stream()
+                .collect(Collectors.summarizingDouble(Student::getScore));
+        System.out.println(collect);
+
+        DoubleSummaryStatistics doubleSummaryStatistics = list.stream()
+                .mapToDouble(Student::getScore)
+                .summaryStatistics();
+        System.out.println(doubleSummaryStatistics);
+    }
+
+    /**
+     * partitioningBy
+     * @DESC 用于分割列表
+     * 把学生列表中年龄大于100的放进key为true的Map中
+     * 小于等于100的放进key为false的Map中
+     */
+    @Test
+    void partitioningByTest() {
+        Map<Boolean, List<Student>> map = list.stream()
+                .collect(Collectors.partitioningBy(e -> e.getAge() > 100));
+        log.info("true列表 = {}", map.get(Boolean.TRUE));
+        log.info("false列表 = {}", map.get(Boolean.FALSE));
+    }
+
+    /**
+     * groupingBy
+     * @DESC 分组
+     * 1.根据成绩分组
+     * 2.获取每个分数的人数
+     * 3.根据成绩获取取得每个成绩的学生的总分
+     */
+    @Test
+    void groupingByTest() {
+        Map<Double, List<Student>> map1 = list.stream().collect(Collectors.groupingBy(Student::getScore));
+        map1.forEach((k, v) -> System.out.println(k + "\t" + v));
+
+        Map<Double, Long> map2 = list.stream().collect(Collectors.groupingBy(Student::getScore, Collectors.counting()));
+        map2.forEach((k,v) -> System.out.println(k + "\t" + v));
+
+        Map<Double, Double> map3 = list.stream()
+                .collect(Collectors.groupingBy(Student::getScore, Collectors.summingDouble(Student::getScore)));
+        map3.forEach((k, v) -> System.out.println(k + "\t" + v));
+    }
+
+    /**
+     * parallel
+     * @DESC 并发
+     * 延迟一秒后，并发的打印出学生的名字
+     */
+    @Test
+    void parallel() {
+        list.stream().parallel().forEach(this::print);
+    }
+
+    private void print(Student student) {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info("学生的名字是 ： {}", student.getName());
+    }
+
+    /**
+     * @DESC 读写文件
+     * 先把list中的数据写到student.txt中
+     * 再读取出来
+     */
+    @Test
+    void fileTest() throws IOException {
+        PrintWriter printWriter = new PrintWriter(Files.newBufferedWriter(Paths.get("D://student.txt")));
+        //list列表写出到文件student.txt中
+        list.forEach(printWriter::println);
+        printWriter.close();
+        //读取文件
+        List<String> collect = Files.lines(Paths.get("D://student.txt"))
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+        Assertions.assertEquals(5, collect.size());
+    }
 
 }
 
