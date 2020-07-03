@@ -27,7 +27,7 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @SpringBootTest
-public class StreamTest {
+class StreamTest {
 
     private List<Student> list;
     private List<List<Student>> listFlat;
@@ -313,7 +313,9 @@ public class StreamTest {
 
 }
 
-
+/**
+ * 定义学生类
+ */
 @Data
 @AllArgsConstructor
 class Student {
@@ -323,6 +325,9 @@ class Student {
     private Double score;
 }
 
+/**
+ * 定义精英学生类
+ */
 @Data
 class EliteStudent {
     private String name;
