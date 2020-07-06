@@ -1,11 +1,18 @@
 package com.yunqing.demoatest;
 
 import cn.hutool.crypto.SecureUtil;
+import com.yunqing.demoatest.utils.CollectorsUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.collections.impl.collector.BigDecimalSummaryStatistics;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @Slf4j
@@ -44,6 +51,28 @@ class DemoATestApplicationTests {
          * BigDecimal.valueOf(1.745);
          * BigDecimal.valueOf(0.745);
          */
+    }
+
+
+    @Test
+    void bigDecimalTest() {
+        double avg = 66.665000;
+        System.out.println(BigDecimal.valueOf(avg).setScale(2, BigDecimal.ROUND_HALF_UP));
+        System.out.println(BigDecimal.valueOf(avg).divide(BigDecimal.valueOf(3), 2, BigDecimal.ROUND_HALF_UP));
+        List<BigDecimal> list = Arrays.asList(BigDecimal.valueOf(1), BigDecimal.valueOf(2), BigDecimal.valueOf(5),
+                BigDecimal.valueOf(4), BigDecimal.valueOf(3));
+        final BigDecimal collect = list.stream().collect(CollectorsUtil.averagingBigDecimal(e -> e, 2, BigDecimal.ROUND_HALF_UP));
+        System.out.println(collect);
+        final BigDecimal collect1 = list.stream().collect(CollectorsUtil.summingBigDecimal(e -> e));
+        System.out.println(collect1);
+        final BigDecimal collect2 = list.stream().collect(CollectorsUtil.maxBy(e -> e));
+        final BigDecimal collect3 = list.stream().collect(CollectorsUtil.minBy(e -> e));
+        System.out.println(collect2 + "\t" + collect3);
+
+        System.out.println("----------------------------------------");
+        final BigDecimalSummaryStatistics collect4 = list.stream().collect(Collectors2.summarizingBigDecimal(e -> e));
+        System.out.println(collect4.getAverage());
+
     }
 
 }
