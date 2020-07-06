@@ -310,6 +310,12 @@ class StreamTest {
         Assertions.assertEquals(5, collect.size());
     }
 
+    @Test
+    void test() {
+        List<Student> newList = list.stream().limit(3).peek(System.out::println).collect(Collectors.toList());
+        System.out.println("---------------------" + newList.size());
+    }
+
 
 }
 
