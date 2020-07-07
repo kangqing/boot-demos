@@ -7,7 +7,7 @@ package com.yunqing.demoatest.multithread.thread;
  */
 public class Demo2 {
     /**
-     * 结论：并不是按照 12345的顺序输出，证明线程是随机执行的
+     * 结论：并不是按照 12345的顺序输出，证明线程是随机执行的1
      * @param args
      */
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Demo2 {
 
 class Demo2Thread extends Thread {
     private int val;
-    public Demo2Thread(int val) {
+    Demo2Thread(int val) {
         this.val = val;
     }
 
