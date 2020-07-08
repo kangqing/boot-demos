@@ -8,34 +8,34 @@ package com.yunqing.demoatest;
 public class OneLinkedList {
 
     public static void main(String[] args) {
-        ListNode listNode = new ListNode();
-        listNode.addNodeAtEnd(1);
-        listNode.printLinedList();
-        listNode.addNodeAtEnd(2);
-        listNode.printLinedList();
-        listNode.addNodeAtStart(3);
-        listNode.printLinedList();
-        listNode.addNodeAtStart("head节点");
-        listNode.addNodeAtEnd("tail节点");
-        listNode.printLinedList();
-        System.out.println(listNode.length());
-        Node node = getKthFromEnd(listNode, 6);
-        if (node == null) {
+        Node node = new Node();
+        node.addNodeAtEnd(1);
+        node.printLinedList();
+        node.addNodeAtEnd(2);
+        node.printLinedList();
+        node.addNodeAtStart(3);
+        node.printLinedList();
+        node.addNodeAtStart("head节点");
+        node.addNodeAtEnd("tail节点");
+        node.printLinedList();
+        System.out.println(node.length());
+        Node result = getKthFromEnd(node, 6);
+        if (result == null) {
             System.out.println("不存在");
         } else {
-            System.out.println(node.data);
+            System.out.println(result.data);
         }
     }
 
-    private static Node getKthFromEnd (ListNode listNode, int k) {
-        if (listNode.length() < 1 || listNode.length() < k || k < 1) {
+    private static Node getKthFromEnd (Node node, int k) {
+        if (node.length() < 1 || node.length() < k || k < 1) {
             return null;
         }
-        if (listNode.length() == k) {
-            return listNode.head;
+        if (node.length() == k) {
+            return node.head;
         }
-        Node first = listNode.head;
-        Node second = listNode.head;
+        Node first = node.head;
+        Node second = node.head;
         for (int i = 0; i < k; i++) {
             first = first.next;
         }
