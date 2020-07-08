@@ -1,14 +1,16 @@
-package com.yunqing.demoatest;
+package com.yunqing.demoatest.algorithm.linkedlist;
+
+import java.io.Serializable;
 
 /**
- * @Description
+ * @Description 单链表
  * @Author yunqing
  * @Data 2020/7/8 9:47
  */
 public class OneLinkedList {
 
     public static void main(String[] args) {
-        Node node = new Node();
+        Node<Serializable> node = new Node<>();
         node.addNodeAtEnd(1);
         node.printLinedList();
         node.addNodeAtEnd(2);
@@ -19,7 +21,7 @@ public class OneLinkedList {
         node.addNodeAtEnd("tail节点");
         node.printLinedList();
         System.out.println(node.length());
-        Node result = getKthFromEnd(node, 6);
+        Node<Serializable> result = getKthFromEnd(node, 5);
         if (result == null) {
             System.out.println("不存在");
         } else {
@@ -27,15 +29,21 @@ public class OneLinkedList {
         }
     }
 
-    private static Node getKthFromEnd (Node node, int k) {
+    /**
+     * 求单链表的倒数第 k 个节点
+     * @param node 节点
+     * @param k 倒数第 k 位置，最后一位为倒数第一位
+     * @return
+     */
+    private static Node<Serializable> getKthFromEnd (Node<Serializable> node, int k) {
         if (node.length() < 1 || node.length() < k || k < 1) {
             return null;
         }
         if (node.length() == k) {
             return node.head;
         }
-        Node first = node.head;
-        Node second = node.head;
+        Node<Serializable> first = node.head;
+        Node<Serializable> second = node.head;
         for (int i = 0; i < k; i++) {
             first = first.next;
         }
