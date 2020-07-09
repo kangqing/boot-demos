@@ -75,4 +75,14 @@ class DemoATestApplicationTests {
 
     }
 
+    /**
+     * 测试保留4位小数
+     * BigDecimal.ROUND_HALF_UP 是四舍五入的方式
+     */
+    @Test
+    void test() {
+        double d = 14.15515215751;
+        System.out.println(BigDecimal.valueOf(d).setScale(4, BigDecimal.ROUND_HALF_UP));
+    }
+
 }
