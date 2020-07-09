@@ -50,7 +50,7 @@ class StopThread1 extends Thread {
     /**
      * 停止方法
      */
-    public void stopMethod() {
+    void stopMethod() {
         System.out.println("调用此自定义方法停止线程");
         flag = false;
     }

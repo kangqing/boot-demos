@@ -1,7 +1,5 @@
 package com.yunqing.demoatest.multithread.thread;
 
-import lombok.Data;
-
 /**
  * @Description 暂停线程
  * @Author yunqing
@@ -15,10 +13,6 @@ public class SuspendThreadTest {
         t1.setName("A");
         t1.start();
 
-        Thread t3 = new Thread(test::method);
-        t3.setName("B");
-        t3.start();
-
         Thread t2 = new Thread(test::method);
         t2.start();
 
@@ -31,14 +25,14 @@ public class SuspendThreadTest {
  */
 class SuspendThreadService {
 
+    /**
+     * 加上同步锁之后，暂停线程就不能释放锁，导致一直处于线程暂停状态
+     */
     synchronized void method() {
         System.out.println("线程开始");
         if ("A".equals(Thread.currentThread().getName())) {
             System.out.println("线程被暂停");
             Thread.currentThread().suspend();
-        } else if ("B".equals(Thread.currentThread().getName())) {
-            System.out.println("线程被恢复");
-            Thread.currentThread().resume();
         }
         System.out.println("线程结束");
     }
