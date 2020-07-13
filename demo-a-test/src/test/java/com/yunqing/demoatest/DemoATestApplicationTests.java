@@ -85,4 +85,11 @@ class DemoATestApplicationTests {
         System.out.println(BigDecimal.valueOf(d).setScale(4, BigDecimal.ROUND_HALF_UP));
     }
 
+    @Test
+    void listRemoveTest() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 3, 2, 1, 2));
+        list.remove(1);
+        list.forEach(System.out::println);
+    }
+
 }
