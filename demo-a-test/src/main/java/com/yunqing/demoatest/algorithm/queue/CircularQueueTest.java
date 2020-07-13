@@ -1,5 +1,9 @@
 package com.yunqing.demoatest.algorithm.queue;
 
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @Description 循环队列测试
  * @Author yunqing LeetCode 622 设计循环队列
@@ -7,6 +11,8 @@ package com.yunqing.demoatest.algorithm.queue;
  */
 public class CircularQueueTest {
     public static void main(String[] args) {
+        QueueTest();
+        System.out.println("-----------------------------------------------");
         MyCircularQueue queue = new MyCircularQueue(5);
         System.out.println(queue.isEmpty());
         System.out.println(queue.isFull());
@@ -36,6 +42,16 @@ public class CircularQueueTest {
         System.out.println(queue.Front() + "\t" + queue.Rear());
         System.out.println(queue.deQueue());
         System.out.println(queue.Front() + "\t" + queue.Rear());
+    }
+
+    private static void QueueTest() {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(1);
+        queue.add(2);
+        queue.offer(3);
+        System.out.println(queue.peek());//返回元素的头
+        queue.poll();
+        System.out.println(queue.peek());
     }
 
 }
