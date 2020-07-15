@@ -1,4 +1,4 @@
-package com.yunqing.demoatest.algorithm;
+package com.yunqing.demoatest.algorithm.recursion;
 
 import java.util.Arrays;
 import java.util.Collections;
