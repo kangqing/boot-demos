@@ -237,6 +237,9 @@ class StreamTest {
                 .mapToDouble(Student::getScore)
                 .summaryStatistics();
         System.out.println(doubleSummaryStatistics);
+
+        Student student = list.stream().min(Comparator.comparing(Student::getId)).get();
+        System.out.println(student);
     }
 
     /**
