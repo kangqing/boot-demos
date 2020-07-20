@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @Description 三角形最小路径和
+ * @Description LeetCode 120 三角形最小路径和
  * @Author yunqing
  * @Data 2020/7/14 20:27
  */
