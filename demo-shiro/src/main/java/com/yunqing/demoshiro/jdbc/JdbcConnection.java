@@ -41,7 +41,7 @@ public class JdbcConnection {
      * @return
      */
     public String getPasswordByUsername(String username) {
-        String sql = "select password from user  where name = ?";
+        String sql = "select `password` from user where `name` = ?";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();

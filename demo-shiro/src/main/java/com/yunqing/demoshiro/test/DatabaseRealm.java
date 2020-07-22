@@ -1,12 +1,15 @@
 package com.yunqing.demoshiro.test;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import cn.hutool.core.util.StrUtil;
+import com.yunqing.demoshiro.jdbc.JdbcConnection;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import java.util.Set;
 
 /**
  * @Description  Realm 在 Shiro里到底扮演什么角色呢？
@@ -24,7 +27,16 @@ public class DatabaseRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        //能进入到这里，表示账号已经通过验证了,开始授权
+        String username = (String) principalCollection.getPrimaryPrincipal();
+        //获取角色和权限
+        Set<String> roleList = new JdbcConnection().getRoleList(username);
+        Set<String> permitList = new JdbcConnection().getPermitList(username);
+        //要授权的对象
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.setRoles(roleList);
+        simpleAuthorizationInfo.setStringPermissions(permitList);
+        return simpleAuthorizationInfo;
     }
 
     /**
@@ -35,8 +47,16 @@ public class DatabaseRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        //从之前封装的UsernamePasswordToken中获取用户填写的用户名、密码
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-
-        return null;
+        String username = token.getPrincipal().toString();
+        String password = String.valueOf(token.getPassword());
+        //从数据库中获取用户名的密码
+        String passwordInDB = new JdbcConnection().getPasswordByUsername(username);
+        if (!password.equals(passwordInDB) || StrUtil.isBlank(passwordInDB)) {
+            throw new AuthenticationException();
+        }
+        //认证信息里存放账号密码, getName() 是当前Realm的继承方法,通常返回当前类名 :databaseRealm
+        return new SimpleAuthenticationInfo(username, password, getName());
     }
 }

@@ -1,12 +1,10 @@
 package com.yunqing.demoshiro.test;
 
-import com.google.common.collect.Lists;
 import com.yunqing.demoshiro.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
@@ -21,7 +19,7 @@ import java.util.List;
  * @Data 2020/7/22 14:09
  */
 @Slf4j
-public class Test1 {
+public class ShiroTest {
     public static void main(String[] args) {
         User user1 = new User(1,"zhang3", "12345");
         User user2 = User.builder().build();
@@ -51,7 +49,7 @@ public class Test1 {
          * 判断list中的用户是否登录
          */
         for (User user : userList) {
-            if (Solution.login(user)) {
+            if (login(user)) {
                 log.info("[{}]登录成功，所用的密码是[{}]", user.getUsername(), user.getPassword());
             } else {
                 log.info("[{}]登录失败，所用的密码是[{}]", user.getUsername(), user.getPassword());
@@ -63,8 +61,8 @@ public class Test1 {
          */
         for (User user : userList) {
             for (String role : roles) {
-                if (Solution.login(user)) {
-                    if (Solution.hasRole(user, role)) {
+                if (login(user)) {
+                    if (hasRole(user, role)) {
                         log.info("用户[{}]拥有角色：[{}]", user.getUsername(), role);
                     } else {
                         log.info("用户[{}]不拥有角色：[{}]", user.getUsername(), role);
@@ -75,8 +73,8 @@ public class Test1 {
         log.info("-------------------------------------------------------------------");
         for (User user : userList) {
             for (String permit : permits) {
-                if (Solution.login(user)) {
-                    if (Solution.isPermitted(user, permit)) {
+                if (login(user)) {
+                    if (isPermitted(user, permit)) {
                         log.info("用户[{}]拥有权限：[{}]", user.getUsername(), permit);
                     } else {
                         log.info("用户[{}]不拥有权限：[{}]", user.getUsername(), permit);
@@ -84,26 +82,25 @@ public class Test1 {
                 }
             }
         }
-
     }
-}
 
-/**
- * 从 shiro.ini中获取用户、角色、权限
- */
-class Solution {
+
+    //----------------------------------------------------------------------------------------------
+
     /**
      * 获取Subject对象
      * @param user
      * @return
      */
-    public static Subject getSubject(User user) {
+    private static Subject getSubject(User user) {
         //创建一个DefaultSecurityManager实例
         DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager();
-        //创建一个基于Ini文件的数据源
-        IniRealm iniRealm = new IniRealm("classpath:shiro.ini");
+        //创建一个基于Ini文件的数据源，来认证授权
+        //IniRealm iniRealm = new IniRealm("classpath:shiro.ini");
+        //修改使用我们自定义的DatabaseRealm作为认证授权的依据
+        DatabaseRealm databaseRealm = new DatabaseRealm();
         //数据源的数据绑定到DefaultSecurityManager实例
-        defaultSecurityManager.setRealm(iniRealm);
+        defaultSecurityManager.setRealm(databaseRealm);
         //将安全管理者实例放入全局对象
         SecurityUtils.setSecurityManager(defaultSecurityManager);
         //全局对象通过安全管理者生成Subject对象并返回
@@ -115,7 +112,7 @@ class Solution {
      * @param user
      * @return
      */
-    public static boolean login(User user) {
+    private static boolean login(User user) {
         Subject subject = getSubject(user);
         //如果已经登录，则退出
         if (subject.isAuthenticated()) {
@@ -137,7 +134,7 @@ class Solution {
      * 是否拥有某个角色
      * @return
      */
-    public static boolean hasRole(User user, String role) {
+    private static boolean hasRole(User user, String role) {
         Subject subject = getSubject(user);
         return subject.hasRole(role);
     }
@@ -148,7 +145,7 @@ class Solution {
      * @param permit
      * @return
      */
-    public static boolean isPermitted(User user, String permit) {
+    private static boolean isPermitted(User user, String permit) {
         Subject subject = getSubject(user);
         return subject.isPermitted(permit);
     }
