@@ -1,7 +1,10 @@
 package com.yunqing.demoshiro.jdbc;
 
+import cn.hutool.crypto.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.validation.Valid;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +16,8 @@ import java.util.Set;
  */
 @Slf4j
 public class JdbcConnection {
+    @Value("${com.yunqing.salt}")
+    private String salt;
     /**
      * 加载mysql驱动
      */
@@ -33,6 +38,27 @@ public class JdbcConnection {
         return DriverManager.getConnection(
                 "jdbc:mysql://127.0.0.1:3307/shiro?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai",
                 "root", "5678");
+    }
+
+    /**
+     * 新建用户
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    public boolean createUser(String username, String password) {
+        String sql = "insert into user values(null, ?, ?)";
+        //盐值加密密码后，再进行存入数据库
+        String encodePass = SecureUtil.md5(password + salt);
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, encodePass);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**
