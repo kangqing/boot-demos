@@ -1,4 +1,4 @@
-package com.yunqing.demoatest;
+package com.yunqing.demoatest.algorithm.array;
 
 /**
  * @Description LeetCode64 最小路径和
