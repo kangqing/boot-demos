@@ -15,7 +15,7 @@ public class LeetCode724 {
 
 class Solution724 {
     public int pivotIndex(int[] nums) {
-        if (nums.length < 3) return -1;
+        if (nums.length < 1) return -1;
         int[] arr = new int[10000];
         int numsSum = 0;
         for (int i = 0; i < nums.length; i++) {
