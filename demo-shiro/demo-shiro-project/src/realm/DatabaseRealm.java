@@ -1,14 +1,13 @@
-package com.yunqing.demoshiro.test;
+package realm;
 
 import cn.hutool.core.util.StrUtil;
-import com.yunqing.demoshiro.jdbc.JdbcConnection;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.crypto.SecureUtil;
+import jdbc.JdbcConnection;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-
 import java.util.Set;
 
 /**
@@ -20,6 +19,7 @@ import java.util.Set;
  * @Data 2020/7/22 17:29
  */
 public class DatabaseRealm extends AuthorizingRealm {
+
     /**
      * 授权
      * @param principalCollection
@@ -51,9 +51,11 @@ public class DatabaseRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String username = token.getPrincipal().toString();
         String password = String.valueOf(token.getPassword());
+        String salt = "csau8za98xa@^*&7==-??.>smjhd";
+        String encodePass = SecureUtil.sha256(password + salt);
         //从数据库中获取用户名的密码
         String passwordInDB = new JdbcConnection().getPasswordByUsername(username);
-        if (!password.equals(passwordInDB) || StrUtil.isBlank(passwordInDB)) {
+        if (!encodePass.equals(passwordInDB) || StrUtil.isBlank(passwordInDB)) {
             throw new AuthenticationException();
         }
         //认证信息里存放账号密码, getName() 是当前Realm的继承方法,通常返回当前类名 :databaseRealm

@@ -1,10 +1,7 @@
-package com.yunqing.demoshiro.jdbc;
+package jdbc;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.crypto.SecureUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.validation.Valid;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,10 +11,7 @@ import java.util.Set;
  * @Author yx
  * @Data 2020/7/22 17:18
  */
-@Slf4j
 public class JdbcConnection {
-    @Value("${com.yunqing.salt}")
-    private String salt;
     /**
      * 加载mysql驱动
      */
@@ -48,8 +42,10 @@ public class JdbcConnection {
      */
     public boolean createUser(String username, String password) {
         String sql = "insert into user values(null, ?, ?)";
+        String salt = "csau8za98xa@^*&7==-??.>smjhd";
+        System.out.println(salt);
         //盐值加密密码后，再进行存入数据库
-        String encodePass = SecureUtil.md5(password + salt);
+        String encodePass = SecureUtil.sha256(password + salt);
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, encodePass);
@@ -129,9 +125,9 @@ public class JdbcConnection {
     }
 
     public static void main(String[] args) {
-        log.info("zhang3拥有的角色包括[{}]", new JdbcConnection().getRoleList("zhang3"));
-        log.info("zhang3拥有的权限包括[{}]", new JdbcConnection().getPermitList("zhang3"));
-        log.info("li4拥有的角色包括[{}]", new JdbcConnection().getRoleList("li4"));
-        log.info("li4拥有的权限包括[{}]", new JdbcConnection().getPermitList("li4"));
+        Console.log("zhang3拥有的角色包括[{}]", new JdbcConnection().getRoleList("zhang3"));
+        Console.log("zhang3拥有的权限包括[{}]", new JdbcConnection().getPermitList("zhang3"));
+        Console.log("li4拥有的角色包括[{}]", new JdbcConnection().getRoleList("li4"));
+        Console.log("li4拥有的权限包括[{}]", new JdbcConnection().getPermitList("li4"));
     }
 }

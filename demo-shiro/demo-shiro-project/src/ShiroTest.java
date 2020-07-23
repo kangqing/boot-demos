@@ -1,15 +1,11 @@
-package com.yunqing.demoshiro.test;
-
-import com.yunqing.demoshiro.entity.User;
-import lombok.extern.slf4j.Slf4j;
+import cn.hutool.core.lang.Console;
+import entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSecurityManager;
-import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
+import realm.DatabaseRealm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,24 +16,44 @@ import java.util.List;
  * @Author yx
  * @Data 2020/7/22 14:09
  */
-@Slf4j
 public class ShiroTest {
     public static void main(String[] args) {
+        //shiro1.1 - shiro-1.2测试方法
+        //shiro1_2();
+
+        //shiro1_3
+        shiro1_3();
+
+    }
+
+    /**
+     * shiro 1.3测试方法
+     */
+    private static void shiro1_3() {
+        //注册一个用户
+        //new JdbcConnection().createUser("bob", "123456");
+        User user = new User(1,"bob", "123456");
+        if (login(user)) {
+            Console.log("{}登录成功，密码是{}", user.getUsername(), user.getPassword());
+        } else {
+            Console.log("{}登录失败，密码是{}", user.getUsername(), user.getPassword());
+        }
+    }
+
+    /**
+     * shiro1.1 - shiro1.2测试方法
+     */
+    private static void shiro1_2() {
         User user1 = new User(1,"zhang3", "12345");
-        User user2 = User.builder().build();
-        user2.setUsername("li4")
-                .setPassword("abcde").setId(2);
-        User user3 = User.builder()
-                .username("wang5")
-                .password("11111")
-                .id(3)
-                .build();
+        User user2 = new User(2,"li4", "abcde");
+        User user3 = new User(3,"wang5", "11111");
+
         List<User> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);
         userList.add(user3);
-        log.info("封装用于验证登录的三个用户[{}], [{}], [{}]", user1.toString(), user2.toString(), user3.toString());
-        log.info("-------------------------------------------------------------------");
+        Console.log("封装用于验证登录的三个用户[{}], [{}], [{}]", user1.toString(), user2.toString(), user3.toString());
+        Console.log("-------------------------------------------------------------------");
         /**
          * 角色
          */
@@ -52,12 +68,12 @@ public class ShiroTest {
          */
         for (User user : userList) {
             if (login(user)) {
-                log.info("[{}]登录成功，所用的密码是[{}]", user.getUsername(), user.getPassword());
+                Console.log("[{}]登录成功，所用的密码是[{}]", user.getUsername(), user.getPassword());
             } else {
-                log.info("[{}]登录失败，所用的密码是[{}]", user.getUsername(), user.getPassword());
+                Console.log("[{}]登录失败，所用的密码是[{}]", user.getUsername(), user.getPassword());
             }
         }
-        log.info("-------------------------------------------------------------------");
+        Console.log("-------------------------------------------------------------------");
         /**
          * 判断用户是否拥有角色列表中的角色
          */
@@ -65,21 +81,21 @@ public class ShiroTest {
             for (String role : roles) {
                 if (login(user)) {
                     if (hasRole(user, role)) {
-                        log.info("用户[{}]拥有角色：[{}]", user.getUsername(), role);
+                        Console.log("用户[{}]拥有角色：[{}]", user.getUsername(), role);
                     } else {
-                        log.info("用户[{}]不拥有角色：[{}]", user.getUsername(), role);
+                        Console.log("用户[{}]不拥有角色：[{}]", user.getUsername(), role);
                     }
                 }
             }
         }
-        log.info("-------------------------------------------------------------------");
+        Console.log("-------------------------------------------------------------------");
         for (User user : userList) {
             for (String permit : permits) {
                 if (login(user)) {
                     if (isPermitted(user, permit)) {
-                        log.info("用户[{}]拥有权限：[{}]", user.getUsername(), permit);
+                        Console.log("用户[{}]拥有权限：[{}]", user.getUsername(), permit);
                     } else {
-                        log.info("用户[{}]不拥有权限：[{}]", user.getUsername(), permit);
+                        Console.log("用户[{}]不拥有权限：[{}]", user.getUsername(), permit);
                     }
                 }
             }

@@ -43,6 +43,56 @@
     DatabaseRealm databaseRealm = new DatabaseRealm();
     ```
 ### 1.3 `shiro`加密
-
-    
+    1.首先在JdbcConnection.java中添加了一个新增用户的方法,注意新增用户使用sha256加盐加密
+    ```
+        /**
+         * 新建用户
+         * @param username 用户名
+         * @param password 密码
+         * @return
+         */
+        public boolean createUser(String username, String password) {
+            String sql = "insert into user values(null, ?, ?)";
+            String salt = "csau8za98xa@^*&7==-??.>smjhd";
+            System.out.println(salt);
+            //盐值加密密码后，再进行存入数据库
+            String encodePass = SecureUtil.sha256(password + salt);
+            try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ps.setString(2, encodePass);
+                ps.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    ```
+    2.其次在DataRealm.java认证的时候，根据用户输入的密码同样进行sha256加盐加密之后，比对数据库中存的密码
+    ```
+    String salt = "csau8za98xa@^*&7==-??.>smjhd";
+    String encodePass = SecureUtil.sha256(password + salt);
+    //从数据库中获取用户名的密码
+    String passwordInDB = new JdbcConnection().getPasswordByUsername(username);
+    if (!encodePass.equals(passwordInDB) || StrUtil.isBlank(passwordInDB)) {
+        throw new AuthenticationException();
+    }
+    ```
+    3.在shiroTest.java测试方法中先，添加一个用户，再用此用户进行登录
+    ```
+    /**
+     * shiro 1.3测试方法
+     */
+    private static void shiro1_3() {
+        //注册一个用户
+        //new JdbcConnection().createUser("bob", "123456");
+        User user = User.builder().username("bob")
+                .password("123456").build();
+        if (login(user)) {
+            Console.log("{}登录成功，密码是{}", user.getUsername(), user.getPassword());
+        } else {
+            Console.log("{}登录失败，密码是{}", user.getUsername(), user.getPassword());
+        }
+    }
+    ```
     
