@@ -23,13 +23,18 @@ class SolutionMST01_07 {
         int m = matrix.length;
         int n = matrix[0].length;
         int[][] arr = new int[n][m];
+        int j = 0;
         for(int y=m; y>0; y--) {
-            int j = 0;
+            int x = m;
             for(int i = 0; i<n; i++) {
-                arr[j][i] = matrix[y-1][0];
+                arr[j][i] = matrix[x-1][j];
+                x--;
             }
             j++;
         }
-        matrix = arr.clone();
+        //二维数组的拷贝方式
+        for (int i = 0; i < arr.length; i++) {
+            matrix[i] = arr[i].clone();
+        }
     }
 }
