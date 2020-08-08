@@ -1,4 +1,4 @@
-package com.yunqing.demoatest.algorithm.string;
+package com.yunqing.demoatest.algorithm.array;
 
 import java.util.*;
 
