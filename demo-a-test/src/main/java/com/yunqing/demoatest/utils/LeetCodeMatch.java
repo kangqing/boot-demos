@@ -19,6 +19,7 @@ class SolutionMatch {
 
 }
 
+/**
 //int[] intArr = new int[]{ };
 //创建一个栈
 //Deque<Character> stack = new ArrayDeque<>();
@@ -32,3 +33,12 @@ class SolutionMatch {
 //Integer remove = queue.remove();//出队列获取值
 
 //Collections.reverse(list); //反转列表
+
+ * 先看ASCII码：a~z是97~122的二进制，而A~Z是65~90的二进制编码，
+ * 于是我们就得出：大写字母=小写字母-32 ；这个公式了。
+ * 当然这里的32我也可以这么写‘Z’=‘z’-‘空格’。因为空格的ASCII码是32对应的二进制编码
+ *
+ * 又因为 ‘0’ 的ASCII码对应48
+ * 而‘1’-‘9’分别对应49 - 57
+ * 所以实际上减去‘0’相当于减去48
+ */
