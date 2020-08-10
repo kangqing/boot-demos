@@ -11,9 +11,10 @@ import java.util.Collections;
  */
 public class LeetCode498 {
     public static void main(String[] args) {
-        int[][] arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] arr = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
         Solution498 s = new Solution498();
         System.out.println(Arrays.toString(s.findDiagonalOrder(arr)));
+        System.out.println(Arrays.toString(s.findDiagonalOrder_1(arr)));
     }
 }
 //TODO ----------- 自己没想出来，看题解的
@@ -69,6 +70,72 @@ class Solution498 {
             }
         }
         return result;
+    }
+
+    int[] findDiagonalOrder_1(int[][] matrix) {
+        //验空
+        if (matrix == null || matrix.length == 0) {
+            return new int[0];
+        }
+        int row = matrix.length;    //行数
+        int col = matrix[0].length; //列数
+        //返回的数组
+        int[] resultArr = new int[row * col];
+        resultArr[0] = matrix[0][0];
+        boolean b = true;
+        int getNext = 1;
+        for (int i = 1; i < row * col; i++) {
+            getNext = getNextNumber(getNext, row, col, b);
+            if (getNext == row * col) {
+                resultArr[i] = matrix[row - 1][col - 1];
+                break;
+            }
+            if ((getNext < col && getNext % 2 == 0) ||
+                    (getNext % col == 1 && (getNext / col) % 2 == 0) ||
+                    (getNext % col == 0 && (getNext / col) % 2 == 0) ||
+                    (getNext < row * col && getNext > row * col - col && getNext % 2 != 0)) {
+                b = !b;
+            }
+            if (getNext % col == 0) {
+                int x = col - 1;
+                int y = getNext / col - 1;
+                resultArr[i] = matrix[y][x];
+            } else {
+                int x = getNext % col - 1;
+                int y = getNext / col;
+                resultArr[i] = matrix[y][x];
+            }
+        }
+        return resultArr;
+
+
+    }
+
+    /**
+     * 获取下一个数字
+     * @return
+     */
+    private int getNextNumber(int currNumber, int row, int col, boolean b) {
+        //四个角的特殊数是
+        //1                            col
+        //(row-1)*col + 1              row*col
+        if (b) {
+            if (currNumber < col) {
+                return ++currNumber;
+            } else if (currNumber % col == 0) {
+                return 2 * col;
+            } else {
+                return currNumber - col + 1;
+            }
+        } else {
+            if (currNumber % col == 1 && currNumber != (row -1) * col + 1) {
+                return currNumber + col;
+            } else if ((row -1) * col + 1 <= currNumber && currNumber < row * col){
+                return ++currNumber;
+            } else {
+                return currNumber + col - 1;
+            }
+        }
     }
 
 
