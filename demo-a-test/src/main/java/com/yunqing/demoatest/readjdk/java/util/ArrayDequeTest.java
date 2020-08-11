@@ -1,4 +1,4 @@
-package com.yunqing.demoatest.readjdk.java.util.concurrent;
+package com.yunqing.demoatest.readjdk.java.util;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -14,7 +14,7 @@ public class ArrayDequeTest {
     private static Deque<Integer> deque = new ArrayDeque<>();
 
     public static void main(String[] args) {
-        stackTest();
+        //stackTest();
         //queueTest();
         doubleQueueTest();
     }
@@ -103,6 +103,26 @@ public class ArrayDequeTest {
         deque.removeLastOccurrence(1);
         deque.forEach(System.out::print);
         System.out.println("---------------本行是从尾删除第一个匹配1的元素-----------------------------");
+
+        ArrayDeque<Integer> deque1;
+        deque1 = new ArrayDeque<>();
+        for (int i = 0; i < 3; i++) {
+            deque1.offerFirst(i);
+        }
+        /**
+         * 确实是开辟了新的内存空间，而不是指针指向deque1
+         */
+        Deque<Integer> deque2 = deque1.clone();
+        deque1.forEach(System.out::print);
+        System.out.println("--------------------------------------------");
+        deque2.forEach(System.out::print);
+        System.out.println("--------------------------------------------");
+        deque2.offerFirst(8);
+        deque1.forEach(System.out::print);
+        System.out.println("--------------------------------------------");
+        deque2.forEach(System.out::print);
+        System.out.println("--------------------------------------------");
+
 
     }
 }
