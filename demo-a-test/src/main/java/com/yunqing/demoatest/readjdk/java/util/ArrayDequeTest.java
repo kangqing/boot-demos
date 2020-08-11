@@ -85,7 +85,7 @@ public class ArrayDequeTest {
      * removeLast == pollLast()
      * getFirst() == peekFirst()
      * getLast() == peekLast()
-     * 前者不满足特定情况超容量、队列为空等会抛异常
+     * 有无返回值、是否会异常等看具体实现，很简单的就不赘述
      * 建议使用后者带 offer/poll/peek的方法
      */
     private static void doubleQueueTest() {
