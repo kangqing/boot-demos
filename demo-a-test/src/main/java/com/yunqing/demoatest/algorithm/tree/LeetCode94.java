@@ -1,14 +1,12 @@
 package com.yunqing.demoatest.algorithm.tree;
 
-import sun.reflect.generics.tree.Tree;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
 /**
- * @Description 二叉树的中序遍历
+ * @Description LeetCode94 二叉树的中序遍历
  * @Author yunqing
  * @Data 2020/7/20 6:17
  */
