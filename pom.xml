@@ -34,7 +34,6 @@
         <module>demo-configuration-properties</module>
         <module>demo-hutool</module>
         <module>demo-web-log</module>
-        <module>demo-shiro</module>
         <module>demo-api-security</module>
     </modules>
 
