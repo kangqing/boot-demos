@@ -14,3 +14,7 @@ com:
       - 4
     str: "我是配置的字符串"
     strPassword: 我是密码，需要双引号吗？显然不需要
+
+#yunqing:
+#  name: 111
+#  email: 222
