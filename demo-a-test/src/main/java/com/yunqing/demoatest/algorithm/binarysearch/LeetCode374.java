@@ -1,4 +1,4 @@
-package com.yunqing.demoatest.algorithm;
+package com.yunqing.demoatest.algorithm.binarysearch;
 
 import java.util.Random;
 
