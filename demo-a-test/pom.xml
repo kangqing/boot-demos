@@ -25,13 +25,14 @@
         </dependency>
     </dependencies>
 
-    <build>
+    <!-- 打包排除此项 -->
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>
