@@ -21,7 +21,7 @@
 
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <boot-demos.version>1.0-SNAPSHOT</boot-demos.version>
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     </properties>
@@ -34,7 +34,6 @@
         <module>demo-configuration-properties</module>
         <module>demo-hutool</module>
         <module>demo-web-log</module>
-        <module>demo-shiro</module>
         <module>demo-api-security</module>
     </modules>
 

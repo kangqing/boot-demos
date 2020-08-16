@@ -2,6 +2,7 @@ package com.yunqing.democonfigurationproperties;
 
 import cn.hutool.core.lang.Console;
 import com.yunqing.democonfigurationproperties.config.PropertiesConst;
+import com.yunqing.democonfigurationproperties.config.ValueConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ class DemoConfigurationPropertiesApplicationTests {
 
     @Autowired
     private PropertiesConst propertiesConst;
+    @Autowired
+    private ValueConfig valueConfig;
 
     @Test
     void contextLoads() {
@@ -35,6 +38,12 @@ class DemoConfigurationPropertiesApplicationTests {
         if (StringUtils.length(str) > 10) {
             System.out.println("--------------------------------------------------");
         }
+    }
+
+    @Test
+    void testValueConfig() {
+        System.out.println("name = " + valueConfig.getName());
+        System.out.println("email = " + valueConfig.getEmail());
     }
 
 }

@@ -21,14 +21,12 @@ class SolutionMatch {
 
 /**
 //int[] intArr = new int[]{ };
-//创建一个栈
+//创建一个栈或者队列
 //Deque<Character> stack = new ArrayDeque<>();
 //stack.push('a');//入栈
 //Character first = stack.peekFirst();//栈顶元素
 //stack.pop();//出栈
 
-//创建一个队列
-//Queue<Integer> queue = new LinkedList<>();
 //queue.offer(1);//入队列
 //Integer remove = queue.remove();//出队列获取值
 
