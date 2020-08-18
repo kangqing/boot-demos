@@ -9,9 +9,10 @@ public class LeetCode35 {
     public static void main(String[] args) {
         int[] arr = new int[]{1,3,5,6};
         Solution35 s = new Solution35();
-        int target = 7;
+        int target = 0;
         System.out.println(s.searchInsert(arr, target));
         System.out.println(s.searchInsert_1(arr, target));
+        System.out.println(s.searchInsert_2(arr, target));
     }
 }
 
@@ -56,6 +57,29 @@ class Solution35 {
         }
 
         return low;
+    }
+
+
+    /**
+     * 二分法
+     * 时间复杂度 O(log n)
+     * 题解给的答案
+     */
+    int searchInsert_2(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        int ans = nums.length;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                ans = mid;
+                high = mid - 1;
+            }
+        }
+
+        return ans;
     }
 }
 
