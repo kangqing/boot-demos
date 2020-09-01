@@ -15,7 +15,7 @@ import java.util.*;
  * @Author yunqing
  * @Data 2020/7/14 10:03
  */
-public class TurntableLock {
+public class LeetCode752 {
     public static void main(String[] args) {
         Solution solution = new Solution();
         String[] arr = new String[] {"0201","0101","0102","1212","2002"};
