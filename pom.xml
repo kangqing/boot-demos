@@ -35,7 +35,8 @@
         <module>demo-hutool</module>
         <module>demo-web-log</module>
         <module>demo-api-security</module>
-        <module>demo-jdbc</module>
+        <module>demo-json-result</module>
+        <module>demo-leetcode</module>
     </modules>
 
     <!--<repositories>
