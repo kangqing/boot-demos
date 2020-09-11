@@ -1,6 +1,4 @@
-package com.yunqing.demoatest.utils;
-
-import java.util.*;
+package com.yunqing.demoleetcode;
 
 /**
  * 力扣周赛专用
