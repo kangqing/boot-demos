@@ -30,12 +30,12 @@ public class ArrayDequeTest {
         }
         System.out.println("栈的大小 = " + deque.size());
         //迭代器遍历，从栈顶开始
-        for (Iterator iterator = deque.iterator(); iterator.hasNext();) {
+        for (Iterator<Integer> iterator = deque.iterator(); iterator.hasNext();) {
             System.out.print(iterator.next());
         }
         System.out.println("--------------------------------------------");
         //迭代器遍历，从栈底开始
-        for (Iterator iterator = deque.descendingIterator(); iterator.hasNext();) {
+        for (Iterator<Integer> iterator = deque.descendingIterator(); iterator.hasNext();) {
             System.out.print(iterator.next());
         }
         //出栈 5
@@ -66,7 +66,7 @@ public class ArrayDequeTest {
         }
         deque.forEach(System.out::print);
         System.out.println("--------------------------------------------");
-        for (Iterator iterator = deque.descendingIterator(); iterator.hasNext();) {
+        for (Iterator<Integer> iterator = deque.descendingIterator(); iterator.hasNext();) {
             System.out.print(iterator.next());
         }
         deque.poll(); // 出队列
