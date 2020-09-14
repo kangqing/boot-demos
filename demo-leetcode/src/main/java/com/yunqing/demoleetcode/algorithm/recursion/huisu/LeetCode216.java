@@ -1,4 +1,4 @@
-package com.yunqing.demoleetcode.algorithm.recursion;
+package com.yunqing.demoleetcode.algorithm.recursion.huisu;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
