@@ -55,7 +55,38 @@ public class ArrayListTest {
         list.addAll(deque);
         list.retainAll(deque);
         System.out.println(list);
+        //从指定索引开始返回迭代器
+        for (int i = 0; i < 5; i++) {
+            list.add(i + 1);
+        }
+        System.out.println(list);
 
+        for (ListIterator<Integer> integerListIterator = list.listIterator(2); integerListIterator.hasNext();) {
+            System.out.println(integerListIterator.next() + "--从指定索引开始返回迭代器");
+        }
+        //按照列表的顺序返回迭代器
+        ListIterator<Integer> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next() + "--按照列表顺序返回迭代器");
+        }
+        //返回正常迭代器
+        for (Iterator<Integer> iterator1 = list.iterator(); iterator1.hasNext();) {
+            System.out.println(iterator1.next() + "---返回正常迭代器");
+        }
+
+        //返回索引fromIndex到索引toIndex之间的字列表
+        List<Integer> list1 = list.subList(2, 5);
+        System.out.println(list1);
+        //函数式替换
+        list.replaceAll(e -> e + 1);
+        System.out.println(list);
+
+        //倒序排序
+        list.sort((m, n) -> n - m);
+        System.out.println(list);
+        //正序排序
+        list.sort(Comparator.comparingInt(m -> m));
+        System.out.println(list);
 
 
     }
