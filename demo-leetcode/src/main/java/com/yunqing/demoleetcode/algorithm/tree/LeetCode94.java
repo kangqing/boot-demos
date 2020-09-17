@@ -32,12 +32,12 @@ public class LeetCode94 {
 /**
  * 二叉树节点
  */
-class TreeNode {
+/*class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
     TreeNode(int x) { val = x; }
-}
+}*/
 
 /**
  * 递归的方法很容易，缺点是：如果树的层级很深，可能会造成堆栈溢出
