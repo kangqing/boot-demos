@@ -8,6 +8,10 @@ import java.util.*;
  * date 2020/9/7 上午6:51
  */
 public class LeetCode347 {
+    public static void main(String[] args) {
+        Solution347 solution347 = new Solution347();
+        solution347.test();
+    }
 }
 
 /**
@@ -32,5 +36,23 @@ class Solution347 {
             res[i] = Objects.requireNonNull(queue.poll())[0];
         }
         return res;
+    }
+
+    /**
+     * map加入堆中
+     */
+    void test() {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1, 1);
+        map.put(2, 2);
+        //声明一个最大堆，按照map.getValue()比较的最大堆
+        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((o1, o2) -> o2.getValue()
+                .compareTo(o1.getValue()));
+        //map加入优先队列
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
+            priorityQueue.offer(integerIntegerEntry);
+        }
+        Map.Entry<Integer, Integer> poll = priorityQueue.poll();
+        System.out.println(poll.getValue());
     }
 }
