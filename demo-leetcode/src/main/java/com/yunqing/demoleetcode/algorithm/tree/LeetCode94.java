@@ -42,6 +42,8 @@ public class LeetCode94 {
 /**
  * 递归的方法很容易，缺点是：如果树的层级很深，可能会造成堆栈溢出
  * 中序遍历：左  根  右
+ * 前序遍历：根  左  右
+ * 后序遍历：左  右  根
  */
 class Solution94_1 {
     public List<Integer> inorderTraversal(TreeNode root) {
@@ -51,13 +53,12 @@ class Solution94_1 {
     }
     //递归进行中序遍历
     private void loop(List<Integer> list, TreeNode node) {
-        if (node.left != null) {
-            loop(list, node.left);
+        if (node == null) {
+            return;
         }
+        loop(list, node.left);
         list.add(node.val);
-        if (node.right != null) {
-            loop(list, node.right);
-        }
+        loop(list, node.right);
     }
 }
 
