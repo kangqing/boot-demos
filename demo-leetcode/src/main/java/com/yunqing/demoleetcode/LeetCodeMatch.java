@@ -1,5 +1,7 @@
 package com.yunqing.demoleetcode;
 
+import java.util.*;
+
 /**
  * 力扣周赛专用
  * @author yunqing
@@ -8,12 +10,11 @@ package com.yunqing.demoleetcode;
 public class LeetCodeMatch {
     public static void main(String[] args) {
         SolutionMatch solutionMatch = new SolutionMatch();
-        
     }
 }
 
 class SolutionMatch {
-    
+
 }
 
 /**
