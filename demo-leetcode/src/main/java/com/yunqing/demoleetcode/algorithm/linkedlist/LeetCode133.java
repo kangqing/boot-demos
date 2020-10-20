@@ -33,14 +33,18 @@ class Solution133 {
         int right = list.size() - 1;
         while (left < right) {
             // L1 -> Ln
+            // L2 -> L(n - 1)
             list.get(left).next = list.get(right);
             left++;
             if (left == right) {
                 break;
             }
+            // Ln -> L2
+            // L(n - 1) -> L3
             list.get(right).next = list.get(left);
             right--;
         }
+        // 连表最后一个节点指向 null
         list.get(left).next = null;
     }
 }
