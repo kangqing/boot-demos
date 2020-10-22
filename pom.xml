@@ -37,6 +37,7 @@
         <module>demo-api-security</module>
         <module>demo-json-result</module>
         <module>demo-leetcode</module>
+        <module>demo-elasticsearch</module>
     </modules>
 
     <!--<repositories>
