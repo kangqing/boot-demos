@@ -10,42 +10,10 @@ import java.util.*;
 public class LeetCodeMatch {
     public static void main(String[] args) {
         SolutionMatch solutionMatch = new SolutionMatch();
-        solutionMatch.checkArithmeticSubarrays(new int[] {4,6,5,9,3,7}, new int[] {0, 0, 2}, new int[] {2, 3, 5});
     }
 }
 
 class SolutionMatch {
-    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
-        List<Boolean> res = new ArrayList<>();
-        int left, right;
-        for (int i = 0; i < l.length; i++) {
-            left = l[i];
-            right = r[i];
-            int[] arr = new int[right - left + 1];
-            int a = left;
-            int index = 0;
-            while (a <= right) {
-                arr[index++] = nums[a];
-                a++;
-            }
-            boolean b = jisuan(arr);
-            res.add(b);
-        }
-        return res;
-
-    }
-
-    private boolean jisuan(int[] nums) {
-        Arrays.sort(nums);
-        int val = nums[1] - nums[0];
-
-        for (int i = 1; i < nums.length; i++) {
-            if (val != nums[i] - nums[i - 1]) {
-                return false;
-            }
-        }
-        return true;
-    }
 
 }
 

@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.2.RELEASE</version>
+        <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,7 +23,7 @@
     <properties>
         <java.version>11</java.version>
         <boot-demos.version>1.0-SNAPSHOT</boot-demos.version>
-        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
     </properties>
 
     <modules>
