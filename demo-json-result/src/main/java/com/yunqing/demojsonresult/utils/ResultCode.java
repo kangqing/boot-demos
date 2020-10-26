@@ -1,9 +1,9 @@
 package com.yunqing.demojsonresult.utils;
 
 /**
- * @author yx
- * @date 2020/5/9 13:55
- * @Description: 返回码定义
+ * 返回码定义
+ * @author kangqing
+ * @since 2020/5/9 13:55
  * 规定:
  * #1表示成功
  * #1001～1999 区间表示参数错误
@@ -66,10 +66,10 @@ public enum ResultCode {
     /**
      * 根据code获取message
      *
-     * @param code
-     * @return
+     * @param code 错误码
+     * @return 错误信息
      */
-    public static String getMessageByCode(Integer code) {
+    public static String getMessageByCode(String code) {
         for (ResultCode ele : values()) {
             if (ele.getCode().equals(code)) {
                 return ele.getMessage();

@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author yx
- * @date 2020/5/9 13:58
+ * @author kangqing
+ * @since 2020/5/9 13:58
  * 统一返回实体
  */
 @Getter
 @NoArgsConstructor
-public class JsonResult<T> implements Serializable {
+public class JsonResult<T> {
 
     private Boolean status;
     private String code;

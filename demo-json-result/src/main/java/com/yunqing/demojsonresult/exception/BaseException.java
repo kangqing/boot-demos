@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @Description 自定义异常类
- * @Author yunqing
- * @Data 2020/5/17 21:31
+ * 自定义异常类
+ * @author kangqing
+ * @since 2020/5/17 21:31
  */
 @Getter
 @Setter

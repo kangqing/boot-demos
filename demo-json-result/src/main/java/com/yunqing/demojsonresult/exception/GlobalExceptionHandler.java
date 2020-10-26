@@ -21,8 +21,8 @@ import java.util.*;
 
 /**
  * 全局异常处理
- * @author yx
- * @date 2020/5/11 12:14
+ * @author kangqing
+ * @since 2020/5/11 12:14
  */
 @ResponseBody
 @ControllerAdvice
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public JsonResult handleValidationException(ConstraintViolationException ex) {
+    public JsonResult<?> handleValidationException(ConstraintViolationException ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage());
     }
@@ -60,9 +60,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public JsonResult methodArgumentValidationHandler(MethodArgumentNotValidException ex){
+    public JsonResult<?> methodArgumentValidationHandler(MethodArgumentNotValidException ex){
         logExceptionHandler(ex);
-        if (ex.getBindingResult() != null && !CollectionUtils.isEmpty(ex.getBindingResult().getAllErrors())) {
+        ex.getBindingResult();
+        if (!CollectionUtils.isEmpty(ex.getBindingResult().getAllErrors())) {
             return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()),
                     ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         } else {
@@ -76,7 +77,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public JsonResult bindException(BindException ex) {
+    public JsonResult<?> bindException(BindException ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求参数绑定失败");
     }
@@ -88,7 +89,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public JsonResult missingServletRequestParameterException(MissingServletRequestParameterException ex) {
+    public JsonResult<?> missingServletRequestParameterException(MissingServletRequestParameterException ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求参数不全：" + ex.getMessage());
     }
@@ -99,7 +100,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public JsonResult httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
+    public JsonResult<?> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求方式不正确");
     }
@@ -110,7 +111,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BaseException.class)
-    public JsonResult baseException(BaseException ex) {
+    public JsonResult<?> baseException(BaseException ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(ex.getErrorCode(), ex.getMessage());
     }
@@ -121,7 +122,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public JsonResult otherException(Exception ex) {
+    public JsonResult<Object> otherException(Exception ex) {
         logExceptionHandler(ex);
         return JsonResult.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), ex.getMessage());
     }

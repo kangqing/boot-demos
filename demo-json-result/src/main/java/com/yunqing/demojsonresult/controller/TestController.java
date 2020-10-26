@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yx
- * @date 2020/5/9 14:01
+ * @since 2020/5/9 14:01
  */
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
     @GetMapping("/query")
-    public JsonResult test() {
+    public JsonResult<?> test() {
         String aa = "Hello, JsonResult";
         return JsonResult.success(aa);
     }
 
     @PostMapping("/add")
-    public JsonResult test1(@RequestParam String aa) {
+    public JsonResult<?> test1(@RequestParam String aa) {
 
         throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), aa);
 
     }
 
     @PostMapping("/update")
-    public JsonResult test2(@RequestBody User user) {
+    public JsonResult<?> test2(@RequestBody User user) {
         //Assert.notNull(user.getUsername(), "用户名不能为空");
         if (user.getUsername()==null) {
             throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "用户名不能为空777");
@@ -39,7 +39,7 @@ public class TestController {
     }
 
     @GetMapping("/delete")
-    public JsonResult test3(@RequestParam String id) {
+    public JsonResult<?> test3(@RequestParam String id) {
         return JsonResult.success(StrUtil.format("id为{}的列不存在", id));
     }
 }
