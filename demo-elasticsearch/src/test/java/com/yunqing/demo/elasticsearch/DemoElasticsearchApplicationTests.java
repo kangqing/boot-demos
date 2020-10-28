@@ -29,7 +29,7 @@ class DemoElasticsearchApplicationTests {
 				//结果集过滤  这里设置不需要结果集(不添加包含与不包含,会自动生成长为0数组)
 				.withSourceFilter(new FetchSourceFilterBuilder().build())
 				.build();
-		SearchHits<Person> hits = elasticsearchRestTemplate.search(query, Person.class, IndexCoordinates.of("db-index"));
+		SearchHits<Person> hits = elasticsearchRestTemplate.search(query, Person.class, IndexCoordinates.of("person"));
 		System.out.println(hits);
 		//获取聚合结果集   因为结果为字符串类型 所以用ParsedStringTerms接收   还有ParsedLongTerms接收数字  ParsedDoubleTerms接收小数
 		Aggregations aggregations = hits.getAggregations();

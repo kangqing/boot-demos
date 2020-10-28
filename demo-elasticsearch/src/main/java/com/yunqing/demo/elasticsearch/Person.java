@@ -1,6 +1,8 @@
 package com.yunqing.demo.elasticsearch;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
@@ -8,7 +10,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * @since 2020/10/22 14:09
  */
 @Data
-@Document(indexName = "db-index", shards = 5, replicas = 1)
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(indexName = "person", shards = 5, replicas = 1)
 public class Person {
 
     private String id;
