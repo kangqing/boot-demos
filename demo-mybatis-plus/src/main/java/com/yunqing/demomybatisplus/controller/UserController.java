@@ -63,6 +63,7 @@ public class UserController {
      * 连表查询分页
      * @return
      */
+    @GetMapping
     public JsonResult<?> pageCondition(@ModelAttribute PageDTO<?> pageDTO) {
         return JsonResult.success();
     }
