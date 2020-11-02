@@ -28,6 +28,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--解决打包报错：Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile
+             (default-compile) on project demo-json-result: Fatal error compiling: 无效的目标发行版: 11 -> [Help 1]
+             *****打包 mvn clean package, mvn install 之后才能被依赖 *****-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

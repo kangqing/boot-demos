@@ -4,11 +4,14 @@ package com.yunqing.demomybatisplus.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yunqing.demojsonresult.utils.JsonResult;
+import com.yunqing.demomybatisplus.dto.PageDTO;
 import com.yunqing.demomybatisplus.pojo.User;
 import com.yunqing.demomybatisplus.service.UserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +51,21 @@ public class UserController {
         map.put("pageList", list);
         return map;
     }
+
+    @GetMapping("/list")
+    public JsonResult<?> pageSearch(@ModelAttribute PageDTO<?> pageDTO) {
+        IPage<User> page = new Page<>(pageDTO.getPage(), pageDTO.getLimit());
+        IPage<User> res = userService.page(page);
+        return JsonResult.success(res);
+    }
+
+    /**
+     * 连表查询分页
+     * @return
+     */
+    public JsonResult<?> pageCondition(@ModelAttribute PageDTO<?> pageDTO) {
+        return JsonResult.success();
+    }
+
 
 }
