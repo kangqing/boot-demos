@@ -19,9 +19,28 @@
 	</properties>
 
 	<dependencies>
+		<!--通过添加它，默认情况下它将使用OAuth 2.0保护您的应用安全。-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<!-- 最终依赖项是webjars“定位器”，由webjars站点作为库提供。
+		Spring可以使用定位器在webjar中定位静态资产，而无需知道确切的版本
+		（因此，中的无版本/webjars/**链接index.html）。
+		只要您不关闭MVC自动配置，默认情况下就会在Spring Boot应用程序中激活webjar定位器。-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
 		</dependency>
 
 		<dependency>

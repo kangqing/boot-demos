@@ -38,21 +38,26 @@
         <module>demo-json-result</module>
         <module>demo-leetcode</module>
         <module>demo-elasticsearch</module>
+        <module>demo-social</module>
     </modules>
 
-    <!--<repositories>
+    <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
+    <repositories>
         <repository>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>central</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <!-- 是否开启发布版构件下载 -->
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <!-- 是否开启快照版构件下载 -->
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-    </repositories>-->
+    </repositories>
 
 
     <dependencies>
