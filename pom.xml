@@ -42,23 +42,23 @@
     </modules>
 
     <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>central</id>
             <name>aliyun maven</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
             <layout>default</layout>
-            <!-- 是否开启发布版构件下载 -->
+            &lt;!&ndash; 是否开启发布版构件下载 &ndash;&gt;
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <!-- 是否开启快照版构件下载 -->
+            &lt;!&ndash; 是否开启快照版构件下载 &ndash;&gt;
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
-    <!--阿里插件镜像仓库-->
+    &lt;!&ndash;阿里插件镜像仓库&ndash;&gt;
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
@@ -71,7 +71,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
 
     <dependencies>
