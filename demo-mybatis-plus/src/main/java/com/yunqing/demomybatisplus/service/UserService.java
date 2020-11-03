@@ -1,5 +1,7 @@
 package com.yunqing.demomybatisplus.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yunqing.demomybatisplus.dto.PageDTO;
 import com.yunqing.demomybatisplus.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-01-09
  */
 public interface UserService extends IService<User> {
+
+    IPage<User> getAll(PageDTO pageDTO);
 
 }

@@ -24,5 +24,20 @@
     <sql id="Base_Column_List">
         id, nickname, password, mobile, email, sex, id_card, name, university_no, user_status, last_login_time, last_login_ip, create_time, update_time
     </sql>
+    <select id="getAll" resultType="com.yunqing.demomybatisplus.pojo.User">
+        select
+        id,
+        nickname,
+        mobile,
+        email,
+        sex,
+        id_card as idCard,
+        name,
+        university_no as universityNo,
+        user_status as userStatus,
+        last_login_time lastLoginTime,
+        last_login_ip lastLoginIp
+        from t_user
+    </select>
 
 </mapper>

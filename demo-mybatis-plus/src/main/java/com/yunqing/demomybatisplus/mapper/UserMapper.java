@@ -1,5 +1,6 @@
 package com.yunqing.demomybatisplus.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yunqing.demomybatisplus.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-01-09
  */
 public interface UserMapper extends BaseMapper<User> {
+
+    IPage<User> getAll(IPage<?> page);
 
 }

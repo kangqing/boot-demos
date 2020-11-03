@@ -20,12 +20,6 @@
     </properties>
 
     <dependencies>
-        <!--依赖统一json返回结果-->
-        <dependency>
-            <groupId>com.yunqing</groupId>
-            <artifactId>demo-json-result</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!--mybatis plus相关依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
