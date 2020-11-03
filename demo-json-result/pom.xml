@@ -27,7 +27,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--将生成两个jar,一个供其他项目依赖，一个可执行jar-->
+                <!--将生成两个jar,一个供其他项目依赖，一个可执行jar,这样的话别的子项目依赖后，github Actions不会报错找不到-->
                 <configuration>
                     <classifier>exec</classifier>
                 </configuration>
