@@ -1,5 +1,6 @@
 package com.yunqing.demomybatisplus.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yunqing.demomybatisplus.dto.PageDTO;
 import com.yunqing.demomybatisplus.pojo.User;
@@ -27,5 +28,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public IPage<User> getAll(PageDTO pageDTO) {
         IPage<?> page = PageDTO.buildPageCondition(pageDTO);
         return userMapper.getAll(page);
+    }
+
+    @Override
+    public IPage<User> getListByEmail(PageDTO pageDTO, String email) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda().like(User::getEmail, email);
+        IPage<User> page = PageDTO.buildPageCondition(pageDTO);
+        return userMapper.selectPage(page, wrapper);
     }
 }

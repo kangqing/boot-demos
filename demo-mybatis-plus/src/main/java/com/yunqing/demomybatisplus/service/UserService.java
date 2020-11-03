@@ -17,4 +17,6 @@ public interface UserService extends IService<User> {
 
     IPage<User> getAll(PageDTO pageDTO);
 
+    IPage<User> getListByEmail(PageDTO pageDTO, String email);
+
 }

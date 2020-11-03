@@ -3,7 +3,6 @@ package com.yunqing.demomybatisplus.dto;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Min;
 
@@ -33,8 +32,8 @@ public class PageDTO {
      * @param pageDTO 分页信息
      * @return 返回IPage分页信息或者null
      */
-    public static IPage<?> buildPageCondition(PageDTO pageDTO) {
-        IPage<?> page = new Page<>();
+    public static <T> IPage<T> buildPageCondition(PageDTO pageDTO) {
+        IPage<T> page = new Page<>();
         if(pageDTO.getLimit() != null && pageDTO.getPage() != null) {
             page.setCurrent(pageDTO.getPage()).setSize(pageDTO.getLimit());
         } else {

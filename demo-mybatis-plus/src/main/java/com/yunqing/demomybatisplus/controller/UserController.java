@@ -10,14 +10,10 @@ import com.yunqing.demomybatisplus.pojo.User;
 import com.yunqing.demomybatisplus.service.UserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.Cacheable;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +56,23 @@ public class UserController {
     }
 
     /**
-     * 连表查询分页
+     * 连表查询分页, sql
      * @return
      */
-    @GetMapping
+    @GetMapping("/getAll")
     public JsonResult<?> pageCondition(@ModelAttribute PageDTO pageDTO) {
         return JsonResult.success(userService.getAll(pageDTO));
+    }
+
+    /**
+     * 根据Email模糊条件查询分页
+     * @param pageDTO 分页条件
+     * @param email email
+     * @return
+     */
+    @GetMapping("/getListByEmail")
+    public JsonResult<?> wrapper(@ModelAttribute PageDTO pageDTO, @RequestParam String email) {
+        return JsonResult.success(userService.getListByEmail(pageDTO, email));
     }
 
 
