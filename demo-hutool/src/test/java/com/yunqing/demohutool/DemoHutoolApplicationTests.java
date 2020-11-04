@@ -7,16 +7,23 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.lang.Validator;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
+import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import cn.hutool.extra.qrcode.QrConfig;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 class DemoHutoolApplicationTests {
@@ -27,6 +34,57 @@ class DemoHutoolApplicationTests {
         Console.log("加密后的字符串:{}", str);
     }
 
+    @Data
+    @AllArgsConstructor
+    static class Dept {
+        private Integer id;
+
+        private String name;
+
+        private String parentId;
+    }
+
+    /**
+     * 树形结构输出
+     */
+    @Test
+    void TreeUtilTest() {
+        List<Dept> list = new ArrayList<>();
+        list.add(new Dept(1, "技术部", ""));
+        list.add(new Dept(2, "财务部", ""));
+        list.add(new Dept(3, "采购部", ""));
+        list.add(new Dept(11, "开发部", "1"));
+        list.add(new Dept(12, "测试部", "1"));
+        list.add(new Dept(21, "会计部", "2"));
+        list.add(new Dept(31, "采购文具部", "3"));
+        list.add(new Dept(111, "前端开发部", "11"));
+        list.add(new Dept(112, "后端开发部", "11"));
+
+        //配置
+        TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
+        // 自定义属性名 都要默认值的
+        treeNodeConfig.setIdKey("id");
+        treeNodeConfig.setNameKey("deptName");
+        treeNodeConfig.setParentIdKey("pId");
+        // 最大递归深度
+        //treeNodeConfig.setDeep(3);
+
+        //转换器
+        List<Tree<String>> treeNodes = TreeUtil.build(list, "", treeNodeConfig,
+                (treeNode, tree) -> {
+                    tree.setId(treeNode.getId().toString());
+                    tree.setParentId(treeNode.getParentId());
+                    tree.setName(treeNode.getName());
+                    // 扩展属性 ...
+                    tree.putExtra("checked", true);
+                });
+        treeNodes.forEach(System.out::println);
+        //return treeNodes;
+    }
+
+    /**
+     * 时间相关
+     */
     @Test
     void dateUtilTest() {
         //当前时间
@@ -49,6 +107,9 @@ class DemoHutoolApplicationTests {
         Console.log("格式化时间：{}\n农历时间：{}", format, chineseDate);
     }
 
+    /**
+     * 字符串相关
+     */
     @Test
     void strUtilTest() {
         //只判断null和""空字符串为空
@@ -72,6 +133,9 @@ class DemoHutoolApplicationTests {
         Console.log(format);
     }
 
+    /**
+     * 主键 id
+     */
     @Test
     void IdUtilTest() {
         //生成的UUID是不带-的字符串
@@ -89,6 +153,9 @@ class DemoHutoolApplicationTests {
                 "\n雪花算法String类型id:{}", s, s1, s3, lon, str);
     }
 
+    /**
+     * email验证
+     */
     @Test
     void validatorTest() {
         boolean isEmail = Validator.isEmail("10001@qq.com");
@@ -98,6 +165,9 @@ class DemoHutoolApplicationTests {
         Console.log("验证邮箱：{}\n正则匹配：{}\n验证UUID：{}", isEmail, mactchRegex, isUUID);
     }
 
+    /**
+     * 生成二维码
+     */
     @Test
     void QrCodeUtilTest() {
         QrConfig config = new QrConfig(300, 300);
