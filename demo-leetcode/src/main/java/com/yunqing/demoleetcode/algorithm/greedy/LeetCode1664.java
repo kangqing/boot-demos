@@ -16,7 +16,8 @@ public class LeetCode1664 {
 class Solution1664 {
     public int waysToMakeFair(int[] nums) {
         int res = 0;
-        int ji = 0, ou = 0;
+        int ji = 0;
+        int ou = 0;
         for (int i = 0; i < nums.length; i++) {
             if (i % 2 == 0) ou += nums[i];
             else ji += nums[i];
