@@ -14,7 +14,7 @@ public class LeetCode222 {
     }
 }
 
-class Solution {
+class Solution222 {
     public int countNodes(TreeNode root) {
         int res = 0;
         if (root == null) return res;
