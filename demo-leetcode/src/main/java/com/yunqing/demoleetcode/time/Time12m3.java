@@ -7,14 +7,14 @@ import java.util.Arrays;
  * @author yunqing
  * @since 2020/12/3 20:50
  */
-public class Time12_3 {
+public class Time12m3 {
     public static void main(String[] args) {
-        Solution12_3 s = new Solution12_3();
+        Solution12m3 s = new Solution12m3();
         System.out.println(s.countPrimes(1500000));
     }
 }
 
-class Solution12_3 {
+class Solution12m3 {
     public int countPrimes(int n) {
         int[] arr = new int[n];
         // arr[i] = 1代表是质数

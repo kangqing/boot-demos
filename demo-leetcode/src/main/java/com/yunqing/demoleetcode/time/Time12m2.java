@@ -7,15 +7,15 @@ import java.util.Arrays;
  * @author yx
  * @since 2020/12/2 15:23
  */
-public class Time12_2 {
+public class Time12m2 {
     public static void main(String[] args) {
         int[] a = {3, 4, 6, 5};
         int[] b = {9, 1, 2, 5, 8, 3};
-        Solution12_2 solution12_2 = new Solution12_2();
-        System.out.println(Arrays.toString(solution12_2.maxNumber(a, b, 5)));
+        Solution12m2 solution12m2 = new Solution12m2();
+        System.out.println(Arrays.toString(solution12m2.maxNumber(a, b, 5)));
     }
 }
-class Solution12_2 {
+class Solution12m2 {
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
         // 分析从nums1中选择 x 个数， 则需要从nums2中选择 k - x个数
         int[] res = new int[k];

@@ -8,14 +8,14 @@ import java.util.Arrays;
  * @author yx
  * @since 2020/12/7 15:12
  */
-public class Time12_7 {
+public class Time12m7 {
     public static void main(String[] args) {
-        Solution12_7 s = new Solution12_7();
+        Solution12m7 s = new Solution12m7();
         System.out.println(s.matrixScore(new int[][]{{0,0,1,1}, {1,0,1,0}, {1,1,0,0} }));
     }
 }
 
-class Solution12_7 {
+class Solution12m7 {
     public int matrixScore(int[][] A) {
         int res = 0;
         if (A.length == 0) {
