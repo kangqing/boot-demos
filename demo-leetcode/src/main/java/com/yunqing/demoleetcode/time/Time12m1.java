@@ -7,16 +7,16 @@ import java.util.Arrays;
  * @author yx
  * @since 2020/12/1 17:33
  */
-public class Time12_1 {
+public class Time12m1 {
     public static void main(String[] args) {
-        Solution12_1 s = new Solution12_1();
+        Solution12m1 s = new Solution12m1();
         int[] a = {1};
         int[] ints = s.searchRange(a, 1);
         System.out.println(Arrays.toString(ints));
     }
 }
 
-class Solution12_1 {
+class Solution12m1 {
     public int[] searchRange(int[] nums, int target) {
         if(nums == null) return new int[]{-1, -1};
         //if(nums.length == 1 && nums[0] == target) return new int[]{0,0};

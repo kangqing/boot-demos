@@ -7,13 +7,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author yunqing
  * @since 2020/12/5 11:58
  */
-public class Time12_5 {
+public class Time12m5 {
     public static void main(String[] args) {
 
     }
 }
 
-class Solution12_5 {
+class Solution12m5 {
     public int leastInterval(char[] tasks, int n) {
         Map<Character, Integer> map = new HashMap<>();
         int max = 0;

@@ -8,13 +8,13 @@ import java.util.Map;
  * @author yx
  * @since 2020/12/4 9:48
  */
-public class Time12_4 {
+public class Time12m4 {
     public static void main(String[] args) {
 
     }
 }
 
-class Solution12_4 {
+class Solution12m4 {
     public boolean isPossible(int[] nums) {
         // 存储数组中每个数字的数量
         Map<Integer, Integer> map = new HashMap<>();
