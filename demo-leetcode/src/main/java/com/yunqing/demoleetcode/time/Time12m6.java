@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 12.6杨辉三角
  * @author yunqing
  * @since 2020/12/6 10:14
  */
-public class Time12_6 {
+public class Time12m6 {
     public static void main(String[] args) {
-        Solution12_6 s = new Solution12_6();
+        Solution12m6 s = new Solution12m6();
         System.out.println(s.generate(5));
     }
 }
 
-class Solution12_6 {
+class Solution12m6 {
     public List<List<Integer>> generate(int numRows) {
         // 存储返回结果
         List<List<Integer>> res = new ArrayList<>();
