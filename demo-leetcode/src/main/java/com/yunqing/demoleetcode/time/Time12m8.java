@@ -17,7 +17,7 @@ public class Time12m8 {
 class Solution {
     public List<Integer> splitIntoFibonacci(String S) {
         List<Integer> res = new ArrayList<>();
-
+        return res;
     }
 
     /**
