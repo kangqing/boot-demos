@@ -3,7 +3,7 @@ package com.yunqing.demoleetcode.time;
 import java.util.Arrays;
 
 /**
- * 12.9 动态规划,重点
+ * 12.9 动态规划
  * @author yx
  * @since 2020/12/9 10:25
  */
