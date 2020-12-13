@@ -17,7 +17,8 @@ class Solution12m12{
         if (n < 2) {
             return n;
         }
-        int up = 1, down = 1;
+        int up = 1;
+        int down = 1;
         for (int i = 1; i < n; i++) {
             if (nums[i] > nums[i - 1]) {
                 up = Math.max(up, down + 1);
