@@ -8,7 +8,7 @@ import java.util.*;
  * @author yunqing
  * @since 2020/12/14 22:14
  */
-public class LeetCode12m14 {
+public class Time12m14 {
     public static void main(String[] args) {
 
     }
