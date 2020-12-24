@@ -13,7 +13,7 @@ public class Offer03 {
     }
 }
 
-class Solution {
+class SolutionOffer03 {
     public int findRepeatNumber(int[] nums) {
         Arrays.sort(nums);
         for(int i = 1; i < nums.length; i++) {
