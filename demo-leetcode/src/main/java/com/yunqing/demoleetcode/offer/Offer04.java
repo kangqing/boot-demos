@@ -10,9 +10,12 @@ public class Offer04 {
     }
 }
 
-class Solution {
+/**
+ * 线性查找
+ */
+class SolutionOffer04 {
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
-        if (matrix == null) return false;
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
         int rows = matrix.length;
         int cols = matrix[0].length;
         // 从右上角开始线性查找，如果 == 则返回， 如果 < target 则列 - 1， 否则 行 - 1
@@ -21,8 +24,8 @@ class Solution {
         while (col >= 0 && row < rows) {
             int curr = matrix[row][col];
             if (curr == target) return true;
-            else if (curr < target) col--;
-            else row++;
+            else if (curr < target) row++;
+            else col--;
         }
         return false;
     }
