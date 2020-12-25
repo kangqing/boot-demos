@@ -13,7 +13,7 @@ public class TreeNode {
     TreeNode() {
     }
 
-    TreeNode(int x) {
+    public TreeNode(int x) {
         val = x;
     }
 
