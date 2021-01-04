@@ -13,10 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -74,8 +72,22 @@ public class DemoHutoolApplication {
                 .logDesc("自定义2")
                 .username("kanqging")
                 .build();
+        SysLogExportDTO bean3 = SysLogExportDTO.builder()
+                .id(1L)
+                .operation("4")
+                .createTime(new Date())
+                .logDesc("自定义1")
+                .username("aa")
+                .build();
+        SysLogExportDTO bean4 = SysLogExportDTO.builder()
+                .id(2L)
+                .operation("4")
+                .createTime(new Date())
+                .logDesc("自定义2")
+                .username("aa")
+                .build();
         // 获取操作日志列表
-        List<SysLogExportDTO> rows = CollUtil.newArrayList(bean1, bean2);
+        List<SysLogExportDTO> rows = CollUtil.newArrayList(bean1, bean2, bean3, bean4);
 
         //自定义标题别名
         String[] title = new String[]{"id", "operation", "username", "logDesc", "createTime"};
@@ -90,14 +102,17 @@ public class DemoHutoolApplication {
         writer.write(rows, true);
 
         //合并单元格
-        writer.merge(2, 3, 2, 2, "kangqing", false);
-
+        //writer.merge(2, 3, 2, 2, "kangqing", false);
+        // 获取当前行
+        Sheet sheet = writer.getSheet();
+        // 合并同一列上相同值的行
+        MergedRegionUtil.mergedRegion(sheet, 2, 2, 3);
 
         // 切换sheet页
         // writer.setSheet("sheet2");
 
         // 设置列宽度 (单位为一个字符的宽度，例如传入width为10，表示10个字符的宽度）
-        // writer.setColumnWidth(0, 10);
+        writer.setColumnWidth(4, 20);
 
         //导出数据
         try {
@@ -124,29 +139,5 @@ public class DemoHutoolApplication {
 
     }
 
-    /**
-     * 合并单元格，主要用于同一列上不用行的元素相同，合并相同元素的行
-     * @param sheet sheet页
-     * @param cell 第几列
-     * @param top 慢指针，合并的开始行数
-     * @param button 快指针，合并的结束行数
-     * @return 返回当前快指针的行数
-     */
-    private int mergedRegion(Sheet sheet, int cell, int top, int button) {
-        //合并分子公司相同项的单元格
-        while(sheet.getRow(button) != null) {
-            String topVal = sheet.getRow(top).getCell(cell).getStringCellValue();
-            String butVal = sheet.getRow(button).getCell(cell).getStringCellValue();
-            if (!topVal.equals(butVal) && top < button - 1) {
-                sheet.addMergedRegion(new CellRangeAddress(top, button - 1, cell, cell));
-                top = button;
-            }
-            button++;
-        }
-        if (top < button - 1) {
-            sheet.addMergedRegion(new CellRangeAddress(top, button - 1, cell, cell));
-        }
-        return button;
-    }
 
 }
