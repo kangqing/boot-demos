@@ -1,5 +1,7 @@
 package com.yunqing.demojsonresult.utils;
 
+import com.yunqing.demojsonresult.exception.BaseException;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +13,9 @@ import java.io.Serializable;
  * 统一返回实体
  */
 @Getter
+@Builder
 @NoArgsConstructor
-public class JsonResult<T> {
+public class JsonResult<T> implements Serializable {
 
     private Boolean status;
     private String code;
@@ -56,6 +59,12 @@ public class JsonResult<T> {
         this.data = data;
     }
 
+    private JsonResult(String code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
     private JsonResult(boolean status, String code, String msg, T data) {
         this.status = status;
         this.code = code;
@@ -93,6 +102,21 @@ public class JsonResult<T> {
 
     public static <T> JsonResult<T> fail(String code, String msg, T data){
         return new JsonResult<T>(false, code, msg, data);
+    }
+
+    public static <T> JsonResult<T> noStatus(String code, String msg, T data){
+        return new JsonResult<T>(code, msg, data);
+    }
+
+    /**
+     * 构造一个异常的API返回
+     *
+     * @param t   异常
+     * @param <T> {@link BaseException} 的子类
+     * @return ApiResponse
+     */
+    public static <T extends BaseException> JsonResult<T> ofException(T t) {
+        return noStatus(t.getErrorCode(), t.getErrorMsg(), null);
     }
 
 
