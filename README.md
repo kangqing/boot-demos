@@ -33,5 +33,8 @@ mybatis逆向工程生成代码包括Example
 ## demo-social
 准备写一个OAuth2.0的社交平台登录的demo
 
+## demo-swagger
+springboot整合swagger的starter, 新的丝袜哥的api接口地址 http://localhost:8080/swagger-ui/
+
 ## demo-web-log
 一个记录日志输出的demo

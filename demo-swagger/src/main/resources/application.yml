@@ -1,0 +1,13 @@
+server:
+  port: 8080
+# 自定义 swagger2 配置
+swagger2:
+  enable: true
+  tryHost: http://localhost:${server.port}
+  base-package: com.yunqing.mall.controller
+  title: Mall
+  version: 1.0
+  description: Swagger2 API接口文档
+  contract-name: kangqing
+  contract-url: http://yunqing.xyz
+  contract-email: kangqing.37@gmail.com
