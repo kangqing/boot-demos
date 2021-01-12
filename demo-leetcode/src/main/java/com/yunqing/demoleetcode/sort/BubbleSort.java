@@ -3,7 +3,7 @@ package com.yunqing.demoleetcode.sort;
 import java.util.Arrays;
 
 /**
- * 冒泡排序
+ * 冒泡排序 稳定：即不会破坏相同元素的原有顺序
  *
  * 时间复杂度 O(n²)
  *
