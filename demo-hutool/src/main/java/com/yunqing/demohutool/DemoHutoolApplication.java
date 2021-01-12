@@ -89,9 +89,10 @@ public class DemoHutoolApplication {
         // 获取操作日志列表
         List<SysLogExportDTO> rows = CollUtil.newArrayList(bean1, bean2, bean3, bean4);
 
-        //自定义标题别名
+        //自定义标题别名, 需要自定义一个与导出excel标题属性相同的DTO对象SysLogExportDTO，否则会行错乱
         String[] title = new String[]{"id", "operation", "username", "logDesc", "createTime"};
         String[] alias = new String[]{"ID", "操作类型", "操作人", "日志描述", "创建时间"};
+        int[] width = {20, 15, 15, 30, 20};
         for (int i = 0; i < title.length; i++) {
             writer.addHeaderAlias(title[i], alias[i]);
         }
@@ -112,7 +113,9 @@ public class DemoHutoolApplication {
         // writer.setSheet("sheet2");
 
         // 设置列宽度 (单位为一个字符的宽度，例如传入width为10，表示10个字符的宽度）
-        writer.setColumnWidth(4, 20);
+        for (int i = 0; i < width.length; i++) {
+            writer.setColumnWidth(i, width[i]);
+        }
 
         //导出数据
         try {
