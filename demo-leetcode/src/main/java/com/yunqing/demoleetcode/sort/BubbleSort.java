@@ -27,10 +27,10 @@ public class BubbleSort {
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
-                System.out.println(Arrays.toString(arr));
+                System.out.println("第" + j + "和" + (j + 1) + "索引比较交换后 ：" + Arrays.toString(arr));
             }
             // 第 i 趟排序后的结果
-            System.out.println("第" + i + "趟排序后的结果：" + Arrays.toString(arr));
+            System.out.println("----------------------第" + i + "趟排序后的结果：" + Arrays.toString(arr));
         }
     }
 }
