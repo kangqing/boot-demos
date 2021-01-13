@@ -16,14 +16,10 @@ public class CountingSort {
         int[] arr = {5, 7, 1, 13, 6, 2};
         // 下面进行计数排序
 
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-
         //找出数组中的最大最小值
-        for (int j : arr) {
-            max = Math.max(max, j);
-            min = Math.min(min, j);
-        }
+        int max = Arrays.stream(arr).max().getAsInt();
+        int min = Arrays.stream(arr).min().getAsInt();
+
 
         int[] help = new int[max - min + 1];
 
@@ -35,7 +31,7 @@ public class CountingSort {
 
         //计算每个数字应该在排序后数组中应该处于的位置
         for (int i = 1; i < help.length; i++) {
-            help[i] = help[i - 1] + help[i];
+            help[i] += help[i - 1];
         }
 
         //根据help数组进行排序
