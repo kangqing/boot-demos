@@ -1,6 +1,7 @@
 package com.yunqing.demoleetcode.sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,14 +21,10 @@ public class BucketSort {
         // 下面进行桶排序
 
         // 找出最大最小值
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-        for (int j : arr) {
-            max = Math.max(max, j);
-            min = Math.min(min, j);
-        }
+        int max = Arrays.stream(arr).max().getAsInt();
+        int min = Arrays.stream(arr).min().getAsInt();
 
-        // 规划桶数
+        // 规划桶数， 计算最多需要多少个桶
         int bucketNum = (max - min) / arr.length + 1;
         List<List<Integer>> bucketArr = new ArrayList<>(bucketNum);
         for(int i = 0; i < bucketNum; i++){
