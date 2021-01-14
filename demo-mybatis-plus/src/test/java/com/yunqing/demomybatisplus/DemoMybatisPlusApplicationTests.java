@@ -30,7 +30,14 @@ class DemoMybatisPlusApplicationTests {
     private RoleService roleService;
 
     /**
-     * 测试声明式事务
+     * 测试声明式事务失效场景
+     * 结论：
+     * 1. 修饰非 public 方法失效，同时 IDE 会给出提醒，不能修饰非 public 方法
+     * 2. 设置了错误的属性 propagation = ...
+     * 3. 内部 this 调用，外层调用层未加 @Transactional，没有AOP动态代理，所以失效
+     * 4. 只默认回滚非检查异常和Error
+     * 5. 异常被 try catch 处理了
+     * 6. 数据库本身不支持事务，例如使用了 myisam 引擎
      */
     @Test
     void transactionalTest() throws IOException {
