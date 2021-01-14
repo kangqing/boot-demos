@@ -1,12 +1,12 @@
 package com.yunqing.demomybatisplus;
 
-import cn.hutool.core.lang.Snowflake;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yunqing.demomybatisplus.pojo.Role;
 import com.yunqing.demomybatisplus.pojo.User;
+import com.yunqing.demomybatisplus.service.RoleService;
 import com.yunqing.demomybatisplus.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,9 +24,18 @@ import java.util.stream.Collectors;
 class DemoMybatisPlusApplicationTests {
 
     @Autowired
-    private Snowflake snowflake;
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    /**
+     * 测试声明式事务
+     */
+    @Test
+    void transactionalTest() throws IOException {
+        roleService.updateTest();
+    }
 
     /**
      * 测试有选择性的更新
