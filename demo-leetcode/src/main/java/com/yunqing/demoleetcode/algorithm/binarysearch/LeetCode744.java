@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.binarysearch;
 
 /**
  * LeetCode744 寻找比目标字母大的最小字母
- * @author yx
+ * @author kangqing
  * @date 2020/8/20 9:59
  */
 public class LeetCode744 {

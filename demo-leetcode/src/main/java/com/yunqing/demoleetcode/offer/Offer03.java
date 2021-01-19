@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 剑指Offer 03 数组中重复的数字
- * @author yx
+ * @author kangqing
  * @since 2020/12/24 11:13
  */
 public class Offer03 {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 12.9 动态规划 重点
- * @author yx
+ * @author kangqing
  * @since 2020/12/9 10:25
  */
 public class Time12m9 {

@@ -25,7 +25,7 @@ import java.util.*;
 
 /**
  * 统一日志处理切面类
- * @author yx
+ * @author kangqing
  * @date 2020/5/6 10:16
  */
 @Aspect

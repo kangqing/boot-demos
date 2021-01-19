@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 12.8 回溯 + 剪枝
- * @author yx
+ * @author kangqing
  * @since 2020/12/8 17:46
  */
 public class Time12m8 {

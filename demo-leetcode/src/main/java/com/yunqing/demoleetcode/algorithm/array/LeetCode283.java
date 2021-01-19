@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.array;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode283 移动零
  * @date 2020/8/12 15:48
  */

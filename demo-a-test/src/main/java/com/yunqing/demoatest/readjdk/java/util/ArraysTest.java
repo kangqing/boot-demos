@@ -7,7 +7,7 @@ import java.util.Spliterator;
 import java.util.stream.Collectors;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/9/15 17:28
  */
 public class ArraysTest {

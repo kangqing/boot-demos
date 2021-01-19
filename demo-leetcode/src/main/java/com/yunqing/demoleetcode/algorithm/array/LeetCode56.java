@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @Description LeetCode56 合并区间
- * @Author yx
- * @Data 2020/7/27 16:58
+ * LeetCode56 合并区间
+ * @author  kangqing
+ * @since 2020/7/27 16:58
  */
 public class LeetCode56 {
     public static void main(String[] args) {

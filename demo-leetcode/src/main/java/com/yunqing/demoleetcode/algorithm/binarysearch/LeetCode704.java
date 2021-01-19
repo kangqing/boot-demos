@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.binarysearch;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode704 二分查找
  * @date 2020/8/13 14:47
  */

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 /**
  * 二维数组，二进制转10进制
- * @author yx
+ * @author kangqing
  * @since 2020/12/7 15:12
  */
 public class Time12m7 {

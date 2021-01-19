@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 自定义分页返回结果
- * @author yx
+ * @author kangqing
  * @since 2020/10/28 14:17
  */
 @Data

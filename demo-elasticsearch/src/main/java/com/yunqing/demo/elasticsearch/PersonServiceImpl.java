@@ -24,7 +24,7 @@ import static org.elasticsearch.index.query.QueryBuilders.regexpQuery;
 
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/10/22 16:20
  */
 @Service

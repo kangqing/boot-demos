@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author yx
+ * @author kangqing
  * @description 用于  @PropertySource 加载 yml 配置文件.
  * @date 2020/8/13 10:43
  */

@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.tree;
 
 /**
  * LeetCode226 翻转二叉树
- * @author yx
+ * @author kangqing
  * @since 2020/9/17 14:39
  */
 public class LeetCode226 {

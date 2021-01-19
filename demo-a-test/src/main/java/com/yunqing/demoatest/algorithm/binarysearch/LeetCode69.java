@@ -2,7 +2,7 @@ package com.yunqing.demoatest.algorithm.binarysearch;
 
 /**
  * LeetCode69 x的平方根
- * @author yx
+ * @author kangqing
  * @date 2020/8/13 16:34
  */
 public class LeetCode69 {

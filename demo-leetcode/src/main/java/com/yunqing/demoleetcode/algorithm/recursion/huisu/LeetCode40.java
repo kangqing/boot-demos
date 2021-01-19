@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 /**
  * LeetCode40 组合总和 II
- * @author yx
+ * @author kangqing
  * @since 2020/9/11 14:39
  */
 public class LeetCode40 {

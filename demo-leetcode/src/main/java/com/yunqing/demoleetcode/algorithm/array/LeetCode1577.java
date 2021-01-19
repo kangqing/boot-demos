@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * LeetCode1577 数的平方等于两数乘积的方法数
- * @author yx
+ * @author kangqing
  * @date 2020/9/7 14:50
  */
 public class LeetCode1577 {

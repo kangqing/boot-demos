@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  * @Description LeetCode14 最长公共前缀
- * @Author yx
+ * @Author kangqing
  * @Data 2020/7/29 16:23
  */
 public class LeetCode14 {

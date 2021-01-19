@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 12.28 动态规划，股票的买卖
  *
- * @author yx
+ * @author kangqing
  * @since 2020/12/28 10:12
  */
 public class Time12m28 {

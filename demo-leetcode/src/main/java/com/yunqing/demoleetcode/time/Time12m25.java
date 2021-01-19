@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 12.25, 排序 + 贪心
- * @author yx
+ * @author kangqing
  * @since 2020/12/25 9:21
  */
 public class Time12m25 {

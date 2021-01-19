@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 /**
- * @author yx
+ * @author kangqing
  * @description 流处理BigDecimal的实现
  * @date 2020/7/6 12:15
  */

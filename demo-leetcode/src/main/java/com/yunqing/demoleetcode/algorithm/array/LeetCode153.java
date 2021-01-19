@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.array;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode153 寻找旋转排序数组中的最小值
  * @date 2020/8/12 14:13
  */

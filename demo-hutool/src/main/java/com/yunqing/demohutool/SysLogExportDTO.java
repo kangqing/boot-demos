@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 操作日志导出类
- * @author yx
+ * @author kangqing
  * @since 2021/1/4 16:37
  */
 @Data

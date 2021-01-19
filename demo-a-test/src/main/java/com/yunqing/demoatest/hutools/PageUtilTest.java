@@ -6,7 +6,7 @@ import cn.hutool.core.util.PageUtil;
 import java.util.Arrays;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/9/15 16:03
  */
 public class PageUtilTest {

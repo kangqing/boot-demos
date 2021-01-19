@@ -2,7 +2,7 @@ package com.yunqing.demoatest.algorithm.binarysearch;
 
 /**
  * LeetCode33 搜索旋转排序数组
- * @author yx
+ * @author kangqing
  * @date 2020/8/14 14:02
  */
 public class LeetCode33 {

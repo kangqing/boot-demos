@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.string;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode344 反转字符串
  * @date 2020/8/7 17:12
  */

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @author yx
+ * @author kangqing
  * @description
  * @date 2020/7/2 15:35
  */

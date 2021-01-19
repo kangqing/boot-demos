@@ -8,8 +8,8 @@ import java.util.BitSet;
  * BitSet类实现一个按需增长的位向量
  * 线程不安全
  * 集合中所有位的初始值是false
- * 传递一个null参数到BitSet中的任何方法都会空指针
- * @author yx
+ * 传递一个 null 参数到BitSet中的任何方法都会空指针
+ * @author kangqing
  * @since 2020/9/22 17:46
  */
 public class BitSetTest {

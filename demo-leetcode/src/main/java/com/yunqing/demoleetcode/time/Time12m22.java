@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * 12.22 广度优先遍历
- * @author yx
+ * @author kangqing
  * @since 2020/12/22 9:11
  */
 public class Time12m22 {

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 /**
  * 异常日志
- * @author yx
+ * @author kangqing
  * @since 2020/11/10 15:17
  */
 @Data

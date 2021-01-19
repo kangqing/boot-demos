@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.dp;
 
 /**
  * LeetCode64 最小路径和 动态规划
- * @author yx
+ * @author kangqing
  * @since 2020/12/23 17:49
  */
 public class LeetCode64 {

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/10/22 14:09
  */
 @Data

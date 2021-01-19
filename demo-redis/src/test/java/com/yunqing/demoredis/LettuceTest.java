@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yx
+ * @author kangqing
  * @description 参考 try.redis.io
  * @date 2020/6/3 16:08
  */

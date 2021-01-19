@@ -28,7 +28,7 @@ import java.util.Scanner;
  *
  *  # 解决springbootTest中不能Scanner键盘输入问题，在VM中加入
  *  -Deditable.java.test.console=true
- * @author yx
+ * @author kangqing
  * @since 2020/10/19 14:40
  */
 @SpringBootTest

@@ -3,7 +3,7 @@ package com.yunqing.demoleetcode.time.time202101;
 /**
  * 1.4 递归 菲波那切数列
  * 1.4 动态规划-滚动数组 菲波那切数列
- * @author yx
+ * @author kangqing
  * @since 2021/1/4 9:19
  */
 public class Time1m4 {

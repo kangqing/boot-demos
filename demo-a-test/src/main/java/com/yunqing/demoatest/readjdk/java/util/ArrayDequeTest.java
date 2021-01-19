@@ -5,13 +5,13 @@ import java.util.Deque;
 import java.util.Iterator;
 
 /**
- * @author yx
+ * @author kangqing
  * @description 双端队列
  * @date 2020/8/11 9:31
  */
 public class ArrayDequeTest {
 
-    private static Deque<Integer> deque = new ArrayDeque<>();
+    private static final Deque<Integer> deque = new ArrayDeque<>();
 
     public static void main(String[] args) {
         //stackTest();

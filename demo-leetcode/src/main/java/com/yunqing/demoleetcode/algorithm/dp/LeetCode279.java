@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 堆栈溢出自己写的
  * LeetCode279 完全平方数
- * @author yx
+ * @author kangqing
  * @since 2020/9/14 15:40
  */
 public class LeetCode279 {

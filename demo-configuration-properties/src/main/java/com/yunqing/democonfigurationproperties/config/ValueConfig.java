@@ -5,7 +5,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.DefaultPropertySourceFactory;
 
 /**
- * @author yx
+ * @author kangqing
  * @description
  * @date 2020/8/13 10:21
  */

@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.offer;
 
 /**
  * 剑指 Offer 04. 二维数组中的查找
- * @author yx
+ * @author kangqing
  * @since 2020/12/24 11:16
  */
 public class Offer04 {

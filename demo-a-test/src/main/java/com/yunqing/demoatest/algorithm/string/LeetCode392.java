@@ -2,7 +2,7 @@ package com.yunqing.demoatest.algorithm.string;
 
 /**
  * @Description LeetCode392 判断子序列
- * @Author yx
+ * @Author kangqing
  * @Data 2020/7/27 15:45
  */
 public class LeetCode392 {

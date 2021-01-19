@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 递归回溯解法
  * LeetCode39 组合总和
- * @author yx
+ * @author kangqing
  * @since 2020/9/11 13:54
  */
 public class LeetCode39 {

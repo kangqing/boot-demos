@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @Description LeetCode面试题01.07 旋转矩阵
- * @Author yx
+ * @Author kangqing
  * @Data 2020/7/27 17:55
  */
 public class LeetCodeMST01_07 {

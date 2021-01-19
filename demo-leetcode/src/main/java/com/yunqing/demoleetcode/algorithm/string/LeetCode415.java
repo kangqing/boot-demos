@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.string;
 
 /**
- * @author yx LeetCode415 字符串相加
+ * @author kangqing LeetCode415 字符串相加
  * @description
  * @date 2020/8/3 11:06
  */

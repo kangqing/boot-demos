@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * LeetCode46 全排列
- * @author yx
+ * @author kangqing
  * @since 2020/9/18 14:07
  */
 public class LeetCode46 {

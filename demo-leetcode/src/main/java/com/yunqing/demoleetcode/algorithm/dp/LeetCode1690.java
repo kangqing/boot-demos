@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.dp;
 
 /**
  * LeetCode1690 石子游戏 VII
- * @author yx
+ * @author kangqing
  * @since 2020/12/22 11:35
  */
 public class LeetCode1690 {

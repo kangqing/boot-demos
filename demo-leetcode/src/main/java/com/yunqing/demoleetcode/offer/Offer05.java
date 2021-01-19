@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 剑指 Offer 05. 替换空格
- * @author yx
+ * @author kangqing
  * @since 2020/12/24 17:33
  */
 public class Offer05 {

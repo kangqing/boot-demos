@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * Controller层的日志封装类
- * @author yx
+ * @author kangqing
  * @date 2020/5/6 10:14
  */
 @Data

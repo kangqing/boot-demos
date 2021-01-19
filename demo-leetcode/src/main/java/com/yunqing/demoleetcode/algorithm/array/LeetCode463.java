@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.array;
 
 /**
  * LeetCode463 岛屿的周长
- * @author yx
+ * @author kangqing
  * @since 2020/10/30 17:20
  */
 public class LeetCode463 {

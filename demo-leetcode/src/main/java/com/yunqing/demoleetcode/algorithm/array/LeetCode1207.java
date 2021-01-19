@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * LeetCode1207 独一无二的出现次数
- * @author yx
+ * @author kangqing
  * @since 2020/10/28 17:43
  */
 public class LeetCode1207 {

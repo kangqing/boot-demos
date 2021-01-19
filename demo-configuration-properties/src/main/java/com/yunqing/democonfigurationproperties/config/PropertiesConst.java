@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * @author yx
+ * @author kangqing
  * @date 2020/4/24 14:14
  */
 @Configuration

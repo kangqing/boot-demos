@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 /**
  * 12.26 最大矩形， 单调栈
- * @author yx
+ * @author kangqing
  * @since 2020/12/26 21:33
  */
 public class Time12m26 {

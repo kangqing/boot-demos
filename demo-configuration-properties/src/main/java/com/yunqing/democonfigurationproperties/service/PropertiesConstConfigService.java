@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * 获取配置项接口
- * @author yx
+ * @author kangqing
  * @date 2020/4/24 14:32
  */
 public interface PropertiesConstConfigService {

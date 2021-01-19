@@ -1,7 +1,7 @@
 package com.yunqing.demoleetcode.algorithm.array;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode26 删除排序数组中的重复项
  * @date 2020/8/12 14:44
  */

@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * 分析：使用最小堆进行解析，
  * 选取前10个元素构造一个最小堆，然后用剩下的元素和堆顶元素比较，如果小于堆顶元素，则小于10堆中所有元素，丢弃，
  * 如果大于堆顶元素，替换
- * @author yx
+ * @author kangqing
  * @since 2020/9/14 9:04
  */
 public class MinDuiTest {

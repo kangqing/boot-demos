@@ -9,7 +9,7 @@ import java.nio.channels.Pipe;
 
 /**
  * 管道
- * @author yx
+ * @author kangqing
  * @since 2020/10/19 17:31
  */
 @SpringBootTest

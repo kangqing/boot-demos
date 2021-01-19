@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.string;
 
 /**
  * LeetCode925 长按键入
- * @author yx
+ * @author kangqing
  * @since 2020/10/21 14:06
  */
 public class LeetCode925 {

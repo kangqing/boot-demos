@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 1.5 双指针
- * @author yx
+ * @author kangqing
  * @since 2021/1/5 10:11
  */
 public class Time1m5 {

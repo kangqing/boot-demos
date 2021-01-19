@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.time;
 
 /**
  * 12.20 贪心 + 栈
- * @author yx
+ * @author kangqing
  * @since 2020/12/21 10:18
  */
 public class Time12m20 {

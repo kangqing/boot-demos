@@ -25,7 +25,7 @@ import java.nio.file.StandardOpenOption;
  *  *              |--Pipe.SourceChannel
  *  * 2.缓冲区：Buffer 负责存取数据
  *  * 3.选择器：Selector 是SelectableChannel的多路复用器，用于监控SelectableChannel的IO状况
- * @author yx
+ * @author kangqing
  * @since 2020/10/19 14:40
  */
 @SpringBootTest

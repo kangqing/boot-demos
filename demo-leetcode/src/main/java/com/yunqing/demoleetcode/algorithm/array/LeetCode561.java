@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCode561 数组拆分 I
  * @date 2020/8/7 17:42
  */

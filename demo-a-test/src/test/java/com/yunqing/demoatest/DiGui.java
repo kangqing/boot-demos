@@ -1,7 +1,7 @@
 package com.yunqing.demoatest;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/11/20 10:08
  */
 public class DiGui {

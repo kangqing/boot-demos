@@ -5,7 +5,7 @@ import java.util.Deque;
 
 /**
  * 12.10 双端队列
- * @author yx
+ * @author kangqing
  * @since 2020/12/10 10:07
  */
 public class Time12m10 {

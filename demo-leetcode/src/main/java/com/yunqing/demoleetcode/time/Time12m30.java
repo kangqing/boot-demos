@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 /**
  * 12.30 最大堆
- * @author yx
+ * @author kangqing
  * @since 2020/12/30 13:55
  */
 public class Time12m30 {

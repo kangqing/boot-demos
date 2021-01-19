@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 分治法 + 递归
- * @author yx
+ * @author kangqing
  * @since 2020/12/25 14:58
  */
 public class Offer07 {

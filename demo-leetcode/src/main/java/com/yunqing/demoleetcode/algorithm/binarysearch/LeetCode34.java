@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * LeetCode34 在排序数组中查找元素的第一个和最后一个位置
- * @author yx
+ * @author kangqing
  * @date 2020/8/18 10:00
  */
 public class LeetCode34 {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 12.23 hash表
- * @author yx
+ * @author kangqing
  * @since 2020/12/23 9:41
  */
 public class Time12m23 {

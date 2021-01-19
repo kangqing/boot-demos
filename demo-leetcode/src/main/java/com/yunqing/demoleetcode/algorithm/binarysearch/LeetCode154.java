@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.binarysearch;
 
 /**
  * LeetCode154 寻找旋转排序数组中的最小值 II
- * @author yx
+ * @author kangqing
  * @date 2020/8/20 16:28
  */
 public class LeetCode154 {

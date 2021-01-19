@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 12月1号，考点：二分查找，注意点while(条件的left <= right是否带等号)
- * @author yx
+ * @author kangqing
  * @since 2020/12/1 17:33
  */
 public class Time12m1 {

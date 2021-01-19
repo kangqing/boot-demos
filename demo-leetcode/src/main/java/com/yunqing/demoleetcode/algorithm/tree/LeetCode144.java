@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * LeetCode144 二叉树的前序遍历
- * @author yx
+ * @author kangqing
  * @since 2020/9/28 14:25
  *        1
  *     /    \

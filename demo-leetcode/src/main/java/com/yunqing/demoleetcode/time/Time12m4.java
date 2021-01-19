@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 贪心：两个哈希表，永远先把元素接在上一个元素为结尾的子序列后面，如果没有上一个元素结尾的子序列，再结合下两个元素创建新的3个元素子序列
- * @author yx
+ * @author kangqing
  * @since 2020/12/4 9:48
  */
 public class Time12m4 {

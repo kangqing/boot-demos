@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2020/12/24 17:45
  */
 public class Offer06 {

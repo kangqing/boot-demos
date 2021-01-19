@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.algorithm.tree;
 
 /**
  * 构造一个二叉树
- * @author yx
+ * @author kangqing
  * @since 2020/9/17 14:40
  */
 public class TreeNode {

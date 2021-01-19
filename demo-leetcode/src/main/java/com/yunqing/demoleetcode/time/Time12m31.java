@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * 12.31贪心
  *
- * @author yx
+ * @author kangqing
  * @since 2020/12/31 9:32
  */
 public class Time12m31 {

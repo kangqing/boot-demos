@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * 自定义操作日志注解
- * @author yx
+ * @author kangqing
  * @since 2020/11/10 10:59
  */
 @Target(ElementType.METHOD)

@@ -15,7 +15,7 @@ import java.util.Base64;
  * 基本：输出被映射到一组字符A-Za-z0-9+/，编码不添加任何行标，输出的解码仅支持A-Za-z0-9+/。
  * URL：输出映射到一组字符A-Za-z0-9+_，输出是URL和文件。
  * MIME：输出隐射到MIME友好格式。输出每行不超过76字符，并且使用'\r'并跟随'\n'作为分割。编码输出最后没有行分割。
- * @author yx
+ * @author kangqing
  * @since 2020/9/21 10:52
  */
 public class Base64Test {

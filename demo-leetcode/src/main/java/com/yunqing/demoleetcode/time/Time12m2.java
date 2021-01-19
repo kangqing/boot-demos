@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 12月2， 考点：单调栈
- * @author yx
+ * @author kangqing
  * @since 2020/12/2 15:23
  */
 public class Time12m2 {

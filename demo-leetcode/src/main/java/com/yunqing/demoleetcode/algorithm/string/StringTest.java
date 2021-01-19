@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @Description 字符串不可变测试
- * @Author yx
+ * @Author kangqing
  * @Data 2020/7/29 16:10
  */
 public class StringTest {

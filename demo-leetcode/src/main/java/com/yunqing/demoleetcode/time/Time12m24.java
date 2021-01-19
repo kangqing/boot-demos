@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 12.24 贪心，这道题目一定是要确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。
- * @author yx
+ * @author kangqing
  * @since 2020/12/24 9:37
  */
 public class Time12m24 {

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Description LeetCode56 合并区间
- * @Author yx
+ * @Author kangqing
  * @Data 2020/7/27 16:58
  */
 public class LeetCode56 {

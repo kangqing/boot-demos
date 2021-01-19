@@ -1,9 +1,9 @@
 package com.yunqing.demoleetcode.algorithm.string;
 
 /**
- * @Description LeetCode392 判断子序列
- * @Author yx
- * @Data 2020/7/27 15:45
+ * LeetCode392 判断子序列
+ * @author  kangqing
+ * @since 2020/7/27 15:45
  */
 public class LeetCode392 {
     public static void main(String[] args) {

@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * 将常量配置到数据库中
- * @author yx
+ * @author kangqing
  * @date 2020/4/24 14:27
  */
 @Configuration

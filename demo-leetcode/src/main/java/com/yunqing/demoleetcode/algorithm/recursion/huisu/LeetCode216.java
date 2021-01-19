@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * LeetCode216 组合总和 III
- * @author yx
+ * @author kangqing
  * @since 2020/9/11 15:03
  */
 public class LeetCode216 {

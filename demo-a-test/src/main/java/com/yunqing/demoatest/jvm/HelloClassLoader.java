@@ -12,7 +12,7 @@ import java.nio.channels.WritableByteChannel;
 
 /**
  * 自定义类加载器
- * @author yx
+ * @author kangqing
  * @since 2020/10/16 11:12
  */
 public class HelloClassLoader extends ClassLoader {

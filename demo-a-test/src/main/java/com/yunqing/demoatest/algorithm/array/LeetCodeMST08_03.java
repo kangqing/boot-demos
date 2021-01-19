@@ -1,7 +1,7 @@
 package com.yunqing.demoatest.algorithm.array;
 
 /**
- * @author yx
+ * @author kangqing
  * @description LeetCodeMST08_03 魔术索引
  * @date 2020/7/31 12:23
  */

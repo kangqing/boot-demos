@@ -2,7 +2,7 @@ package com.yunqing.demoleetcode.time;
 
 /**
  * 12.17 动态规划，先找出转移方程，股票的最佳买卖时机利益最大化
- * @author yx
+ * @author kangqing
  * @since 2020/12/17 9:24
  */
 public class Time12m17 {

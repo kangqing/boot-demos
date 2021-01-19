@@ -3,7 +3,7 @@ package com.yunqing.demoatest.algorithm.stack;
 
 /**
  * LeetCode1541 平衡括号字符串的最少插入次数
- * @author yx
+ * @author kangqing
  * @date 2020/8/14 16:52
  */
 public class LeetCode1541 {
