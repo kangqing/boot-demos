@@ -18,13 +18,14 @@ public class No2MergeSortArr {
 }
 
 class SolutionNo2 {
-
+    // 可以直接不考虑两个数组的顺序
     public void merge_1(int[] nums1, int m, int[] nums2, int n) {
         // 额，亏我还知道用System.arraycopy()
         // 源数组， 从0开始， 复制到目标数组， 到目标数组 m 位置开始， 复制 n 位
         System.arraycopy(nums2, 0, nums1, m, n);
         Arrays.sort(nums1);
     }
+    // 双指针
     public void merge_2(int[] nums1, int m, int[] nums2, int n) {
         if(m == 0) {
             System.arraycopy(nums2, 0, nums1, 0, n);
