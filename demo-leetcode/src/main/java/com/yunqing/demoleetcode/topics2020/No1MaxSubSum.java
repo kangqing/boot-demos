@@ -45,7 +45,7 @@ class SolutionNo1 {
 
     //-2,1,-3,4,-1,2,1,-5,4
 
-    // 动态规划 转移方程： nums[i] = Math.max(dp[i - 1] + nums[i], nums[i])
+    // 动态规划 转移方程： dp[i] = Math.max(dp[i - 1] + nums[i], nums[i])
     // 以当前数结尾为最大，有可能是当前数 + 前一个数结尾最大dp[i - 1]，或者是当前数就是最大（前一个最大小于0时候）
     public int maxSubArray_2(int[] nums) {
         int[] dp = new int[nums.length];
