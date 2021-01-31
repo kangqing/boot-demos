@@ -1,4 +1,6 @@
-package com.yunqing.demoleetcode.algorithm.tree;
+package com.yunqing.demoleetcode.topics2020;
+
+import com.yunqing.demoleetcode.algorithm.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,11 +8,9 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * LeetCode102 二叉树的层序遍历
- * @author kangqing
- * @since 2020/9/28 15:02
+ * 二叉树层序遍历
  */
-public class LeetCode102 {
+public class No5BinaryTree {
     public static void main(String[] args) {
 
     }
