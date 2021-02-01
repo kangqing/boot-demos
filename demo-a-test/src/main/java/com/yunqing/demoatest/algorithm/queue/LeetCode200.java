@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @Description LeetCode 200 岛屿数量
- * @Author yunqing
- * @Data 2020/7/13 23:29
+ * LeetCode 200 岛屿数量
+ * @author kangqing
+ * @since 2020/7/13 23:29
  */
 public class LeetCode200 {
 
