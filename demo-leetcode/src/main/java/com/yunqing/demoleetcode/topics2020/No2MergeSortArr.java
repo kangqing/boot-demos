@@ -3,7 +3,7 @@ package com.yunqing.demoleetcode.topics2020;
 import java.util.Arrays;
 
 /**
- * @author yx
+ * @author kangqing
  * @since 2021/1/28 14:17
  */
 public class No2MergeSortArr {
