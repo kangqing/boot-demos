@@ -59,7 +59,7 @@ class StreamTest {
 
     /**
      * filter
-     * @DESC 过滤出list中学生名字中包括 "1" 的学生集合，
+     *  过滤出list中学生名字中包括 "1" 的学生集合，
      *       并使用peek()利用其返回Stream<Student>直接以流的方式实现打印过滤出的学生
      *
      *       peek() 和 ForEach() 的区别：
@@ -83,7 +83,7 @@ class StreamTest {
 
     /**
      * map
-     * @DESC 可以将List里面的对象转化成新的对象
+     * 可以将List里面的对象转化成新的对象
      * 1.将学生集合里不小于90分的作为精英学生过滤出来,并打印
      * 2.获取所有学生的 name 集合,并打印
      */
@@ -96,7 +96,7 @@ class StreamTest {
                     return eliteStudent;
                 }).peek(System.out::println)
                 .collect(Collectors.toList());
-        Assertions.assertEquals(3, collect.size());
+        Assertions.assertEquals(4, collect.size());
 
         final List<String> nameList = list.stream().map(Student::getName)
                 .peek(System.out::println)
@@ -107,7 +107,7 @@ class StreamTest {
 
     /**
      * flatMap
-     * @DESC 将嵌套列表转换为普通列表，例如 List<List<Student>> 转化为 List<Student>
+     * 将嵌套列表转换为普通列表，例如 List<List<Student>> 转化为 List<Student>
      * 1.将嵌套列表转化成普通列表，断言转化结果 = list
      * 2.转化后获取列表的 id 集合并打印
      * 3.转化后再提取集合的分数，求平均值，打印平均值
@@ -136,7 +136,7 @@ class StreamTest {
 
     /**
      * sorted
-     * @DESC 排序
+     * 排序
      * 1.先按照分数倒叙排列，如果分数相同按照年龄正序排列，如果年龄相同按照 id 正序排列，打印
      * 2.如果 reversed() 写在最后，则全部按照倒叙排列
      */
@@ -161,7 +161,7 @@ class StreamTest {
 
     /**
      * match
-     * @DESC 验证list中的每一项是否匹配我们的条件
+     * 验证list中的每一项是否匹配我们的条件
      * allMatch 全都匹配
      * anyMatch 任意匹配
      * noneMatch 全不匹配
@@ -188,9 +188,9 @@ class StreamTest {
 
     /**
      * reduce
-     * @DESC 合并流元素产生单个值
+     * 合并流元素产生单个值
      * 1.计算list中所有学生年龄的总和，存在则打印
-     * 2.计算list中所有学生年龄的总和，存在则打印
+     * 2.计算list中所有学生成绩的总和，存在则打印
      */
     @Test
     void reduceTest() {
@@ -244,7 +244,7 @@ class StreamTest {
 
     /**
      * partitioningBy
-     * @DESC 用于分割列表
+     *  用于分割列表
      * 把学生列表中年龄大于100的放进key为true的Map中
      * 小于等于100的放进key为false的Map中
      */
@@ -258,7 +258,7 @@ class StreamTest {
 
     /**
      * groupingBy
-     * @DESC 分组
+     * 分组
      * 1.根据成绩分组
      * 2.获取每个分数的人数
      * 3.根据成绩获取取得每个成绩的学生的总分
@@ -278,7 +278,7 @@ class StreamTest {
 
     /**
      * parallel
-     * @DESC 并发
+     * 并发
      * 延迟一秒后，并发的打印出学生的名字
      */
     @Test
@@ -296,7 +296,7 @@ class StreamTest {
     }
 
     /**
-     * @DESC 读写文件
+     * 读写文件
      * 先把list中的数据写到student.txt中
      * 再读取出来
      */
