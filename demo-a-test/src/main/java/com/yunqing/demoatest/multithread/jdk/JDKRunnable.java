@@ -1,7 +1,9 @@
 package com.yunqing.demoatest.multithread.jdk;
 
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.ReUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -32,7 +34,10 @@ public class JDKRunnable {
         new Thread(r2).start();
 
         //method();
-        stream();
+        //stream();
+        final Animal animal = new Animal();
+        animal.eat();
+
     }
 
     /**
@@ -146,28 +151,46 @@ public class JDKRunnable {
         list.stream().filter(e -> e.getScore() >= 90)
                 .findFirst()
                 .ifPresent(System.out::println);
-        Console.log("-------------------------");
+        Console.log("-----------filter--------------");
 
         list.stream().skip(1).limit(2).forEach(System.out::println);
-        Console.log("-------------------------");
+        Console.log("------------limit-------------");
 
         list.stream().skip(3).distinct().forEach(System.out::println);
-        Console.log("-------------------------");
+        Console.log("-------------distinct------------");
 
         list.stream().mapToInt(Student::getAge).min().ifPresent(System.out::println);
-        Console.log("-------------------------");
+        Console.log("-------------map------------");
 
         final Set<String> collect = list.stream().map(Student::getName).collect(Collectors.toSet());
         System.out.println(collect);
-        Console.log("-------------------------");
+        Console.log("-------------collect------------");
 
-        final List<Student> collect1 = list.stream().sorted(Comparator.comparingInt(Student::getAge))
+        final List<Student> collect1 = list.stream().sorted(Comparator.comparingDouble(Student::getScore).reversed()
+                .thenComparing(Student::getAge)
+                .thenComparing(Student::getId))
                 .collect(Collectors.toList());
-        System.out.println(collect1);
-        Console.log("-------------------------");
+        collect1.forEach(System.out::println);
+        Console.log("----------sort---------------");
 
+        final boolean b = list.stream().allMatch(e -> e.getAge() < 25);
+        Assert.isFalse(b);
+        final boolean b1 = list.stream().anyMatch(e -> ReUtil.isMatch("^[1-9]\\d*$", e.getId().toString()));
+        Assert.isTrue(b1);
+        final boolean b2 = list.stream().noneMatch(e -> e.getScore() == 100d);
+        Assert.isFalse(b2);
+        Console.log("----------------match------------------");
+
+        list.stream().mapToInt(Student::getAge)
+                .reduce(Integer::sum)
+                .ifPresent(System.out::println);
+        Console.log("----------------reduce------------------");
+
+        final DoubleSummaryStatistics collect2 = list.stream().collect(Collectors.summarizingDouble(Student::getScore));
+        Console.log(collect2);
 
     }
+
 }
 
 /**
@@ -180,5 +203,41 @@ class Student {
     private String name;
     private Integer age;
     private Double score;
+}
+
+interface Cat {
+    /**
+     * 接口默认方法
+     */
+    default void eat() {
+        System.out.println("一只小猫爱吃鱼");
+    }
+
+    /**
+     * Java 8 的另一个特性是接口可以声明（并且可以提供实现）静态方法。
+     */
+    static void voice() {
+        System.out.println("一只小猫喵喵叫");
+    }
+
+}
+
+interface Dog {
+    default void eat() {
+        System.out.println("一只小狗啃骨头");
+    }
+}
+
+class Animal implements Cat, Dog{
+
+    @Override
+    public void eat() {
+        // 第一种使用默认实现
+        Dog.super.eat();
+        // 第二种自己实现
+        System.out.println("我是一只新动物");
+        // 调用接口的静态方法
+        Cat.voice();
+    }
 }
 

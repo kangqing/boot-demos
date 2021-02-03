@@ -35,7 +35,7 @@ public class Base64Test {
 
         //URL编码
         str = Base64.getUrlEncoder().encodeToString("dksiofdo+/d,s;".getBytes(StandardCharsets.UTF_8));
-        Console.log("原始字符串是：{}", str);
+        Console.log("加密后字符串是：{}", str);
         //URL解码
         byte[] decode1 = Base64.getUrlDecoder().decode(str);
         Console.log("URL解码后 {}", new String(decode1, StandardCharsets.UTF_8));
@@ -43,7 +43,7 @@ public class Base64Test {
 
         //Mime编码
         str = Base64.getMimeEncoder().encodeToString("dksiofdo+/d,s;ddd".getBytes(StandardCharsets.UTF_8));
-        Console.log("原始字符串是：{}", str);
+        Console.log("加密后字符串是：{}", str);
         //Mime解码
         byte[] decode2 = Base64.getMimeDecoder().decode(str);
         Console.log("Mime解码后 {}", new String(decode2, StandardCharsets.UTF_8));
@@ -55,7 +55,7 @@ public class Base64Test {
 
         相当于用lineSeparator隔开加密后的字符串,每lineLength（4的倍数向下取整）隔开
          */
-        String s = Base64.getMimeEncoder(8, ".?--".getBytes())
+        String s = Base64.getMimeEncoder(6, ".?--".getBytes())
                 .encodeToString("jimidssafsaa".getBytes(StandardCharsets.UTF_8));
         Console.log("加密后 {}", s);
         byte[] decode3 = Base64.getMimeDecoder().decode(s);
