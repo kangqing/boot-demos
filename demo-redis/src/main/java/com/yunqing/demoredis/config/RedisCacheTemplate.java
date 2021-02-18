@@ -152,8 +152,7 @@ public class RedisCacheTemplate implements CacheTemplate {
         if (key == null) {
             return null;
         }
-        Set<String> set = redisTemplate.keys(key);
-        return set;
+        return redisTemplate.keys(key);
     }
 
     /**
@@ -172,10 +171,9 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: incr
-     * @Description: 获取redis自增序号
+     * 获取redis自增序号
      * @param key
-     * @param delta
+     * @param delta 自增因子，要增加几
      * @return
      */
     @Override
@@ -205,10 +203,10 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: incr
-     * @Description: 获取redis自增序号
-     * @param key redis的 key值
-     * @param delta 自增的增量
+     * 获取redis自增序号
+     * @param key
+     * @param delta
+     * @param time
      * @return
      */
     @Override
@@ -226,8 +224,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hMapGet
-     * @Description: 获取Map
+     * 获取 hash 类型的集合
      * @param key
      * @return
      */
@@ -245,8 +242,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hMapSet
-     * @Description: 设置Map
+     * 添加类型为 hash 的键值对
      * @param key
      * @param map
      * @return
@@ -266,8 +262,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hMapSet
-     * @Description: 设置Map
+     * 添加类型为 hash 的键值对，并且设置过期时间
      * @param key
      * @param map
      * @param time
@@ -291,11 +286,10 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hget
-     * @Description: 获取Map中的一个键值
-     * @param key
-     * @param item
-     * @return
+     * 获取 value 类型为 hash 的键值对
+     * @param key 键
+     * @param item hash集合的键
+     * @return 返回hash集合的值
      */
     @Override
     public Object hGet(String key, String item) {
@@ -311,11 +305,10 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hset
-     * @Description: 设置Map中一个键值
-     * @param key
-     * @param item
-     * @param value
+     * 添加 value = Hash 类型键值对
+     * @param key 键
+     * @param item value的键
+     * @param value value 的值
      * @return
      */
     @Override
@@ -333,12 +326,11 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: hset
-     * @Description: 设置Map中一个键值
-     * @param key
-     * @param item
-     * @param value
-     * @param time
+     * 添加 value = Hash 类型键值对
+     * @param key 键
+     * @param item value的键
+     * @param value value 的值
+     * @param time 过期时间
      * @return
      */
     @Override
@@ -360,8 +352,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lGet
-     * @Description: 获取List全部对象
+     * 获取 list 类型的值
      * @param key
      * @return
      */
@@ -371,15 +362,14 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lGet
-     * @Description: 获取List中start到end的对象
-     * @param key
-     * @param start
-     * @param end
+     * 获取 list 类型的两个索引之间的值
+     * @param key 键
+     * @param start 索引开始
+     * @param end 索引结束
      * @return
      */
     @Override
-    public List lGet(String key, long start, long end) {
+    public List<Object> lGet(String key, long start, long end) {
         if (key == null) {
             return null;
         }
@@ -392,8 +382,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lGetIndex
-     * @Description: 获取list中指定index的c
+     * 获取 list 中指定索引的值
      * @param key
      * @param index
      * @return
@@ -412,8 +401,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lGetListSize
-     * @Description: 获取List长度
+     * 获取 list 的长度
      * @param key
      * @return
      */
@@ -431,8 +419,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lSet
-     * @Description: 将List放入缓存
+     * 添加 list 类型数据
      * @param key
      * @param value
      * @return
@@ -452,8 +439,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: lSet
-     * @Description: 将List放入缓存
+     * 添加 list类型数据并设置过期时间
      * @param key
      * @param value
      * @param time
@@ -477,8 +463,7 @@ public class RedisCacheTemplate implements CacheTemplate {
     }
 
     /**
-     * @Title: expire
-     * @Description: 设置过期时间
+     * 设置过期时间
      * @param key
      * @param time
      * @return
