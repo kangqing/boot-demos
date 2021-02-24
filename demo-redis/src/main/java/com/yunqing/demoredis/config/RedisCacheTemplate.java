@@ -29,7 +29,7 @@ public class RedisCacheTemplate implements CacheTemplate {
      * 把传入的值当Object对象进行序列化，所以可以猜测这里key出现的\xac\xed\x00\x05t\x00\tb其实可能是对象头信息。
      * @param redisTemplate
      */
-    @Autowired(required = false)
+    /*@Autowired(required = false)
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         RedisSerializer<String> stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
@@ -38,7 +38,7 @@ public class RedisCacheTemplate implements CacheTemplate {
         redisTemplate.setHashValueSerializer(stringSerializer);
         redisTemplate.setEnableTransactionSupport(true);
         this.redisTemplate = redisTemplate;
-    }
+    }*/
 
     /**
      * 写入
