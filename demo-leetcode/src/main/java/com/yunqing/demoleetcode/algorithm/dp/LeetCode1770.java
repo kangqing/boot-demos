@@ -20,6 +20,7 @@ class Solution {
          */
         int[][] dp = new int[m + 1][m + 1];
         int res =  Integer.MIN_VALUE;
+        // k = i + j 代表总数
         for (int k = 1; k <= m; k++) {
             for (int i = 0; i <= k; i++) {
                 if (i == 0) {
@@ -27,7 +28,12 @@ class Solution {
                     dp[0][k] = dp[0][k - 1] + nums[n - k] * multipliers[k - 1];
                 } else if (i == k) {
                     // 全部从nums 头部取的值
+                    dp[i][0] = dp[i - 1][0] +  nums[i - 1] * multipliers[k - 1];
+                } else {
+                    dp[i][k - i] = Math.max(dp[i][k - i - 1] + nums[n - k + i] * multipliers[k - 1],
+                            dp[i - 1][k - i] + nums[i - 1] * multipliers[k - 1]);
                 }
+                if (k == m) res = Math.max(res, dp[i][k - i]);
             }
         }
 
