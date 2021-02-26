@@ -34,11 +34,9 @@
         <module>demo-configuration-properties</module>
         <module>demo-hutool</module>
         <module>demo-web-log</module>
-        <module>demo-api-security</module>
         <module>demo-json-result</module>
         <module>demo-leetcode</module>
         <module>demo-elasticsearch</module>
-        <module>demo-social</module>
         <module>demo-swagger</module>
     </modules>
 
