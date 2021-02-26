@@ -3,9 +3,6 @@
 ## demo-a-test
 建立本项目的目的是尝试一些新鲜的技术栈，或者正在归纳的一些知识点，而这些知识点又不足以新建一个项目来记录，反正就是杂七杂八，不成体系的一小demo
 
-## demo-api-security
-准备写一个关于API安全的小demo,一直没时间写...待更中...
-
 ## demo-configuration-properties
 一个可以从sql中、application.yml或者*.yml中读取配置文件的例子，包括@Value读取、@ConfigurationProperties读取的demo
 
@@ -29,9 +26,6 @@ mybatis逆向工程生成代码包括Example
 
 ## demo-redis
 一个记录redis使用的demo
-
-## demo-social
-准备写一个OAuth2.0的社交平台登录的demo
 
 ## demo-swagger
 springboot整合swagger的starter, 新的丝袜哥的api接口地址 http://localhost:8080/swagger-ui/
