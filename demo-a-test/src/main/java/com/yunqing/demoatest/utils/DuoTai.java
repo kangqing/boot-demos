@@ -10,6 +10,11 @@ public class DuoTai {
         System.out.println(a.say());
         a = new Dog();
         System.out.println(a.say());
+
+        Xingzhuang x = new Changfang();
+        System.out.println(x.area(2, 5));
+        x = new Sanjiao();
+        System.out.println(x.area(2, 5));
     }
 }
 
@@ -32,6 +37,31 @@ class Dog extends Animals {
     @Override
     String say() {
         return "汪汪汪";
+    }
+}
+
+
+//--------------------多态的另一种 实现接口 并重写接口中的方法
+//定义形状接口
+interface Xingzhuang {
+    default Integer area(int width, int height) {
+        return 0;
+    }
+}
+
+class Sanjiao implements Xingzhuang {
+
+    @Override
+    public Integer area(int width, int height) {
+        return width * height / 2;
+    }
+}
+
+class Changfang implements Xingzhuang {
+
+    @Override
+    public Integer area(int width, int height) {
+        return width * height;
     }
 }
 
