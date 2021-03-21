@@ -31,6 +31,11 @@ public class DemoCallable {
         method1();
         // 复习方法 2： 实现Runnable
         method2();
+
+        // FutureTask 就是 Runnable
+        FutureTask<?> task = new FutureTask<>(new MyThread());
+        new Thread(task).start();
+        System.out.println(task.get());
     }
 
     private static void method2() {
@@ -53,4 +58,11 @@ public class DemoCallable {
     }
 
 
+}
+class MyThread implements Callable<String> {
+    @Override
+    public String call() throws Exception {
+        System.out.println("call()");
+        return "111222";
+    }
 }
