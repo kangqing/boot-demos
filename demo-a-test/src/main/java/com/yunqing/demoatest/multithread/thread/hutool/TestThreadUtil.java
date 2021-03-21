@@ -54,18 +54,6 @@ public class TestThreadUtil {
             System.out.println("批量=====" + take.get());
         }
 
-        // 相当于一个减法计数器
-        CountDownLatch countDownLatch = ThreadUtil.newCountDownLatch(5);
-        for (int i = 0; i < 6; i++) {
-            new Thread(() -> {
-                countDownLatch.countDown();
-                System.out.println(Thread.currentThread().getName() + "====执行完了");
-            }, "A" + i).start();
-        }
-        // 等到计数器归零才会往下执行
-        countDownLatch.await();
-        System.out.println("计数器归零了，才执行这句话");
-
 
 
 
