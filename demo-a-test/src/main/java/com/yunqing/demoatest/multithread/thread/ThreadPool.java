@@ -6,13 +6,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description
- * @Author yunqing
- * @Data 2020/7/9 22:21
+ *
+ * @author kangqing
+ * @since 2020/7/9 22:21
  */
 public class ThreadPool {
 
-
+    // CPU 核心数
+    private final static Integer CPU_NUM = Runtime.getRuntime().availableProcessors();
 
     public static void main(String[] args) {
         /**
@@ -21,7 +22,7 @@ public class ThreadPool {
          * 线程池中超过corePoolSize数目的空闲线程最大存活时间 30秒
          * 阻塞队列----new ArrayBlockingQueue
          */
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 100, 30L,
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(4, CPU_NUM, 30L,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
 
         final CountDownLatch latch = new CountDownLatch(5);
