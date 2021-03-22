@@ -14,7 +14,7 @@ class Node<T> {
         this.data = data;
     }
 
-    Node() {}
+    public Node() {}
 
     /**
      * 在单链表末尾添加节点
