@@ -20,9 +20,9 @@ import java.util.zip.ZipOutputStream;
  */
 public class ToJsonFile {
     public static void main(String[] args) throws Exception {
-        List<Record> list = List.of(new Record("1", "记录1", "110"),
-                new Record("2", "记录2", "119"),
-                new Record("3", "记录3", "120"));
+        List<Record> list = List.of(new Record("1", new String[] {"记录1", "111"}, "110"),
+                new Record("2", new String[] {"记录1", "111"}, "119"),
+                new Record("3", new String[] {"记录1", "111"}, "120"));
         List<Record> collect = list.stream().limit(2).collect(Collectors.toList());
         createJsonFile(list);
 
@@ -39,6 +39,7 @@ public class ToJsonFile {
         // java 对象列表转成 json 数组，先转成 json 字符串，再转成 jsonArray
         JSONArray objects = JSONArray.parseArray(JSON.toJSONString(list));
         jsonObject.put("data", objects);
+        System.out.println(jsonObject);
 
         try {
 
@@ -55,11 +56,20 @@ public class ToJsonFile {
             e.printStackTrace();
         }
         // 给压缩包命名 hello.zip 并且创建到指定目录
+        // 生成到原文件夹
         File zipFile = new File("/Users/yunqing/Documents" + File.separator + "hello.zip");
         ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipFile));
         //ZipUtils.compress(file, zipOut, "searchData.json", true);
         ZipUtils.toZip(file, zipOut, true);
         //ZipUtils.toZip(List.of(file), zipOut);
+        // 移动到目标文件夹
+        File targetDir = new File("/Users/yunqing/Documents/xxx");
+        if (targetDir.isDirectory()) {
+            if(zipFile.getName().endsWith(".zip")) {
+                String cmd = "mv " + zipFile.getAbsolutePath() + " " + "/Users/yunqing/Documents/xxx";
+                Runtime.getRuntime().exec(cmd);
+            }
+        }
     }
 }
 
@@ -68,6 +78,6 @@ public class ToJsonFile {
 @NoArgsConstructor
 class Record {
     private String id;
-    private String name;
+    private String[] name;
     private String mobile;
 }
