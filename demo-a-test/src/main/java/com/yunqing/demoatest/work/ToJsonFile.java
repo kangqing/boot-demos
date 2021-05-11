@@ -20,10 +20,10 @@ import java.util.zip.ZipOutputStream;
  */
 public class ToJsonFile {
     public static void main(String[] args) throws Exception {
-        List<Record> list = List.of(new Record("1", new String[] {"记录1", "111"}, "110"),
+        List<Record> list = List.of(new Record("1", new String[] {"记录1", "111"}, null),
                 new Record("2", new String[] {"记录1", "111"}, "119"),
                 new Record("3", new String[] {"记录1", "111"}, "120"));
-        List<Record> collect = list.stream().limit(2).collect(Collectors.toList());
+        //List<Record> collect = list.stream().limit(2).collect(Collectors.toList());
         createJsonFile(list);
 
     }
@@ -32,6 +32,7 @@ public class ToJsonFile {
         File file = new File("searchData.json");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", "1111");
+        jsonObject.put("ce", null);
         jsonObject.put("checkCode", "checkCode");
 
 

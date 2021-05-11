@@ -6,8 +6,7 @@ import org.springframework.core.io.support.DefaultPropertySourceFactory;
 
 /**
  * @author kangqing
- * @description
- * @date 2020/8/13 10:21
+ * @since 2020/8/13 10:21
  */
 @Configuration
 @PropertySource(value = {"classpath:valueconfig.yml"}, factory = PropertySourceFactory.class)
