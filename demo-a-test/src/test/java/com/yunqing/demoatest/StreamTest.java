@@ -22,8 +22,7 @@ import java.util.stream.IntStream;
 
 /**
  * @author kangqing
- * @description
- * @date 2020/7/2 15:35
+ * @since 2020/7/2 15:35
  */
 @Slf4j
 @SpringBootTest
@@ -138,7 +137,10 @@ class StreamTest {
      * sorted
      * 排序
      * 1.先按照分数倒叙排列，如果分数相同按照年龄正序排列，如果年龄相同按照 id 正序排列，打印
-     * 2.如果 reversed() 写在最后，则全部按照倒叙排列
+     * 2.如果 reversed() 写在最后，则全部按照倒叙排列,
+     * 相当于把之前所有排列结果倒叙--整体倒排
+     * 3.如果局部倒排，需要用到.thenComparing(Student::getAge, Comparator.reverseOrder())
+     * 3.如果局部倒排，需要用到.thenComparing(Student::getAge, Comparator.reverseOrder())
      */
     @Test
     void sortedTest() {
@@ -157,6 +159,14 @@ class StreamTest {
                 .peek(System.out::println)
                 .collect(Collectors.toList());
         Assertions.assertEquals("李青", collect2.get(0).getName());
+
+        log.info("-------------------------------------------------------------");
+        final List<Student> collect1 = list.stream().sorted(Comparator.comparing(Student::getScore)
+                .thenComparing(Student::getAge, Comparator.reverseOrder())
+                .thenComparing(Student::getId))
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+        Assertions.assertEquals("李青", collect1.get(4).getName());
     }
 
     /**
