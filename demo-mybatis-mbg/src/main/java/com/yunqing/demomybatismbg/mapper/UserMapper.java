@@ -3,6 +3,8 @@ package com.yunqing.demomybatismbg.mapper;
 import com.yunqing.demomybatismbg.entity.User;
 import com.yunqing.demomybatismbg.entity.UserExample;
 import java.util.List;
+
+import com.yunqing.demomybatismbg.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -28,4 +30,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<UserVo> pageHelperSelect();
 }

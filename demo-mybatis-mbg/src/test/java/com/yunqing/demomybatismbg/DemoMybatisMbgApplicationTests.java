@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.yunqing.demomybatismbg.entity.User;
 import com.yunqing.demomybatismbg.entity.UserExample;
 import com.yunqing.demomybatismbg.mapper.UserMapper;
+import com.yunqing.demomybatismbg.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -122,6 +123,15 @@ class DemoMybatisMbgApplicationTests {
         UserExample example = new UserExample();
         example.or().andNameEqualTo("xiaoming");
         Assertions.assertTrue(userMapper.updateByExample(user, example) > 0);
+    }
+
+    @Test
+    void pageHelper() {
+        PageHelper.startPage(1, 3);
+        List<UserVo> userVos = userMapper.pageHelperSelect();
+        PageInfo<UserVo> pageInfo = new PageInfo<>(userVos);
+        log.info("总条数 = {}, 总共 {} 页", pageInfo.getTotal(), pageInfo.getPages());
+
     }
 
 }

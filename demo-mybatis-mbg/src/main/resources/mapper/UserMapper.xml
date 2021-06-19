@@ -208,4 +208,13 @@
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="pageHelperSelect" resultType="com.yunqing.demomybatismbg.vo.UserVo">
+    select id,
+           name,
+           age,
+           case when status = '1' then '启用'
+                when status = '0' then '禁用'
+           end statusName
+    from user
+  </select>
 </mapper>
