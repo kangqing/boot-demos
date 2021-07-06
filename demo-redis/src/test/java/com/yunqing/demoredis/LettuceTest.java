@@ -4,6 +4,7 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author kangqing
- * @description 参考 try.redis.io
- * @date 2020/6/3 16:08
+ * 参考 try.redis.io
+ * @since 2020/6/3 16:08
  */
 @SpringBootTest
 @Slf4j
@@ -156,7 +157,19 @@ public class LettuceTest {
     }
 
     /**
-     * Lettuce的管道不是真正的管道，效率没有 Jedis 的高 ？？？有待考证
+     * 自增和自减
      */
+    @SneakyThrows
+    @Test
+    void increment() {
+        sync.incr("js");
+        sync.expire("js", 5);
+        log.info("自增js = [{}]", sync.get("js"));
+        sync.decr("js");
+        sync.decr("js");
+        log.info("自增js = [{}]", sync.get("js"));
+        TimeUnit.SECONDS.sleep(8);
+        log.info("自增js = [{}]", sync.get("js"));
+    }
 
 }
