@@ -1,11 +1,9 @@
 package com.yunqing.demoredis.controller;
 
-import cn.hutool.db.nosql.redis.RedisDS;
 import com.yunqing.demoredis.entity.Emp;
 import com.yunqing.demoredis.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import redis.clients.jedis.Jedis;
 
 import java.util.List;
 

@@ -1,10 +1,17 @@
 package com.yunqing.demoatest;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.yunqing.demoatest.utils.CommonUtils;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cglib.core.CollectionUtils;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,4 +39,37 @@ public class CommonUtilsTest {
         String futureMonth = CommonUtils.getFutureMonth("2020/01", "yyyy/MM", -1);
         System.out.println(futureMonth);
     }
+
+    @Test
+    void testList() throws IOException, ClassNotFoundException {
+        List<Cat> list = new ArrayList<>();
+        list.add(new Cat("1", 1));
+        list.add(new Cat("2", 2));
+        List<Cat> cats = new ArrayList<>();
+        cats = deepCopy(list);
+        list.get(0).setAge(100);
+        cats.forEach(System.out::println);
+        list.forEach(System.out::println);
+    }
+
+
+    public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
+
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        ObjectOutputStream out = new ObjectOutputStream(byteOut);
+        out.writeObject(src);
+
+        ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
+        ObjectInputStream in = new ObjectInputStream(byteIn);
+        @SuppressWarnings("unchecked")
+        List<T> dest = (List<T>) in.readObject();
+        return dest;
+    }
+}
+
+@Data
+@AllArgsConstructor
+class Cat implements Serializable{
+    private String name;
+    private int age;
 }
