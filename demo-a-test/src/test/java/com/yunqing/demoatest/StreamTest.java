@@ -29,6 +29,7 @@ import java.util.stream.IntStream;
 class StreamTest {
 
     private List<Student> list;
+    private List<Student> listZDY;
     private List<List<Student>> listFlat;
 
     @BeforeEach//注解在非静态方法上
@@ -38,6 +39,12 @@ class StreamTest {
                 new Student(2, "赵信", 21, 90.0),
                 new Student(3, "乐芙兰1", 21, 90.0),
                 new Student(4, "李青", 50, 100d),
+                new Student(5, "泰达米尔", 600, 90d)
+        );
+
+        listZDY = Arrays.asList(
+                new Student(4, "李青", 50, 100d),
+                new Student(2, "赵信", 21, 90.0),
                 new Student(5, "泰达米尔", 600, 90d)
         );
 
@@ -327,6 +334,26 @@ class StreamTest {
     void test() {
         List<Student> newList = list.stream().limit(3).peek(System.out::println).collect(Collectors.toList());
         System.out.println("---------------------" + newList.size());
+    }
+
+    /**
+     * 测试一个集合按照自定义的一个集合顺序排序
+     * 让 listZDY 中的元素按照 list 中元素的顺序排序
+     */
+    @Test
+    void testZDY() {
+        List<String> collect = list.stream().map(Student::getName).collect(Collectors.toList());
+        final List<Student> result = listZDY.stream().sorted((a, b) -> {
+            if (collect.contains(a.getName()) && collect.contains(b.getName())) {
+                return Integer.compare(collect.indexOf(a.getName()), collect.indexOf(b.getName()));
+            } else if (collect.contains(a.getName()) && !collect.contains(b.getName())) {
+                return -1;
+            } else if (!collect.contains(a.getName()) && collect.contains(b.getName())) {
+                return 1;
+            }
+            return 0;
+        }).collect(Collectors.toList());
+        result.forEach(System.out::println);
     }
 
 
