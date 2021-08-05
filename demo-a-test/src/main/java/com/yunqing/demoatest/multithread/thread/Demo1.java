@@ -3,9 +3,9 @@ package com.yunqing.demoatest.multithread.thread;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description 继承Thread实现多线程，demo1
- * @Author yunqing
- * @Data 2020/7/6 23:00
+ * 继承Thread实现多线程，demo1
+ * @author yunqing
+ * @since 2020/7/6 23:00
  */
 public class Demo1 {
 

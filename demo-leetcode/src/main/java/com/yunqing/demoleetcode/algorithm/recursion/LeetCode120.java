@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @Description LeetCode 120 三角形最小路径和
- * @Author yunqing
- * @Data 2020/7/14 20:27
+ * LeetCode 120 三角形最小路径和
+ * @author yunqing
+ * @since 2020/7/14 20:27
  */
 public class LeetCode120 {
     public static void main(String[] args) {

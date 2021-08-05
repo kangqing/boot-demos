@@ -1,9 +1,8 @@
 package com.yunqing.demoatest.multithread.thread;
 
 /**
- * @Description
- * @Author yunqing
- * @Data 2020/7/6 23:15
+ * @author yunqing
+ * @since 2020/7/6 23:15
  */
 public class Demo2 {
     /**
