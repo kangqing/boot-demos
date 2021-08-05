@@ -1,9 +1,13 @@
 package com.yunqing.demoatest.controller;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -17,6 +21,21 @@ import java.util.regex.Pattern;
 @RestController
 @RequestMapping("/hc")
 public class HttpClientController {
+
+    @GetMapping("/hello")
+    public String getHello() {
+        return "hello";
+    }
+
+    @GetMapping("/heap")
+    public void heap() {
+        List<Cat> cats = new ArrayList<>();
+        for (;;) {
+            Cat cat = new Cat();
+            cats.add(cat);
+        }
+    }
+
 
     @PostMapping("/postTest")
     public String postStr(@RequestBody String name) {
@@ -101,4 +120,10 @@ public class HttpClientController {
         }
         return Sys;
     }
+}
+
+@Data
+@NoArgsConstructor
+class Cat {
+    private String name;
 }
