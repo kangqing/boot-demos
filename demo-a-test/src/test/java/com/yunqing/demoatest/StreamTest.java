@@ -356,6 +356,18 @@ class StreamTest {
         result.forEach(System.out::println);
     }
 
+    /**
+     * list转map,
+     * key 相同的情况下用后面的替换前面的
+     */
+    @Test
+    void listToMap() {
+        Map<String, String> collect =
+                list.stream().collect(Collectors.toMap(e -> e.getAge().toString() + "--" + e.getScore().toString(),
+                        Student::getName, (k1, k2) -> k2));
+        collect.forEach((k, v) -> System.out.println("key = " + k + "  value = " + v));
+    }
+
 
 }
 
