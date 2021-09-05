@@ -366,6 +366,10 @@ class StreamTest {
                 list.stream().collect(Collectors.toMap(e -> e.getAge().toString() + "--" + e.getScore().toString(),
                         Student::getName, (k1, k2) -> k2));
         collect.forEach((k, v) -> System.out.println("key = " + k + "  value = " + v));
+
+        list.stream().collect(Collectors.toMap(Student::getName, stu -> stu))
+                .forEach((k, v) -> System.out.println("key=" + k + ", value=" + v));
+
     }
 
 

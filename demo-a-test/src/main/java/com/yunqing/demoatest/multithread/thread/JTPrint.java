@@ -1,8 +1,10 @@
 package com.yunqing.demoatest.multithread.thread;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -120,5 +122,51 @@ public class JTPrint {
             }
         }, "Thread-B----").start();
 
+    }
+}
+
+class TicketTask{
+    public static Thread t1 = null;
+    public static Thread t2 = null;
+    public static void main(String[] args) {
+        AtomicBoolean flag = new AtomicBoolean(true);
+        t1 = new Thread(() -> {
+
+            while (true) {
+                if (flag.get()) {
+                    LockSupport.park();
+                } else {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("2");
+                    flag.set(true);
+                    LockSupport.unpark(t2);
+                }
+            }
+        });
+
+        t2 = new Thread(() -> {
+            while (true) {
+                if (!flag.get()) {
+
+                    LockSupport.park();
+
+                }else {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("1");
+                    flag.set(false);
+                    LockSupport.unpark(t1);
+                }
+            }
+        });
+        t1.start();
+        t2.start();
     }
 }

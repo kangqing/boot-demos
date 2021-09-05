@@ -1,6 +1,7 @@
 package com.yunqing.demoleetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 力扣周赛专用
@@ -10,11 +11,27 @@ import java.util.*;
 public class LeetCodeMatch {
     public static void main(String[] args) {
         SolutionMatch solutionMatch = new SolutionMatch();
+        String[] arr = {"3","6","7","10"};
+        System.out.println(solutionMatch.kthLargestNumber(arr, 4));
     }
 }
 
 class SolutionMatch {
+    public String kthLargestNumber(String[] nums, int k) {
+        List<Long> list = new ArrayList<>();
+        for (String num : nums) {
+            list.add(Long.parseLong(num));
+        }
+        List<Long> collect = list.stream().sorted().collect(Collectors.toList());
 
+        //List<String> collect = Arrays.stream(nums).sorted().collect(Collectors.toList());
+        for(int i = nums.length - 1; i >= 0; i--) {
+            if(--k == 0) {
+                return collect.get(i).toString();
+            }
+        }
+        return null;
+    }
 }
 
 /**
