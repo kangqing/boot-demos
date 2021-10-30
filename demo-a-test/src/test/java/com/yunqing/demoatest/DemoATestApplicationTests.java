@@ -12,6 +12,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @SpringBootTest
@@ -91,5 +95,62 @@ class DemoATestApplicationTests {
         list.remove(1);
         list.forEach(System.out::println);
     }
+
+    /**
+     * 获取当前线程所有的父线程组的名字
+     */
+    @Test
+    void currentParentGroup() {
+        ThreadGroup current = Thread.currentThread().getThreadGroup();
+        System.out.println("当前线程组是 = " + current);
+        for (;;) {
+            ThreadGroup parent = current.getParent();
+            if (parent != null) {
+                System.out.println(current + "线程组的父线程组是 = " + parent);
+                current = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * 统一处理线程池异常
+     */
+    @Test
+    void uncaughtExceptionHandlers() {
+        ExecutorService pool = Executors.newCachedThreadPool(new MyThreadFactory());
+        for (int i = 0; i < 20; i++) {
+            pool.execute(() -> {
+                int ran = (int) (Math.random() * 10);
+                if (ran > 8) {
+                    throw new RuntimeException("test..." + ran);
+                }
+                System.out.println(Thread.currentThread().getId() + " running ..." + ran);
+            });
+        }
+        pool.shutdown();
+    }
+
+    /**
+     * Future 异常处理
+     */
+    @Test
+    void futureException() {
+        ExecutorService pool = Executors.newCachedThreadPool();
+        for (int i = 0; i < 20; i++) {
+            Future<Integer> future = pool.submit(new MyTaskCall());
+            try {
+                Integer result = future.get();
+                System.out.println(result);
+            } catch (ExecutionException e) {
+                log.error(e.getMessage(), e.getCause());
+            } catch (Exception e) {
+                System.out.println("网络异常，请检查...");
+            }
+        }
+        pool.shutdown();
+    }
+
 
 }
