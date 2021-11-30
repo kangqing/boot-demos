@@ -23,6 +23,6 @@ public class ProductService {
     public void updateProductStockCountById(Long id, Integer stockCount) {
         productDao.updateProductStockCountById(id, stockCount);
         // 故意制造异常
-        int i = 1 / 0;
+        //int i = 1 / 0;
     }
 }

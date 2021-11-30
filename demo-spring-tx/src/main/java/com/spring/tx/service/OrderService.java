@@ -20,6 +20,8 @@ public class OrderService {
 
     private final OrderDao orderDao;
 
+    private final ProductDao productDao;
+
     private final ProductService productService;
 
     /**
@@ -32,7 +34,16 @@ public class OrderService {
         order.setId(number);
         order.setOrderNo("order_" + number);
         orderDao.saveOrder(order);
-        // 扣减库存
+        // this 不生成代理对象，相当于被调用的方法无事务，全部回滚
+        this.updateProductStockCountById(1L, 1);
+        // 事务传播 REQUIRES_NEW 新的事务，所以新事物中的事务已经提交，库存不回滚，订单回滚
         productService.updateProductStockCountById(1L, 1);
+        // 故意制造异常
+        int i = 1 / 0;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void updateProductStockCountById(Long id, Integer stockCount) {
+        productDao.updateProductStockCountById(id, stockCount);
     }
 }
