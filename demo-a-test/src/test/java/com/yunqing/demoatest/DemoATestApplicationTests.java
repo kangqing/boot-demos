@@ -152,5 +152,12 @@ class DemoATestApplicationTests {
         pool.shutdown();
     }
 
+    @Test
+    void testMathFloorDiv() {
+        int a = 10;
+        int b = 3;
+        System.out.println(Math.floorDiv(a, b));
+    }
+
 
 }
