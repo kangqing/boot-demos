@@ -39,6 +39,7 @@
         <module>demo-elasticsearch</module>
         <module>demo-swagger</module>
         <module>demo-spring-tx</module>
+        <module>demo-distributed-lock</module>
     </modules>
 
     <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
