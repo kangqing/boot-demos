@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class QuickSort {
     public static void main(String[] args) {
         // 定义需要进行排序的数组
-        int[] arr = {5, 7, 1, 13, 6, 2, -1, 10};
+        int[] arr = {-2, 7, 1, 13, 6, 2, -1, 10, -2};
         // 下面进行快速排序
 
         quickSort(arr, 0, arr.length - 1);
