@@ -53,7 +53,7 @@ public class QuickSort {
      */
     private static int partition(int[] arr, int beginIndex, int endIndex) {
         // 选择一个值作为参照值，把小于参照值的放在左边，大于参照值的放在右边，我这里选择最后一位作为参照值
-        int key = endIndex;// 标识一下
+        //int key = endIndex;// 标识一下
         // 定义双指针,t1在一个无效位置， t2在第一位
         int t1 = beginIndex - 1;
         // 如果t2找到一个小于 key 的，就把t1 ++ 然后交换位置
