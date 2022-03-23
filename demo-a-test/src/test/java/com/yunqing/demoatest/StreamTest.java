@@ -372,6 +372,22 @@ class StreamTest {
 
     }
 
+    /**
+     * 给数组流排序，先按照数组第一列，再按照数组第二列，再按照数组第三列
+     * 注意类型推断不能推断出具体类型，需要转一下,lambda表达式推断不出类型
+     *
+     */
+    @Test
+    void arraySort() {
+        List<String[]> str = new ArrayList<>();
+        List<String[]> collect = str.stream()
+                .sorted(Comparator.comparing((String[] a) -> a[0])
+                        .thenComparing(b -> b[1])
+                        .thenComparing(c -> c[2]))
+                .collect(Collectors.toList());
+
+    }
+
 
 }
 
