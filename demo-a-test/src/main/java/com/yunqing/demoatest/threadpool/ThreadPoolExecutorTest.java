@@ -14,7 +14,8 @@ public class ThreadPoolExecutorTest {
     public static void main(String[] args) throws InterruptedException {
         BlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<>(5);
         final ThreadPoolExecutor pool =
-                new ThreadPoolExecutor(3, 8, 2000, TimeUnit.MILLISECONDS, blockingQueue);
+                new ThreadPoolExecutor(3, 8, 2000,
+                        TimeUnit.MILLISECONDS, blockingQueue);
         // 任务数设置为 13
         for (int i = 0; i < 13; i++) {
             pool.execute(() -> {
