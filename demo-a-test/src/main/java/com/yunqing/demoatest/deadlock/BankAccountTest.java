@@ -86,40 +86,47 @@ class Bank {
         try {
             // 确定锁的执行顺序
             int result = from.getAccountId().compareTo(to.getAccountId());
+            Account left = from;// id小的先加锁
+            Account right = to;// id大的后加锁
             if (result > 0) {
-                // 锁定转出账户
-                synchronized (from) {
+                left = to;
+                right = from;
+            }
+            // 锁定转出账户
+            synchronized (left) {
+                synchronized (right) {
                     TimeUnit.SECONDS.sleep(1);
                     if (from.getMoney().subtract(money).compareTo(BigDecimal.ZERO) < 0) {
                         System.out.println("余额不足，转账失败");
                     }
                     from.subMoney(money);
-                    // 锁定转入账户
-                    synchronized (to) {
-                        to.addMoney(money);
-                    }
-                    System.out.println("转账成功， 账户" + from.getAccountId() + "转出" + money + "元到账户" + to.getAccountId());
-                }
-            } else {
-                // 锁定转出账户
-                synchronized (to) {
-                    TimeUnit.SECONDS.sleep(1);
+                    // 转入账户
                     to.addMoney(money);
-                    // 锁定转入账户
-                    synchronized (from) {
-                        if (from.getMoney().subtract(money).compareTo(BigDecimal.ZERO) < 0) {
-                            System.out.println("余额不足，转账失败");
-                        }
-                        from.subMoney(money);
-                    }
                     System.out.println("转账成功， 账户" + from.getAccountId() + "转出" + money + "元到账户" + to.getAccountId());
+
                 }
             }
-
         } catch (Exception e) {
             //e.printStackTrace();
             log.error("转账出错，捕获异常 {[]}", e);
         }
     }
-}
 
+    /**
+     * 等待、通知机制
+     */
+    public void transferNotifyAll(Account from, Account to, BigDecimal money) throws InterruptedException {
+        // 获取需要的锁
+        Allocator.getInstance().apply(from, to);
+        TimeUnit.SECONDS.sleep(1);
+        if (from.getMoney().subtract(money).compareTo(BigDecimal.ZERO) < 0) {
+            System.out.println("余额不足，转账失败");
+        }
+        from.subMoney(money);
+        // 转入账户
+        to.addMoney(money);
+        System.out.println("转账成功， 账户" + from.getAccountId() + "转出" + money + "元到账户" + to.getAccountId());
+        // 释放锁并通知其他线程抢锁
+        Allocator.getInstance().release(from, to);
+    }
+}
