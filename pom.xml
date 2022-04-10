@@ -122,6 +122,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -159,6 +160,23 @@
             <version>1.2.66</version>
         </dependency>
     </dependencies>
+    <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
+    <distributionManagement>
+        <!--正式版本-->
+        <repository>
+            <!-- nexus服务器中用户名：在settings.xml中<server>的id-->
+            <id>maven-releases</id>
+            <!-- 这个名称自己定义 -->
+            <name>Nexus Release</name>
+            <url>http://127.0.0.1:8081/repository/maven-releases</url>
+        </repository>
+        <!--快照-->
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>Nexus Snapshot</name>
+            <url>http://127.0.0.1:8081/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -222,13 +240,13 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <!--用于将打包完成发布到远程仓库，也可配置跳过发布-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
+                <!--<configuration>
                     <skip>true</skip>
-                </configuration>
+                </configuration>-->
             </plugin>
         </plugins>
 
