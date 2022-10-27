@@ -160,7 +160,7 @@ class DemoHutoolApplicationTests {
     void validatorTest() {
         boolean isEmail = Validator.isEmail("10001@qq.com");
         //正则匹配正整数
-        boolean mactchRegex = Validator.isMactchRegex("^[1-9]\\d*$", "3.14");
+        boolean mactchRegex = Validator.isMatchRegex("^[1-9]\\d*$", "3.14");
         boolean isUUID = Validator.isUUID(IdUtil.simpleUUID());
         Console.log("验证邮箱：{}\n正则匹配：{}\n验证UUID：{}", isEmail, mactchRegex, isUUID);
     }

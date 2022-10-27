@@ -30,7 +30,8 @@ public class PropertiesConstConfigServiceImpl implements PropertiesConstConfigSe
         List<ConstEntity> list = constRepository.findAll();
         if (CollUtil.isNotEmpty(list)) {
             for (ConstEntity entity : list) {
-                map.put(entity.getConfigKey(), entity.getConfigValue() == null ? entity.getDefaultValue() : entity.getConfigValue());
+                map.put(entity.getConfigKey(), entity.getConfigValue() == null ? entity.getDefaultValue() :
+                        entity.getConfigValue());
             }
         }
         return map;

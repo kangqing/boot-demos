@@ -31,15 +31,6 @@ class DemoConfigurationPropertiesApplicationTests {
         Console.log("--------------------------{}", propertiesConst.getConfigB());
     }
 
-
-    @Test
-    void testStringUtilsLength() {
-        String str = "你是你是你是你是啊啊1";
-        if (StringUtils.length(str) > 10) {
-            System.out.println("--------------------------------------------------");
-        }
-    }
-
     @Test
     void testValueConfig() {
         System.out.println("name = " + valueConfig.getName());
