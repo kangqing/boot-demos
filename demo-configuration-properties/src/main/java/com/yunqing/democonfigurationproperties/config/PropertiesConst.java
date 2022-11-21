@@ -20,4 +20,5 @@ public class PropertiesConst {
     //下面的属性配置在mysql中
     private String configA;
     private String configB;
+    private String cronStr;
 }

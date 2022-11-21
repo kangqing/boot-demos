@@ -3,7 +3,6 @@ package com.yunqing.democonfigurationproperties;
 import cn.hutool.core.lang.Console;
 import com.yunqing.democonfigurationproperties.config.PropertiesConst;
 import com.yunqing.democonfigurationproperties.config.ValueConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

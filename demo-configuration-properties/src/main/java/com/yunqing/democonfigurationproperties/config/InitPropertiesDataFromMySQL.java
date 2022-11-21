@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -45,4 +46,5 @@ public class InitPropertiesDataFromMySQL {
             throw new RuntimeException(e);
         }
     }
+
 }

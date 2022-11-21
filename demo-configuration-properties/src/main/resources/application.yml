@@ -3,6 +3,18 @@ spring:
     url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: root
     password: 5678
+  # 配置 springTask 定时任务相关的配置
+  task:
+    scheduling:
+      pool:
+        size: 10
+      thread-name-prefix: yunqing-scheduled
+    execution:
+      shutdown:
+        # 线程关闭时是否等所有任务结束
+        await-termination: false
+        # 线程最大的等待时间，防止线程陷入循环关不掉
+        await-termination-period: 10s
 
 # 自定义配置属性
 com:
@@ -18,3 +30,7 @@ com:
 #yunqing:
 #  name: 111
 #  email: 222
+
+
+
+
