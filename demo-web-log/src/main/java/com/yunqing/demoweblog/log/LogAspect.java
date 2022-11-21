@@ -101,13 +101,9 @@ public class LogAspect {
      * @param clazz clazz
      * @return  true：是;     false：不是
      */
-    private boolean isPrimite(Class<?> clazz){
-        if (clazz.isPrimitive() || clazz == String.class){
-            return true;
-        }else {
-            return false;
-        }
-    }
+    /*private boolean isPrimite(Class<?> clazz){
+        return clazz.isPrimitive() || clazz == String.class;
+    }*/
 
 
     /**
@@ -120,17 +116,16 @@ public class LogAspect {
             logger.info("该方法没有参数");
             return;
         }
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i=0;i<paramsArgsName.length;i++){
             //参数名
             String name = paramsArgsName[i];
             //参数值
             Object value = paramsArgsValue[i];
-            buffer.append(name +" = ");
-            if(isPrimite(value.getClass())){
-                buffer.append(value + "  ,");
-            }else {
-                buffer.append(value.toString() + "  ,");
+            buffer.append(name).append(" = ");
+            buffer.append(value);
+            if (i != paramsArgsName.length - 1) {
+                buffer.append(", ");
             }
         }
         logger.info(buffer.toString());
