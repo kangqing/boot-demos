@@ -18,11 +18,15 @@ public class CompletableFutureTest {
             // 执行异步业务逻辑
             try {
                 TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new IllegalArgumentException("111");
+            } catch (InterruptedException ignored) {
             }
             System.out.println(Thread.currentThread() + "执行异步逻辑>>>任务1");
             return 1;
+        }).exceptionally(ex -> {
+            ex.printStackTrace();
+            System.out.println("exexexxxxxxxxx");
+            return 0;
         });
 
         final CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {

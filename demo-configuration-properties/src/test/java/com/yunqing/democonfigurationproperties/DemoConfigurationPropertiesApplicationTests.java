@@ -36,4 +36,6 @@ class DemoConfigurationPropertiesApplicationTests {
         System.out.println("email = " + valueConfig.getEmail());
     }
 
+
+
 }
