@@ -47,6 +47,7 @@
         <module>demo-spring-tx</module>
         <module>demo-distributed-lock</module>
         <module>demo-context</module>
+        <module>demo-spring</module>
     </modules>
 
     <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
