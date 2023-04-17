@@ -18,9 +18,9 @@ public class CommandManager implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     public Object process(Map commandState) {
-        // grab a new instance of the appropriate Command
+        // grab a new creative.instance of the appropriate Command
         Command command = createCommand();
-        // set the state on the (hopefully brand new) Command instance
+        // set the state on the (hopefully brand new) Command creative.instance
         command.setState(commandState);
         return command.execute();
     }

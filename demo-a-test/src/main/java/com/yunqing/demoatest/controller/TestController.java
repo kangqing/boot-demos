@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021/9/26 18:53
  */
 @RestController
-@Scope(scopeName = "prototype")
+@Scope(scopeName = "creative.prototype")
 public class TestController {
 
     private int num = 0;

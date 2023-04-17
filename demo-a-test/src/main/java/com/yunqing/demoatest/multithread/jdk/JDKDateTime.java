@@ -30,7 +30,7 @@ public class JDKDateTime {
         //get();
         //get1();
         //asyncPost();
-        //proxy();
+        //structural.proxy();
 
 
     }
