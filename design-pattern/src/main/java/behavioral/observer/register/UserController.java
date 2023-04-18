@@ -14,6 +14,10 @@ public class UserController {
      private Executor executor;
 
      private List<RegisterObserver> registerObservers = new ArrayList<>();
+
+     public UserController(Executor executor) {
+         this.executor = executor;
+     }
      // 一次设置好观察者，之后不可能动态修改
      public void setRegisterObservers(List<RegisterObserver> observers) {
          registerObservers.addAll(observers);
