@@ -14,8 +14,7 @@ import model.ResponseData;
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx)
-            throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // 1. 封装请求
         RequestData msg = new RequestData();
         msg.setIntValue(123);
@@ -24,8 +23,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 7. 处理响应数据
         System.out.println((ResponseData)msg);
         ctx.close();

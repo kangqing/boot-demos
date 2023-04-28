@@ -12,8 +12,7 @@ import java.nio.charset.StandardCharsets;
  * @author kangqing
  * @since 2023/4/2 17:20
  */
-public class ResponseDataEncoder
-        extends MessageToByteEncoder<ResponseData> {
+public class ResponseDataEncoder extends MessageToByteEncoder<ResponseData> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx,
