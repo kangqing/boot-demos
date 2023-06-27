@@ -31,6 +31,7 @@ public class NetworkClient {
         } else if (choice == 2) {
             network = new Tiktok();
         }
+        assert network != null;
         network.send(userName, message);
     }
 }
