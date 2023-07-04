@@ -51,6 +51,7 @@
         <module>demo-netty</module>
         <module>demo-juc</module>
         <module>design-pattern</module>
+        <module>demo-rabbitmq</module>
     </modules>
 
     <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
