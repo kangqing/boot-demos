@@ -1,0 +1,16 @@
+
+spring:
+  # RabbitMQ 配置项，对应 RabbitProperties 配置类
+  rabbitmq:
+    host: 127.0.0.1 # RabbitMQ 服务的地址
+    port: 5672 # RabbitMQ 服务的端口
+    username: root # RabbitMQ 服务的账号
+    password: 5678 # RabbitMQ 服务的密码
+    #publisher-confirm-type: simple  # 发布者同步确认
+    publisher-confirm-type: correlated # 发布者异步确认
+    listener:
+      simple:
+        acknowledge-mode: manual # 纯手动确认，
+        #默认auto,对应 Consumer 的手动确认，在消费消息完成（包括正常返回、和抛出异常）后，由 Spring-AMQP 框架来“自动”进行确认。
+server:
+  port: 8083
