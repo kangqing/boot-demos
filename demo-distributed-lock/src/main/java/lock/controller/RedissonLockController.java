@@ -1,4 +1,4 @@
-package lock;
+package lock.controller;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.system.SystemUtil;
