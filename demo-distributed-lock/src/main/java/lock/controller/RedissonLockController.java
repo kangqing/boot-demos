@@ -5,6 +5,7 @@ import cn.hutool.system.SystemUtil;
 import lombok.RequiredArgsConstructor;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,9 @@ public class RedissonLockController {
 
     private final Redisson redisson;
 
+    @Value("${server.port}")
+    private String port;
+
     /**
      * redisson 底层使用 Lua 脚本保证原子性
      * 改造使用 redisson 分布式锁解决了超卖现象
@@ -42,9 +46,9 @@ public class RedissonLockController {
             if (stock > 0) {
                 stock -= 1;
                 stringRedisTemplate.opsForValue().set("stock", String.valueOf(stock));
-                Console.log("购票成功，剩余票量 = {}", stock);
+                Console.log("端口 = {}, 购票成功，剩余票量 = {}", port, stock);
             } else {
-                Console.log("库存不足");
+                Console.log("库存不足,端口 = {}", port);
             }
         } finally {
             lock.unlock();

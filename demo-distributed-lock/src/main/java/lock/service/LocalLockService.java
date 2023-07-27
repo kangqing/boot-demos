@@ -1,6 +1,8 @@
 package lock.service;
 
 import cn.hutool.core.lang.Console;
+import com.baomidou.lock.annotation.Lock4j;
+import lock.conf4j.RedissonLockNewExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,8 @@ public class LocalLockService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    public void localLock() {
+    @Lock4j(keys = {"#id"}, acquireTimeout = 20000, expire = 10000, executor = RedissonLockNewExecutor.class)
+    public void localLock(String id) {
         int stock = 0;
         try {
             final String stock1 = stringRedisTemplate.opsForValue().get("stock");

@@ -1,12 +1,16 @@
 package lock.controller;
 
 import cn.hutool.core.lang.Console;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * 本地锁，依然会出现超卖现象
@@ -18,6 +22,9 @@ import java.util.Objects;
 public class LocalLockController {
 
     private final StringRedisTemplate stringRedisTemplate;
+
+    @Value("${server.port}")
+    private String port;
 
     /**
      * 本地同步代码块，本地锁，分布式环境下会出现问题
@@ -34,9 +41,9 @@ public class LocalLockController {
         if (stock > 0) {
             stock -= 1;
             stringRedisTemplate.opsForValue().set("stock", String.valueOf(stock));
-            Console.log("购票成功，剩余票量 = {}", stock);
+            Console.log("访问端口 = {}, 购票成功，剩余票量 = {}", port, stock);
         } else {
-            Console.log("库存不足");
+            Console.log("库存不足, 访问端口 = {}", port);
         }
         return "success";
     }
