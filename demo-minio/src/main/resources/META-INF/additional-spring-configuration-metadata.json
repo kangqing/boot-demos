@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "name": "oss.endpoint",
+      "type": "java.lang.String",
+      "description": "OSS对象存储的 URL."
+    },
+    {
+      "name": "oss.enabled",
+      "type": "java.lang.String",
+      "description": "OSS对象存储开关."
+    },
+    {
+      "name": "oss.type",
+      "type": "java.lang.String",
+      "defaultValue": "MINIO",
+      "description": "OSS对象存储类型,仅支持 MINIO 或 ALIYUN."
+    },
+    {
+      "name": "oss.bucket",
+      "type": "java.lang.String",
+      "description": "桶名称."
+    },
+    {
+      "name": "oss.accessKey",
+      "type": "java.lang.String",
+      "description": "秘钥."
+    },
+    {
+      "name": "oss.secretKey",
+      "type": "java.lang.String",
+      "description": "密码."
+    },
+    {
+      "name": "oss.region",
+      "type": "java.lang.String",
+      "description": "minio region config."
+    }
+  ] }

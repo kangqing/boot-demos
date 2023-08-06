@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  # 配置文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+oss:
+  enabled: true
+  type: MINIO
+  endpoint: http://127.0.0.1:9000 # minio 服务地址
+  bucket: demo # 桶名称
+  accessKey: DImVv5gxX4jCMtRjd9cA
+  secretKey: w1FbFj1E3xOtMxF3vpV9XXnMVzJvznepoaYkxF7S
+  region: tianjin
