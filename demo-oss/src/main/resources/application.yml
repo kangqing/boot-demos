@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+#oss:
+#  enabled: true
+#  type: MINIO
+#  endpoint: http://192.168.1.5:9000  # 必须加 http 前缀，不能直接写ip
+#  bucket: demo
+#  access-key: DImVv5gxX4jCMtRjd9cA
+#  secret-key: w1FbFj1E3xOtMxF3vpV9XXnMVzJvznepoaYkxF7S
+#  region: tianjin
+
+oss:
+  enabled: true
+  type: ALIYUN
+  endpoint: oss-cn-beijing.aliyuncs.com
+  bucket: yunqing-img
+  accessKey: LTAI5t8dMRM41FcmQ16PziCm
+  secretKey: 3rg5vkNkNpuxqMityKTr37J9pXwcGJ
+  region: # 对应阿里云区域

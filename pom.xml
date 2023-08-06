@@ -53,6 +53,8 @@
         <module>design-pattern</module>
         <module>demo-rabbitmq</module>
         <module>demo-redisson</module>
+        <module>demo-minio</module>
+        <module>demo-oss</module>
     </modules>
 
     <!--单个项目配置阿里云镜像仓库，优先于settings.xml中的配置，阿里云镜像替代maven默认的仓库：central-->
@@ -86,7 +88,15 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>-->
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.kangqing</groupId>
+                <artifactId>oss-spring-boot-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -168,22 +178,22 @@
         </dependency>
     </dependencies>
     <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
-    <distributionManagement>
-        <!--正式版本-->
+    <!--<distributionManagement>
+        &lt;!&ndash;正式版本&ndash;&gt;
         <repository>
-            <!-- nexus服务器中用户名：在settings.xml中<server>的id-->
+            &lt;!&ndash; nexus服务器中用户名：在settings.xml中<server>的id&ndash;&gt;
             <id>maven-releases</id>
-            <!-- 这个名称自己定义 -->
+            &lt;!&ndash; 这个名称自己定义 &ndash;&gt;
             <name>Nexus Release</name>
             <url>http://127.0.0.1:8081/repository/maven-releases</url>
         </repository>
-        <!--快照-->
+        &lt;!&ndash;快照&ndash;&gt;
         <snapshotRepository>
             <id>maven-snapshots</id>
             <name>Nexus Snapshot</name>
             <url>http://127.0.0.1:8081/repository/maven-snapshots</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement>-->
 
     <build>
         <finalName>${project.artifactId}</finalName>
