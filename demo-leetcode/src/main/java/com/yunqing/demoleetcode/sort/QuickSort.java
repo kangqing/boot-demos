@@ -57,10 +57,10 @@ public class QuickSort {
         // 定义双指针,t1在一个无效位置， t2在第一位
         int t1 = beginIndex - 1;
         // 如果t2找到一个小于 key 的，就把t1 ++ 然后交换位置
-        for (int i = beginIndex; i < endIndex; i++) {
-            if (arr[i] < arr[endIndex]) {
+        for (int t2 = beginIndex; t2 < endIndex; t2++) {
+            if (arr[t2] < arr[endIndex]) {
                 t1++;
-                swap(arr, i, t1);
+                swap(arr, t2, t1);
             }
         }
         // 结束之后再次 t1 ++ 和 参照位也就是最后一位交换

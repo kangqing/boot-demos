@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "xxl.job.admin.username",
+      "type": "java.lang.String",
+      "description": "xxl_job 用户名."
+    },
+    {
+      "name": "xxl.job.admin.password",
+      "type": "java.lang.String",
+      "description": "xxl_job 密码."
+    },
+    {
+      "name": "xxl.job.executor.title",
+      "type": "java.lang.String",
+      "description": "xxl_job 任务执行器."
+    }
+  ] }
