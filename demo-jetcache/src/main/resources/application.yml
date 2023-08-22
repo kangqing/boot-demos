@@ -1,0 +1,41 @@
+# DataSource Config
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo
+    username: root
+    password: 5678
+mybatis-flex:
+  mapper-locations: com.kangqing.mapper/*.xml
+  type-aliases-package: com.kangqing.mapper
+
+
+
+# jetCache配置
+jetcache:
+  # 是否统计
+  statIntervalMinutes: 1
+  # cache名字是否加上area 若设置为true 则缓存的key为 area_cachenam${key} 例如 area为default cachename为 user:info key为1 则缓存的key的值为：default_user:info1
+  areaInCacheName: false
+  # 一级缓存
+  local:
+    default:
+      # 可以使用 caffeine 或者 linkedhashmap
+      type: caffeine
+      # 序列化方式
+      keyConvertor: fastjson
+      limit: 100 # 本地缓存限制个数
+  remote:
+    default: # 需要和注解上面的area保持一致 表示这个area的远程缓存配置
+      type: redis.lettuce #使用lettuce # 远程缓存了类型
+      keyConvertor: fastjson # key序列化方式
+      valueEncoder: bean:cacheJackson2 #bean:cacheJackson2
+      valueDecoder: bean:cacheJackson2 #bean:cacheJackson2 # value 反序列化 目前支持 java和kryo 自定义的 myJson
+      poolConfig:
+        minIdle: 5 #最小空闲连接数
+        maxIdle: 20 # 最大空闲连接数
+        maxTotal: 50 # 最大连接数
+      uri: redis://@localhost:6379/0  #redis://密码@IP:端口/库
+#      host: localhost   # 指定自己的redis地址
+#      port: 6379   # 指定自己的port
+#      password: #若redis设置了密码 需配置自己的密码
+#      database: 0   # redis库
