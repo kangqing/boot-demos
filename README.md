@@ -15,6 +15,12 @@
 ## demo-hutool
 hutool是一个小而全的java工具集，建立此demo用来测试hutool中的方法的使用
 
+## demo-jetcache
+logback-spring.xml 打印日志
+整合阿里 jetcache 实现 caffeine:一级缓存， redis:二级缓存;
+整合 Knife4j 替代 swagger 实现接口文档，替代注解如下：
+![](https://yunqing-img.oss-cn-beijing.aliyuncs.com/hexo/article/202303/6B3KxC.png)
+
 ## demo-json-result
 一个统一返回结果和统一异常处理的小demo
 
