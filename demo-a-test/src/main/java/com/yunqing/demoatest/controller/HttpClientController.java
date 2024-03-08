@@ -1,5 +1,6 @@
 package com.yunqing.demoatest.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -122,8 +123,3 @@ public class HttpClientController {
     }
 }
 
-@Data
-@NoArgsConstructor
-class Cat {
-    private String name;
-}

@@ -1,0 +1,12 @@
+easy-es:
+  address : 127.0.0.1:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
+  username: #如果无账号密码则可不配置此行
+  password: #如果无账号密码则可不配置此行
+  global-config:
+    db-config:
+      refresh-policy: immediate
+
+#refresh-policy支持3种策略
+#none: 默认策略,不刷新数据
+#immediate : 立即刷新,会损耗较多性能,对数据实时性要求高的场景下适用
+#wait_until: 请求提交数据后，等待数据完成刷新(1s)，再结束请求 性能损耗适中
