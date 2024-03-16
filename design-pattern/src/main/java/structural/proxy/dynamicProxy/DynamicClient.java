@@ -9,8 +9,8 @@ import structural.proxy.basicInterface.IUserController;
 public class DynamicClient {
     public static void main(String[] args) {
         final UserController userController = new UserController();
-        MetricsDynamicProxy proxy = new MetricsDynamicProxy();
-        IUserController user = (IUserController) proxy.createProxy(userController);
+        DynamicProxyFactory<IUserController> proxy = new DynamicProxyFactory<>();
+        IUserController user = proxy.createProxy(userController);
         user.login();
         user.register();
     }

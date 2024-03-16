@@ -12,39 +12,43 @@ import java.lang.reflect.Proxy;
  * @author kangqing
  * @since 2023/4/13 07:11
  */
-public class MetricsDynamicProxy {
+public class DynamicProxyFactory<T> {
 
-     private MetricsService service;
+     /**
+      * 组合，记录耗时的打印日志类
+      */
+     private final MetricsService service;
 
-     public MetricsDynamicProxy() {
+     public DynamicProxyFactory() {
          this.service = new MetricsService();
      }
 
      // 创建代理，传入被代理的对象
-     public Object createProxy(Object proxiedObject) {
-          final Class<?>[] interfaces = proxiedObject.getClass().getInterfaces();
-          DynamicProxyHandler handler = new DynamicProxyHandler(proxiedObject);
-          return Proxy.newProxyInstance(proxiedObject.getClass().getClassLoader(), interfaces, handler);
+     @SuppressWarnings(value = "unchecked")
+     public T createProxy(T obj) {
+          final Class<?>[] interfaces = obj.getClass().getInterfaces();
+          DynamicProxyHandler<T> handler = new DynamicProxyHandler<>(obj);
+          return (T) Proxy.newProxyInstance(obj.getClass().getClassLoader(), interfaces, handler);
      }
 
-     private class DynamicProxyHandler implements InvocationHandler {
+     private class DynamicProxyHandler<U> implements InvocationHandler {
 
-          private Object proxiedObject;
+          private final U obj;
 
-          public DynamicProxyHandler(Object proxiedObject) {
-               this.proxiedObject = proxiedObject;
+          public DynamicProxyHandler(U obj) {
+               this.obj = obj;
           }
 
           @Override
           public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                long start = System.currentTimeMillis();
 
-               Object result = method.invoke(proxiedObject, args);
+               Object result = method.invoke(obj, args);
 
                long end = System.currentTimeMillis();
                long responseTime = end - start;
 
-               String apiName = proxiedObject.getClass().getName() + ":" + method.getName();
+               String apiName = obj.getClass().getName() + ":" + method.getName();
 
                RequestInfo info = new RequestInfo(apiName, responseTime, start);
                service.recordRequest(info);
