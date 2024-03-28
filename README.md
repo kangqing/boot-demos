@@ -31,7 +31,8 @@ logback-spring.xml 打印日志
 本人刷力扣题的一些题目，具体题目见力扣官网，这里只记载了题号和解题方法
 
 ## demo-minio
-开始想要实现 Springboot整合MINIO 使用的demo案例，实现之后又想要集成阿里云OSS对象存储，然后搞了个 oss-spring-boot-starter,整合MINIO和阿里云OSS；引入此starter可以在yml中配置使用 MINIO 或者 阿里云对象存储；
+开始想要实现 Springboot整合MINIO 使用的demo案例，实现之后又想要集成阿里云OSS对象存储，然后搞了个 oss-spring-boot-starter,
+整合MINIO和阿里云OSS；引入此starter可以在yml中配置使用 MINIO 或者 阿里云对象存储；
 
 内部仅调通具体整合代码，实际上传、下载等API调用只调通了一个，使用时要注意；
 
@@ -70,7 +71,8 @@ springboot整合swagger的starter, 新的丝袜哥的api接口地址 http://loca
 一个记录日志输出的demo
 
 ## demo-xxl-register-starter
-我们在使用 xxl_job 的过程中，假如需要多个定时任务，一个一个的手动注册到调度端十分麻烦，开发 register-xxl-job-starter 通过一个注解，直接在执行端的定时任务的业务逻辑方法上添加一个注解，自动注册定时任务到调度端；
+我们在使用 xxl_job 的过程中，假如需要多个定时任务，一个一个的手动注册到调度端十分麻烦，开发 register-xxl-job-starter 通过一个注解，
+直接在执行端的定时任务的业务逻辑方法上添加一个注解，自动注册定时任务到调度端；
 
 ## design-pattern
 重新学习设计模式；包括模板方法模式、策略模式、工厂模式、观察者模式、建造者模式、享元模式、适配器模式等；
