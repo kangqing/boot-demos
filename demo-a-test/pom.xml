@@ -34,6 +34,11 @@
             <artifactId>spring-data-elasticsearch</artifactId>
             <version>2.1.12.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>
