@@ -177,7 +177,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.66</version>
+            <version>1.2.83</version>
         </dependency>
     </dependencies>
     <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
