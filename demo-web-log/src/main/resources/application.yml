@@ -1,0 +1,16 @@
+## 简单配置按天gz日志，无需配置logback-spring.xml
+logging:
+  level:
+    root: info
+    com:
+      alarm:
+        alarmserver: info
+  file:
+    name: alarm.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:%5p} ${PID:- } --- [%t] %-40.40logger{39}[%line]: %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 512000000
+      clean-history-on-start: false
