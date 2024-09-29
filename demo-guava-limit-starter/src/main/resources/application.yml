@@ -1,0 +1,11 @@
+rate-limiter:
+  ip-limits:
+    defaultLimit: 5           # 没有配置的 IP 默认限流值（每秒允许 5 个请求）
+    specific-ips:
+      192.168.1.1: 10    # 对特定 IP 地址每秒允许 10 个请求
+      192.168.1.2: 15    # 对特定 IP 地址每秒允许 15 个请求
+  appkey-limits:
+    defaultLimit: 10          # 没有配置的 AppKey 默认限流值
+    specific-appkeys:
+      appkey123: 20      # 对特定 AppKey 每秒允许 20 个请求
+      appkey456: 30      # 对特定 AppKey 每秒允许 30 个请求
