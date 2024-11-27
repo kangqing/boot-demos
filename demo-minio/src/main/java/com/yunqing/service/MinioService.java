@@ -86,4 +86,29 @@ public class MinioService {
                 .object(objectName)
                 .build());
     }
+
+    /**
+     * 检查文件是否存在
+     *
+     * @param fileName
+     * @return
+     */
+    public boolean checkFileExist(String fileName) {
+        try {
+            return minioClient.statObject(
+                    StatObjectArgs.builder()
+                            .bucket(ossConfig.getBucket())
+                            .object(fileName)
+                            .build()
+            ) != null;
+        } catch (MinioException e) {
+            // 如果是不存在的文件，MinioException通常会抛出NoSuchKey异常
+            if (e.getMessage().contains("Not Found") || e.getMessage().contains("NoSuchKey")) {
+                return false;
+            }
+            throw new RuntimeException("检查文件是否存在时发生错误", e);
+        } catch (IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

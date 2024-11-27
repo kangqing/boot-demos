@@ -1,4 +1,4 @@
-package com.yunqing.demoredis;
+package java.com.yunqing.demoredis;
 
 import com.yunqing.demoredis.config.RedisCacheTemplate;
 import com.yunqing.demoredis.utils.SequenceUtil;
@@ -27,6 +27,10 @@ class DemoRedisApplicationTests {
 		//移位运算符<<，左移几位相当于乘以2的几次方, 1 << 2 = 4
 		String code = SequenceUtil.getSequence(incr, 1 << 2);
 		log.info(currentDate + code);
+		Long expire = redisCacheTemplate.getExpire("1sxadssdas");
+		if (expire != null) {
+			log.info(expire.toString());
+		}
 	}
 
 }

@@ -1,12 +1,8 @@
 package com.yunqing.service;
 
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.Bucket;
 import com.yunqing.config.OssConfig;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -65,6 +61,16 @@ public class AliyunService {
     public InputStream downloadFile(String objectName) {
         return ossClient.getObject(ossConfig.getBucket(), objectName)
                 .getObjectContent();
+    }
+
+    /**
+     * 检查文件是否存在
+     *
+     * @param fileName
+     * @return
+     */
+    public boolean checkFileExist(String fileName) {
+        return ossClient.doesObjectExist(ossConfig.getBucket(), fileName);
     }
 
 }

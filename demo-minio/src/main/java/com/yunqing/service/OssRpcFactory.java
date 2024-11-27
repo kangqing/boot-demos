@@ -16,6 +16,7 @@ public class OssRpcFactory {
     static {
         map.put(OssType.MINIO, new MinioRpcOssService());
         map.put(OssType.ALIYUN, new AliyunRpcOssService());
+        map.put(OssType.AMAZON_S3, new AmazonS3RpcOssService());
     }
 
     public static OssOperateRpcApi createOssOperateRpcApi(OssConfig ossConfig) {
@@ -32,7 +33,8 @@ public class OssRpcFactory {
 
     public static enum OssType {
         MINIO,
-        ALIYUN;
+        ALIYUN,
+        AMAZON_S3;
 
         private OssType() {
         }

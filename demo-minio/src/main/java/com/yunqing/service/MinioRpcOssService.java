@@ -7,7 +7,6 @@ import com.yunqing.dto.RpcRequest;
 import com.yunqing.dto.RpcResponse;
 import io.minio.errors.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.*;
@@ -58,18 +57,19 @@ public class MinioRpcOssService implements OssOperateRpcApi {
 
     @Override
     public RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest) {
-        try(
-                OutputStream outputStream =
-                        new FileOutputStream(rpcRequest.getEntity().getFilePath());
-        ) {
-            minioService.downloadFile(rpcRequest.getEntity().getFileName());
-        } catch (IOException e) {
-            log.error("download file is failure!",e);
-            return RpcResponse.failure("下载oss bucket文件失败！");
-        } catch (ServerException | InsufficientDataException | ErrorResponseException | NoSuchAlgorithmException |
-                InvalidKeyException | InvalidResponseException | XmlParserException | InternalException e) {
-            throw new RuntimeException("下载oss bucket文件失败！");
+        try (InputStream inputStream = minioService.downloadFile(rpcRequest.getEntity().getFileName());
+             OutputStream outputStream = new FileOutputStream(rpcRequest.getEntity().getFilePath())) {
+            IoUtil.copy(inputStream, outputStream);
+            return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+        } catch (Exception e) {
+            log.error("下载文件失败！", e);
+            return RpcResponse.failure("下载文件失败！");
         }
-        return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+    }
+
+    @Override
+    public RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest) {
+        boolean b = minioService.checkFileExist(rpcRequest.getEntity().getFileName());
+        return RpcResponse.success(b);
     }
 }

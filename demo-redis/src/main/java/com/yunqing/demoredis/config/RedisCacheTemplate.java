@@ -481,4 +481,16 @@ public class RedisCacheTemplate implements CacheTemplate {
         }
     }
 
+    @Override
+    public Long getExpire(String key) {
+        try {
+            return redisTemplate.getExpire(key);
+        } catch (Exception e) {
+            log.error("redis查询" + key + "过期时间失败", e);
+            return null;
+        }
+    }
+
+
+
 }

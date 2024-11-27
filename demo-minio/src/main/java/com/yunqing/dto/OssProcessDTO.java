@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 @Builder
 @Data
-@SuppressWarnings("serial")
 public class OssProcessDTO implements Serializable {
 
     private String filePath;

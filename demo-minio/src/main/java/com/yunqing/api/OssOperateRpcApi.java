@@ -4,7 +4,6 @@ import com.yunqing.dto.OssProcessDTO;
 import com.yunqing.dto.RpcRequest;
 import com.yunqing.dto.RpcResponse;
 import io.minio.errors.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -41,5 +40,13 @@ public interface OssOperateRpcApi {
      * @return
      */
     RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest);
+
+    /**
+     * 是否存在
+     *
+     * @param rpcRequest
+     * @return
+     */
+    RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest);
 
 }

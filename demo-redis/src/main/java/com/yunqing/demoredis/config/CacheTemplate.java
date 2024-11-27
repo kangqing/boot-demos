@@ -51,6 +51,8 @@ public interface CacheTemplate {
 
     boolean expire(String key, long time);
 
+    Long getExpire(String key);
+
     Set<String> getKeys(String key);
 
     boolean setObject(String key, Object data);

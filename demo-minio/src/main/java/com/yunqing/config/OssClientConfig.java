@@ -6,8 +6,13 @@ import com.aliyun.oss.OSSClientBuilder;
 import io.minio.MinioClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
 
 import javax.annotation.Resource;
+import java.net.URI;
 
 /**
  * @author kangqing
@@ -19,6 +24,10 @@ public class OssClientConfig {
     @Resource
     private OssConfig ossConfig;
 
+    /**
+     * MINIO OSS
+     * @return
+     */
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
@@ -28,9 +37,29 @@ public class OssClientConfig {
                 .build();
     }
 
+    /**
+     * 阿里云 OSS
+     * @return
+     */
     @Bean
     public OSS ossClient() {
         return new OSSClientBuilder()
                 .build(ossConfig.getEndpoint(), ossConfig.getAccessKey(), ossConfig.getSecretKey());
     }
+
+    /**
+     * 亚马逊 OSS
+     * @return
+     */
+    @Bean
+    public S3Client s3Client() {
+        return S3Client.builder()
+                .endpointOverride(URI.create(ossConfig.getEndpoint()))
+                .region(Region.of(ossConfig.getRegion()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(
+                        ossConfig.getAccessKey(), ossConfig.getSecretKey())))
+                .build();
+    }
+
+
 }

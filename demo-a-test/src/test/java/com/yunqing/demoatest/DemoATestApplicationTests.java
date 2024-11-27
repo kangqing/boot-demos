@@ -7,7 +7,9 @@ import org.eclipse.collections.impl.collector.BigDecimalSummaryStatistics;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -159,5 +161,13 @@ class DemoATestApplicationTests {
         System.out.println(Math.floorDiv(a, b));
     }
 
+    @Resource
+    private RedisTemplate redisTemplate;
+
+    @Test
+    void redisTest() {
+        Long expire = redisTemplate.getExpire("112");
+        System.out.println(expire);
+    }
 
 }

@@ -45,15 +45,19 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
 
     @Override
     public RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest) {
-        try(
-                OutputStream outputStream =
-                        new FileOutputStream(rpcRequest.getEntity().getFilePath());
-        ) {
-            aliyunService.downloadFile(rpcRequest.getEntity().getFileName());
-        } catch (IOException e) {
-            log.error("download file is failure!",e);
-            return RpcResponse.failure("下载oss bucket文件失败！");
+        try (InputStream inputStream = aliyunService.downloadFile(rpcRequest.getEntity().getFileName());
+             OutputStream outputStream = new FileOutputStream(rpcRequest.getEntity().getFilePath())) {
+            IoUtil.copy(inputStream, outputStream);
+            return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+        } catch (Exception e) {
+            log.error("下载文件失败！", e);
+            return RpcResponse.failure("下载文件失败！");
         }
-        return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+    }
+
+    @Override
+    public RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest) {
+        boolean b = aliyunService.checkFileExist(rpcRequest.getEntity().getFileName());
+        return RpcResponse.success(b);
     }
 }
