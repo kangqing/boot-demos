@@ -22,16 +22,6 @@ public class TestController {
     @Resource
     private OssOperateRpcApi operateRpcApi;
 
-    @GetMapping("/create")
-    public RpcResponse<?> createBucket(String name) {
-        RpcRequest<String> rpcRequest = new RpcRequest<>(name);
-        try {
-            operateRpcApi.create(rpcRequest);
-            return RpcResponse.success();
-        } catch (Exception e) {
-            throw new RuntimeException("创建 Bucket 失败！");
-        }
-    }
 
     @PostMapping("/upload")
     public RpcResponse<?> uploadFile(MultipartFile file) {

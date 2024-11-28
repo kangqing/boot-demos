@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.1</version>
     <groupId>com.kangqing</groupId>
-    <artifactId>demo-xxl-job-register-starter</artifactId>
+    <artifactId>xxl-job-register-starter</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -53,9 +53,9 @@
         <module>design-pattern</module>
         <module>demo-rabbitmq</module>
         <module>demo-redisson</module>
-        <module>demo-minio</module>
+        <module>oss-spring-boot-starter</module>
         <module>demo-oss</module>
-        <module>demo-xxl-register-starter</module>
+        <module>xxl-job-register-starter</module>
         <module>demo-jetcache</module>
         <module>demo-integration</module>
         <module>limiter-spring-boot-starter</module>
