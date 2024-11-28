@@ -8,7 +8,10 @@ import com.yunqing.dto.RpcResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author kangqing
@@ -19,11 +22,11 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
     @Resource
     private AliyunService aliyunService;
 
-    @Override
-    public RpcResponse<?> create(RpcRequest<String> rpcRequest) {
-        return aliyunService.createBucket(rpcRequest.getEntity()) ? RpcResponse.success():
-                RpcResponse.failure("创建oss bucket失败！");
-    }
+//    @Override
+//    public RpcResponse<?> create(RpcRequest<String> rpcRequest) {
+//        return aliyunService.createBucket(rpcRequest.getEntity()) ? RpcResponse.success():
+//                RpcResponse.failure("创建oss bucket失败！");
+//    }
 
     @Override
     public RpcResponse<?> upload(RpcRequest<OssProcessDTO> rpcRequest) {
@@ -44,14 +47,19 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
     }
 
     @Override
-    public RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest) {
-        try (InputStream inputStream = aliyunService.downloadFile(rpcRequest.getEntity().getFileName());
-             OutputStream outputStream = new FileOutputStream(rpcRequest.getEntity().getFilePath())) {
-            IoUtil.copy(inputStream, outputStream);
-            return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+    public void download(RpcRequest<OssProcessDTO> rpcRequest, HttpServletResponse response) {
+        try (InputStream inputStream = aliyunService.downloadFile(rpcRequest.getEntity().getFileName())) {
+            // 设置响应头，指定文件下载的名称和类型
+            String fileName = URLEncoder.encode(rpcRequest.getEntity().getFileName(), StandardCharsets.UTF_8);
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+
+            // 将输入流写入到响应的输出流
+            IoUtil.copy(inputStream, response.getOutputStream());
+            response.flushBuffer(); // 确保数据完全写入
         } catch (Exception e) {
             log.error("下载文件失败！", e);
-            return RpcResponse.failure("下载文件失败！");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

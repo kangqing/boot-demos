@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import io.minio.MinioClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -29,6 +30,7 @@ public class OssClientConfig {
      * @return
      */
     @Bean
+    @ConditionalOnProperty(name = "oss.type", havingValue = "MINIO")
     public MinioClient minioClient() {
         return MinioClient.builder()
                 .endpoint(ossConfig.getEndpoint())
@@ -42,6 +44,7 @@ public class OssClientConfig {
      * @return
      */
     @Bean
+    @ConditionalOnProperty(name = "oss.type", havingValue = "ALIYUN")
     public OSS ossClient() {
         return new OSSClientBuilder()
                 .build(ossConfig.getEndpoint(), ossConfig.getAccessKey(), ossConfig.getSecretKey());
@@ -52,6 +55,7 @@ public class OssClientConfig {
      * @return
      */
     @Bean
+    @ConditionalOnProperty(name = "oss.type", havingValue = "AMAZON_S3")
     public S3Client s3Client() {
         return S3Client.builder()
                 .endpointOverride(URI.create(ossConfig.getEndpoint()))

@@ -31,12 +31,12 @@ public class OssRpcFactory {
         return rpcApi;
     }
 
-    public static enum OssType {
+    public enum OssType {
         MINIO,
         ALIYUN,
         AMAZON_S3;
 
-        private OssType() {
+        OssType() {
         }
     }
 }

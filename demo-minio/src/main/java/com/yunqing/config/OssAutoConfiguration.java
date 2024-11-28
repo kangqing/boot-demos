@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 // 只有web应用程序时此自动配置类才会生效
 @ConditionalOnWebApplication
 //判断oss.enabled 的值是否为“true”， matchIfMissing = true：没有该配置属性时也会正常加载
-@ConditionalOnProperty(prefix = "oss", name = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = "oss", name = "enabled", havingValue = "true")
 public class OssAutoConfiguration {
 
     @Resource

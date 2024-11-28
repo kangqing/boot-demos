@@ -7,7 +7,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 
 import javax.annotation.Resource;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 @Component
@@ -50,12 +50,30 @@ public class AmazonS3Service {
     }
 
     // 上传文件
-    public void uploadFile(InputStream stream, String objectName) {
-        s3Client.putObject(PutObjectRequest.builder()
-                        .bucket(ossConfig.getBucket())
-                        .key(objectName)
-                        .build(),
-                RequestBody.fromInputStream(stream, -1));
+    public void uploadFile(InputStream stream, String objectName) throws IOException {
+        // 创建临时文件
+        File tempFile = File.createTempFile("upload-", ".tmp");
+
+        try (OutputStream outputStream = new FileOutputStream(tempFile)) {
+            byte[] temp = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = stream.read(temp)) != -1) {
+                outputStream.write(temp, 0, bytesRead);
+            }
+        }
+
+        // 获取文件长度并上传
+        try (InputStream fileStream = new FileInputStream(tempFile)) {
+            s3Client.putObject(PutObjectRequest.builder()
+                            .bucket(ossConfig.getBucket())
+                            .key(objectName)
+                            .build(),
+                    RequestBody.fromInputStream(fileStream, tempFile.length()));
+        } finally {
+            // 删除临时文件
+            tempFile.delete();
+        }
+
     }
 
     // 删除文件
@@ -76,6 +94,7 @@ public class AmazonS3Service {
                         .build()
         );
     }
+
 
     /**
      * 检查文件是否存在

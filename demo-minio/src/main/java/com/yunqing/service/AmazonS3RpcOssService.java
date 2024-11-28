@@ -8,10 +8,10 @@ import com.yunqing.dto.RpcResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class AmazonS3RpcOssService implements OssOperateRpcApi {
@@ -19,26 +19,27 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
     @Resource
     private AmazonS3Service amazonS3Service;
 
-    @Override
-    public RpcResponse<?> create(RpcRequest<String> rpcRequest) {
-        try {
-            return amazonS3Service.createBucket(rpcRequest.getEntity()) ?
-                    RpcResponse.success() : RpcResponse.failure("创建 S3 bucket 失败！");
-        } catch (Exception e) {
-            log.error("创建 S3 bucket 失败！", e);
-            return RpcResponse.failure("创建 S3 bucket 失败！");
-        }
-    }
+//    @Override
+//    public RpcResponse<?> create(RpcRequest<String> rpcRequest) {
+//        try {
+//            return amazonS3Service.createBucket(rpcRequest.getEntity()) ?
+//                    RpcResponse.success() : RpcResponse.failure("创建 S3 bucket 失败！");
+//        } catch (Exception e) {
+//            log.error("创建 S3 bucket 失败！", e);
+//            return RpcResponse.failure("创建 S3 bucket 失败！");
+//        }
+//    }
 
     @Override
     public RpcResponse<?> upload(RpcRequest<OssProcessDTO> rpcRequest) {
-        try (InputStream inputStream = new FileInputStream(rpcRequest.getEntity().getFilePath())) {
+        try (InputStream inputStream =
+                     rpcRequest.getEntity().getFile().getInputStream()) {
             amazonS3Service.uploadFile(inputStream, rpcRequest.getEntity().getFileName());
-            return RpcResponse.success();
         } catch (Exception e) {
-            log.error("上传文件失败！", e);
-            return RpcResponse.failure("上传文件失败！");
+            log.error("upload the file is error", e);
+            return RpcResponse.failure("upload the file is error");
         }
+        return RpcResponse.success();
     }
 
     @Override
@@ -53,14 +54,19 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
     }
 
     @Override
-    public RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest) {
-        try (InputStream inputStream = amazonS3Service.downloadFile(rpcRequest.getEntity().getFileName());
-             OutputStream outputStream = new FileOutputStream(rpcRequest.getEntity().getFilePath())) {
-            IoUtil.copy(inputStream, outputStream);
-            return RpcResponse.success(rpcRequest.getEntity().getFilePath());
+    public void download(RpcRequest<OssProcessDTO> rpcRequest, HttpServletResponse response) {
+        try (InputStream inputStream = amazonS3Service.downloadFile(rpcRequest.getEntity().getFileName())) {
+            // 设置响应头，指定文件下载的名称和类型
+            String fileName = URLEncoder.encode(rpcRequest.getEntity().getFileName(), StandardCharsets.UTF_8);
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+
+            // 将输入流写入到响应的输出流
+            IoUtil.copy(inputStream, response.getOutputStream());
+            response.flushBuffer(); // 确保数据完全写入
         } catch (Exception e) {
             log.error("下载文件失败！", e);
-            return RpcResponse.failure("下载文件失败！");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

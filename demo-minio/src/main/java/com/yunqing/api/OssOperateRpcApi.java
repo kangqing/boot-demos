@@ -5,6 +5,7 @@ import com.yunqing.dto.RpcRequest;
 import com.yunqing.dto.RpcResponse;
 import io.minio.errors.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +21,7 @@ public interface OssOperateRpcApi {
      * @param rpcRequest:内部存储对应的BucketName
      * @return
      */
-    RpcResponse<?> create(RpcRequest<String> rpcRequest) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    //RpcResponse<?> create(RpcRequest<String> rpcRequest) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     /**
      * 存储文件
      * @param rpcRequest filePath和bucketName
@@ -39,7 +40,7 @@ public interface OssOperateRpcApi {
      * @param rpcRequest bucketName 和 fileName
      * @return
      */
-    RpcResponse<?> download(RpcRequest<OssProcessDTO> rpcRequest);
+    void download(RpcRequest<OssProcessDTO> rpcRequest, HttpServletResponse response);
 
     /**
      * 是否存在

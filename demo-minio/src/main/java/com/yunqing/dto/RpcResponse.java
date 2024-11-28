@@ -1,11 +1,18 @@
 package com.yunqing.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * @author kangqing
  * @since 2023/8/4 08:28
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
 
     private String msg;
@@ -16,11 +23,6 @@ public class RpcResponse<T> implements Serializable {
     }
 
     private RpcResponse(T data) {
-        this.data = data;
-    }
-
-    private RpcResponse(String msg, T data) {
-        this.msg = msg;
         this.data = data;
     }
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author kangqing
@@ -43,6 +44,24 @@ public class TestController {
 
         return operateRpcApi.upload(request);
 
+    }
+
+    @PostMapping("/checkFileExsit")
+    public RpcResponse<?> checkFileExsit(String fileName) {
+        OssProcessDTO dto = OssProcessDTO.builder()
+                .fileName(fileName)
+                .build();
+        final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
+        return operateRpcApi.checkFileExist(request);
+    }
+
+    @PostMapping("/download")
+    public void downloadFile(String fileName, HttpServletResponse response) {
+        OssProcessDTO dto = OssProcessDTO.builder()
+                .fileName(fileName)
+                .build();
+        final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
+        operateRpcApi.download(request, response);
     }
 
 
