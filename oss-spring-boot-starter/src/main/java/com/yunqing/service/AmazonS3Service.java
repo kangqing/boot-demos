@@ -1,6 +1,8 @@
 package com.yunqing.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.yunqing.config.OssConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -11,6 +13,7 @@ import java.io.*;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(name = "oss.type", havingValue = "AMAZON_S3")
 public class AmazonS3Service {
 
     @Resource
@@ -50,7 +53,7 @@ public class AmazonS3Service {
     }
 
     // 上传文件
-    public void uploadFile(InputStream stream, String objectName) throws IOException {
+    public void uploadFile(InputStream stream, String filePath, String objectName) throws IOException {
         // 创建临时文件
         File tempFile = File.createTempFile("upload-", ".tmp");
 
@@ -61,7 +64,9 @@ public class AmazonS3Service {
                 outputStream.write(temp, 0, bytesRead);
             }
         }
-
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         // 获取文件长度并上传
         try (InputStream fileStream = new FileInputStream(tempFile)) {
             s3Client.putObject(PutObjectRequest.builder()
@@ -86,7 +91,10 @@ public class AmazonS3Service {
     }
 
     // 下载文件
-    public InputStream downloadFile(String objectName) {
+    public InputStream downloadFile(String filePath, String objectName) {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         return s3Client.getObject(
                 GetObjectRequest.builder()
                         .bucket(ossConfig.getBucket())

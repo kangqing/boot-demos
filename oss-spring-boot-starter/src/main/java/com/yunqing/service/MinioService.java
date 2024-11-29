@@ -1,15 +1,18 @@
 package com.yunqing.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.yunqing.config.OssConfig;
 import io.minio.*;
 import io.minio.errors.*;
 import io.minio.messages.Bucket;
 import lombok.Setter;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
@@ -21,6 +24,7 @@ import java.util.List;
  * @since 2023/8/4 14:26
  */
 @Component
+@ConditionalOnProperty(name = "oss.type", havingValue = "MINIO")
 public class MinioService {
 
     private final OssConfig ossConfig;
@@ -59,7 +63,10 @@ public class MinioService {
     }
 
     // 上传文件
-    public void uploadFile(InputStream stream, String objectName) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public void uploadFile(InputStream stream, String filePath, String objectName) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         minioClient.putObject(PutObjectArgs.builder()
                 .bucket(ossConfig.getBucket())
                 .region(ossConfig.getRegion())
@@ -79,7 +86,10 @@ public class MinioService {
     }
 
     // 下载文件
-    public InputStream downloadFile(String objectName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public InputStream downloadFile(String filePath, String objectName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         return minioClient.getObject(GetObjectArgs.builder()
                 .bucket(ossConfig.getBucket())
                 .region(ossConfig.getRegion())

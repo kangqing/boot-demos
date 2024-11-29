@@ -34,7 +34,8 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
     public RpcResponse<?> upload(RpcRequest<OssProcessDTO> rpcRequest) {
         try (InputStream inputStream =
                      rpcRequest.getEntity().getFile().getInputStream()) {
-            amazonS3Service.uploadFile(inputStream, rpcRequest.getEntity().getFileName());
+            amazonS3Service.uploadFile(inputStream, rpcRequest.getEntity().getFilePath(),
+                    rpcRequest.getEntity().getFileName());
         } catch (Exception e) {
             log.error("upload the file is error", e);
             return RpcResponse.failure("upload the file is error");

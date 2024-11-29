@@ -1,11 +1,14 @@
 package com.yunqing.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.Bucket;
 import com.yunqing.config.OssConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
  * @since 2023/8/4 14:43
  */
 @Component
+@ConditionalOnProperty(name = "oss.type", havingValue = "ALIYUN")
 public class AliyunService {
 
     private final OssConfig ossConfig;
@@ -46,7 +50,10 @@ public class AliyunService {
     }
 
 
-    public void uploadFile(InputStream inputStream, String fileName) {
+    public void uploadFile(InputStream inputStream, String filePath, String fileName) {
+        if (!StrUtil.isBlank(filePath)) {
+            fileName = filePath + File.separator + fileName;
+        }
         //调用方法实现上传
         ossClient.putObject(ossConfig.getBucket(), fileName, inputStream);
     }
@@ -58,7 +65,10 @@ public class AliyunService {
     }
 
     // 下载文件
-    public InputStream downloadFile(String objectName) {
+    public InputStream downloadFile(String filePath, String objectName) {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         return ossClient.getObject(ossConfig.getBucket(), objectName)
                 .getObjectContent();
     }

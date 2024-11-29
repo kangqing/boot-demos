@@ -28,6 +28,7 @@ public class TestController {
 
         OssProcessDTO dto = OssProcessDTO.builder()
                 .file(file)
+                .filePath("2024/11/29")
                 .fileName(file.getOriginalFilename())
                 .build();
         final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
@@ -49,6 +50,7 @@ public class TestController {
     public void downloadFile(String fileName, HttpServletResponse response) {
         OssProcessDTO dto = OssProcessDTO.builder()
                 .fileName(fileName)
+                .filePath("2024/11/29")
                 .build();
         final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
         operateRpcApi.download(request, response);

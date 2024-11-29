@@ -32,7 +32,8 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
     public RpcResponse<?> upload(RpcRequest<OssProcessDTO> rpcRequest) {
         try (InputStream inputStream =
                      rpcRequest.getEntity().getFile().getInputStream();) {
-            aliyunService.uploadFile(inputStream, rpcRequest.getEntity().getFileName());
+            aliyunService.uploadFile(inputStream, rpcRequest.getEntity().getFilePath(),
+                    rpcRequest.getEntity().getFileName());
         } catch (Exception e) {
             log.error("upload the file is error", e);
             return RpcResponse.failure("upload the file is error");
@@ -48,7 +49,8 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
 
     @Override
     public void download(RpcRequest<OssProcessDTO> rpcRequest, HttpServletResponse response) {
-        try (InputStream inputStream = aliyunService.downloadFile(rpcRequest.getEntity().getFileName())) {
+        try (InputStream inputStream = aliyunService.downloadFile(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName())) {
             // 设置响应头，指定文件下载的名称和类型
             String fileName = URLEncoder.encode(rpcRequest.getEntity().getFileName(), StandardCharsets.UTF_8);
             response.setContentType("application/octet-stream");
