@@ -52,7 +52,8 @@ public class MinioRpcOssService implements OssOperateRpcApi {
     @Override
     public RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest)  {
         try {
-            return minioService.deleteFile(rpcRequest.getEntity().getFileName()) ?
+            return minioService.deleteFile(rpcRequest.getEntity().getFilePath(),
+                    rpcRequest.getEntity().getFileName()) ?
                     RpcResponse.success(): RpcResponse.failure("删除oss bucket文件失败！");
         } catch (ServerException | InsufficientDataException | ErrorResponseException | IOException | NoSuchAlgorithmException | InvalidKeyException | InvalidResponseException | XmlParserException | InternalException e) {
             throw new RuntimeException("删除oss bucket文件失败！");
@@ -79,7 +80,8 @@ public class MinioRpcOssService implements OssOperateRpcApi {
 
     @Override
     public RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest) {
-        boolean b = minioService.checkFileExist(rpcRequest.getEntity().getFileName());
+        boolean b = minioService.checkFileExist(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName());
         return RpcResponse.success(b);
     }
 }

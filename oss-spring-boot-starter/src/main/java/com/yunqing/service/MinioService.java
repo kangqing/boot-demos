@@ -76,7 +76,10 @@ public class MinioService {
     }
 
     // 删除文件
-    public boolean deleteFile(String objectName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public boolean deleteFile(String filePath, String objectName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         minioClient.removeObject(RemoveObjectArgs.builder()
                 .bucket(ossConfig.getBucket())
                 .region(ossConfig.getRegion())
@@ -103,7 +106,10 @@ public class MinioService {
      * @param fileName
      * @return
      */
-    public boolean checkFileExist(String fileName) {
+    public boolean checkFileExist(String filePath, String fileName) {
+        if (!StrUtil.isBlank(filePath)) {
+            fileName = filePath + File.separator + fileName;
+        }
         try {
             return minioClient.statObject(
                     StatObjectArgs.builder()

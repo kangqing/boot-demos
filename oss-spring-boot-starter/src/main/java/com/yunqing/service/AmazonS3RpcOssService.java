@@ -46,7 +46,8 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
     @Override
     public RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest) {
         try {
-            return amazonS3Service.deleteFile(rpcRequest.getEntity().getFileName()) ?
+            return amazonS3Service.deleteFile(rpcRequest.getEntity().getFilePath(),
+                    rpcRequest.getEntity().getFileName()) ?
                     RpcResponse.success() : RpcResponse.failure("删除文件失败！");
         } catch (Exception e) {
             log.error("删除文件失败！", e);
@@ -56,7 +57,8 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
 
     @Override
     public void download(RpcRequest<OssProcessDTO> rpcRequest, HttpServletResponse response) {
-        try (InputStream inputStream = amazonS3Service.downloadFile(rpcRequest.getEntity().getFileName())) {
+        try (InputStream inputStream = amazonS3Service.downloadFile(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName())) {
             // 设置响应头，指定文件下载的名称和类型
             String fileName = URLEncoder.encode(rpcRequest.getEntity().getFileName(), StandardCharsets.UTF_8);
             response.setContentType("application/octet-stream");
@@ -78,7 +80,8 @@ public class AmazonS3RpcOssService implements OssOperateRpcApi {
      */
     @Override
     public RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest) {
-        boolean b = amazonS3Service.checkFileExist(rpcRequest.getEntity().getFileName());
+        boolean b = amazonS3Service.checkFileExist(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName());
         return RpcResponse.success(b);
     }
 

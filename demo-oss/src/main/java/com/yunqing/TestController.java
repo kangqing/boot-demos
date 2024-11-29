@@ -46,6 +46,15 @@ public class TestController {
         return operateRpcApi.checkFileExist(request);
     }
 
+    @PostMapping("/delFile")
+    public RpcResponse<?> delFile(String fileName) {
+        OssProcessDTO dto = OssProcessDTO.builder()
+                .fileName(fileName)
+                .build();
+        final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
+        return operateRpcApi.remove(request);
+    }
+
     @PostMapping("/download")
     public void downloadFile(String fileName, HttpServletResponse response) {
         OssProcessDTO dto = OssProcessDTO.builder()

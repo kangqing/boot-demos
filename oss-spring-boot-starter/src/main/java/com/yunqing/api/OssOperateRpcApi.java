@@ -33,7 +33,7 @@ public interface OssOperateRpcApi {
      * @param rpcRequest bucketName 和 fileName
      * @return
      */
-    RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest);
 
     /**
      * 下载文件

@@ -59,7 +59,10 @@ public class AliyunService {
     }
 
     // 删除文件
-    public boolean deleteFile(String objectName) {
+    public boolean deleteFile(String filePath, String objectName) {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         ossClient.deleteObject(ossConfig.getBucket(), objectName);
         return true;
     }
@@ -79,8 +82,15 @@ public class AliyunService {
      * @param fileName
      * @return
      */
-    public boolean checkFileExist(String fileName) {
+    public boolean checkFileExist(String filePath, String fileName) {
+        if (!StrUtil.isBlank(filePath)) {
+            fileName = filePath + File.separator + fileName;
+        }
         return ossClient.doesObjectExist(ossConfig.getBucket(), fileName);
+    }
+
+    public void batchUpload() {
+
     }
 
 }

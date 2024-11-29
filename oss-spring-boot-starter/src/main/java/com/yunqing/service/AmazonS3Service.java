@@ -82,7 +82,10 @@ public class AmazonS3Service {
     }
 
     // 删除文件
-    public boolean deleteFile(String objectName) {
+    public boolean deleteFile(String filePath, String objectName) {
+        if (!StrUtil.isBlank(filePath)) {
+            objectName = filePath + File.separator + objectName;
+        }
         s3Client.deleteObject(DeleteObjectRequest.builder()
                 .bucket(ossConfig.getBucket())
                 .key(objectName)
@@ -109,7 +112,10 @@ public class AmazonS3Service {
      * @param fileName
      * @return
      */
-    public boolean checkFileExist(String fileName) {
+    public boolean checkFileExist(String filePath, String fileName) {
+        if (!StrUtil.isBlank(filePath)) {
+            fileName = filePath + File.separator + fileName;
+        }
         try {
             HeadObjectRequest headObjectRequest = HeadObjectRequest.builder()
                     .bucket(ossConfig.getBucket())

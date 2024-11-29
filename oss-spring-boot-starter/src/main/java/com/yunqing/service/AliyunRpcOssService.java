@@ -43,7 +43,8 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
 
     @Override
     public RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest) {
-        return aliyunService.deleteFile(rpcRequest.getEntity().getFileName()) ?
+        return aliyunService.deleteFile(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName()) ?
                 RpcResponse.success(): RpcResponse.failure("删除oss bucket文件失败！");
     }
 
@@ -67,7 +68,8 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
 
     @Override
     public RpcResponse<?> checkFileExist(RpcRequest<OssProcessDTO> rpcRequest) {
-        boolean b = aliyunService.checkFileExist(rpcRequest.getEntity().getFileName());
+        boolean b = aliyunService.checkFileExist(rpcRequest.getEntity().getFilePath(),
+                rpcRequest.getEntity().getFileName());
         return RpcResponse.success(b);
     }
 }
