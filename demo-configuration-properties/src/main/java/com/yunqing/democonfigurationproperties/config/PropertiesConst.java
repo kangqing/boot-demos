@@ -1,6 +1,8 @@
 package com.yunqing.democonfigurationproperties.config;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import java.util.List;
@@ -21,4 +23,14 @@ public class PropertiesConst {
     private String configA;
     private String configB;
     private String cronStr;
+
+    private List<Cat> cats;
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Cat {
+    private String name;
+    private Integer age;
 }
