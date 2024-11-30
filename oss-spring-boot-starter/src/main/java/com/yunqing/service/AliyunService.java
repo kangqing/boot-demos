@@ -1,15 +1,22 @@
 package com.yunqing.service;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.Bucket;
 import com.yunqing.config.OssConfig;
+import com.yunqing.event.OssBatchUploadEvent;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -22,8 +29,11 @@ public class AliyunService {
 
     private final OssConfig ossConfig;
 
-    public AliyunService(OssConfig ossConfig) {
+    private final ApplicationEventPublisher eventPublisher;
+
+    public AliyunService(OssConfig ossConfig, ApplicationEventPublisher eventPublisher) {
         this.ossConfig = ossConfig;
+        this.eventPublisher = eventPublisher;
     }
 
     @Resource
@@ -57,6 +67,52 @@ public class AliyunService {
         //调用方法实现上传
         ossClient.putObject(ossConfig.getBucket(), fileName, inputStream);
     }
+
+    /**
+     * 批量上传压缩包里的文件
+     * @param zipInputStream 压缩包流
+     * @param targetPath OSS 目标路径
+     * @throws Exception 解压或上传失败
+     */
+    public void batchUploadZipFile(InputStream zipInputStream, String targetPath) throws Exception {
+        // 创建临时目录存放解压文件
+        File tempDir = new File(System.getProperty("java.io.tmpdir") + File.separator + "oss_temp");
+        if (!tempDir.exists() && !tempDir.mkdirs()) {
+            throw new RuntimeException("临时目录创建失败！");
+        }
+
+        // 将压缩包保存到临时目录
+        File zipFile = new File(tempDir, "temp.zip");
+        FileUtil.writeFromStream(zipInputStream, zipFile);
+
+        List<String> uploadedFiles = new ArrayList<>();
+
+        // 解压缩包
+        try (ZipFile zip = new ZipFile(zipFile)) {
+            Enumeration<ZipArchiveEntry> entries = zip.getEntries();
+            while (entries.hasMoreElements()) {
+                ZipArchiveEntry entry = entries.nextElement();
+                if (entry.isDirectory()) {
+                    continue;
+                }
+                File extractedFile = new File(tempDir, entry.getName());
+                FileUtil.writeFromStream(zip.getInputStream(entry), extractedFile);
+
+                // 上传解压后的文件
+                try (InputStream fileStream = FileUtil.getInputStream(extractedFile)) {
+                    uploadFile(fileStream, targetPath, entry.getName());
+                    uploadedFiles.add(entry.getName()); // 记录上传成功的文件名
+                }
+            }
+        } finally {
+            // 清理临时目录
+            FileUtil.del(tempDir);
+        }
+
+        // 发布事件，通知上传成功的文件列表
+        eventPublisher.publishEvent(new OssBatchUploadEvent(this, uploadedFiles));
+    }
+
 
     // 删除文件
     public boolean deleteFile(String filePath, String objectName) {

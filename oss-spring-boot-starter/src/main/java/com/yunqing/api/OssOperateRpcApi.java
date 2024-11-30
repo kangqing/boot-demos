@@ -22,6 +22,14 @@ public interface OssOperateRpcApi {
      * @return
      */
     //RpcResponse<?> create(RpcRequest<String> rpcRequest) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+
+    /**
+     * 批量存储文件
+     * @param rpcRequest filePath和bucketName
+     * @return
+     */
+    RpcResponse<?> uploadBatchZip(RpcRequest<OssProcessDTO> rpcRequest);
+
     /**
      * 存储文件
      * @param rpcRequest filePath和bucketName

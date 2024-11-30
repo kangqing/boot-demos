@@ -42,6 +42,20 @@ public class AliyunRpcOssService implements OssOperateRpcApi {
     }
 
     @Override
+    public RpcResponse<?> uploadBatchZip(RpcRequest<OssProcessDTO> rpcRequest) {
+        try (InputStream inputStream =
+                     rpcRequest.getEntity().getFile().getInputStream();) {
+            aliyunService.batchUploadZipFile(inputStream, rpcRequest.getEntity().getFilePath());
+        } catch (Exception e) {
+            log.error("upload the file is error", e);
+            return RpcResponse.failure("upload the file is error");
+        }
+        return RpcResponse.success();
+    }
+
+
+
+    @Override
     public RpcResponse<?> remove(RpcRequest<OssProcessDTO> rpcRequest) {
         return aliyunService.deleteFile(rpcRequest.getEntity().getFilePath(),
                 rpcRequest.getEntity().getFileName()) ?
