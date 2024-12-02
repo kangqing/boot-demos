@@ -37,6 +37,18 @@ public class MinioRpcOssService implements OssOperateRpcApi {
 //    }
 
     @Override
+    public RpcResponse<?> uploadBatchZip(RpcRequest<OssProcessDTO> rpcRequest) {
+        try (InputStream inputStream =
+                     rpcRequest.getEntity().getFile().getInputStream();) {
+            minioService.batchUploadZipFile(inputStream, rpcRequest.getEntity().getFilePath());
+        } catch (Exception e) {
+            log.error("upload the file is error", e);
+            return RpcResponse.failure("upload the file is error");
+        }
+        return RpcResponse.success();
+    }
+
+    @Override
     public RpcResponse<?> upload(RpcRequest<OssProcessDTO> rpcRequest) {
         try (InputStream inputStream =
                      IoUtil.toStream(new File(rpcRequest.getEntity().getFilePath()));) {

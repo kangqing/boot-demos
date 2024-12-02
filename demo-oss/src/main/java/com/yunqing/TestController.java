@@ -37,6 +37,20 @@ public class TestController {
 
     }
 
+    @PostMapping("/uploadBatchZip")
+    public RpcResponse<?> uploadBatchZipFile(MultipartFile file) {
+
+        OssProcessDTO dto = OssProcessDTO.builder()
+                .file(file)
+                .filePath("2024/11/29")
+                .fileName(file.getOriginalFilename())
+                .build();
+        final RpcRequest<OssProcessDTO> request = new RpcRequest<>(dto);
+
+        return operateRpcApi.uploadBatchZip(request);
+
+    }
+
     @PostMapping("/checkFileExsit")
     public RpcResponse<?> checkFileExsit(String fileName) {
         OssProcessDTO dto = OssProcessDTO.builder()
