@@ -13,17 +13,17 @@ server:
 #oss:
 #  enabled: true
 #  type: ALIYUN
-#  endpoint: oss-cn-beijing.aliyuncs.com
-#  bucket: yunqing-img
-#  accessKey: LTAI5t8dMRM41FcmQ16PziCm
-#  secretKey: 3rg5vkNkNpuxqMityKTr37J9pXwcGJ
-#  region: # 对应阿里云区域
+#  endpoint: https://oss-cn-beijing.aliyuncs.com
+#  bucket: demo
+#  accessKey: xxxxxxxxxxxx
+#  secretKey: xxxxxxxxxxxx
+#  region: https://oss-cn-beijing.aliyuncs.com # 对应阿里云区域
 
 oss:
   enabled: true
   type: AMAZON_S3
-  endpoint: https://s3.amazonaws.com
-  bucket:
-  accessKey:
-  secretKey:
+  endpoint: https://s3.ap-southeast-1.amazonaws.com
+  bucket: demo
+  accessKey: xxxxxxxxxxxxxxxxx
+  secretKey: xxxxxxxxxxxxxxxxx
   region: ap-southeast-1
